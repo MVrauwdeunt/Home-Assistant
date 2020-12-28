@@ -1,0 +1,36 @@
+alias: "Woonkamer Lights Off"
+#initial_state: 'on'
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.woonkamer_eettafellampen_illuminance
+    above: 20
+  - platform: state
+    entity_id: switch.sleeping
+    to: 'on'
+
+condition:
+  condition: state
+  entity_id: input_boolean.automatic_lights
+  state: 'on'
+
+action:
+  ### Turn of The Ambilight
+  - service: light.turn_off
+    data:
+      entity_id: light.ambilight
+  - service: light.turn_off
+    data:
+      entity_id: light.muur
+      transition: 5
+  - service: light.turn_off
+    data:
+      entity_id: light.spot
+      transition: 5      
+  - service: light.turn_off
+    data:
+      entity_id: light.plank
+      transition: 5
+  - service: light.turn_off
+    data:
+      entity_id: light.tafel
+      transition: 5

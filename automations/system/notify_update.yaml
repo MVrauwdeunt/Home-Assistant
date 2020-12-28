@@ -1,0 +1,21 @@
+# ---
+#   alias: "Notify when updates"
+#   #initial_state: 'on'
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.updater
+#     from: "off"
+#     to: "on"
+
+# action:
+#   - device_id: 
+#     domain: notify.mobile_app_oneplus_michel
+#     type: notify
+#     title: "{{ notification_title }}"
+#     message: "{{ notification_message }}"
+#     data: >
+#       {% if include_release_notes %}
+#         {% set android_data = { "clickAction": "%s" } | format(release_notes) %}
+#         {% set ios_data = { "url": "%s" } | format(release_notes) %}
+#         {{ ios_data if is_ios else android_data }}
+#       {% endif %}

@@ -1,0 +1,6 @@
+---
+# The docker component enables a set of additional capabilities to monitor dockercontainers
+#
+# https://github.com/ualex73/monitor_docker
+#
+monitor_docker:  !include_dir_list ../docker

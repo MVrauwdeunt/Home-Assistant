@@ -1,0 +1,26 @@
+# Example .gitignore file for your config dir.
+# A * ensures that everything will be ignored.
+*
+
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+!*
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+**/.vscode/ 
+.vscode
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+sabnzbd.conf
+known_devices.yaml 
+*.old
+*.db
+*.log
+*.swp

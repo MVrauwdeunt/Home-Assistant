@@ -1,0 +1,248 @@
+views:
+- badges: []
+  cards:
+  - cards:
+    - entities:
+      - entity: person.michel_vrauwdeunt
+      - entity: person.thonia
+      - entity: person.zoe
+      show_name: false
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
+        .card-content {\n  padding: 5\n}\n"
+      theme: nest
+      type: glance
+    - entities:
+      - cards:
+        - columns: 1
+          entities:
+          - entity: sensor.time
+          - entity: sensor.alarm_clock_time
+          show_icon: false
+          show_name: false
+          type: glance
+        type: custom:hui-vertical-stack-card
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
+        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
+      type: entities
+    - entity: weather.huis
+      number_of_forecasts: '5'
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
+        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
+      type: custom:weather-card
+    type: vertical-stack
+  - cards:
+    - cards:
+      - columns: 3
+        entities:
+        - entity: light.woonkamer
+        - entity: light.spot
+        - entity: light.muur
+        - entity: light.plank
+        - entity: light.tafel
+        - entity: light.ambilight
+        type: glance
+      type: vertical-stack
+    - artwork: cover
+      entity: media_player.baldr
+      hide:
+        play_stop: false
+        power_state: true
+        source: true
+        volume: false
+      icon: mdi:kodi
+      shortcuts:
+        buttons:
+        - icon: mdi:music
+          id: spotify:user:spotify:playlist:37i9dQZF1DZ06evO2O09Hg
+          type: playlist
+        - icon: mdi:pine-tree
+          id: Bathroom
+          type: source
+        columns: 3
+      type: custom:mini-media-player
+    - entities:
+      - entity: switch.versterker
+      - entity: sensor.slaapkamer_tv_wifi_signal
+      - entity: sensor.slaapkamer_tv_uptime
+      - entity: switch.livingroomtv_power
+      type: entities
+    type: vertical-stack
+  - cards:
+    - columns: 3
+      entities:
+      - entity: light.woonkamer
+      - entity: light.spot
+      - entity: light.muur
+      - entity: light.plank
+      - entity: light.tafel
+      - entity: light.ambilight
+      type: glance
+    - dimFinishedEvents: true
+      enableModeChange: true
+      entities:
+      - color: red
+        entity: calendar.werkrooster
+        icon: mdi:office
+      - entity: calendar.verjaardagen
+      - entity: calendar.feyenoord
+      - entity: calendar.persoonlijk
+      firstDayOfWeek: 1
+      maxDaysToShow: 7
+      name: Calendar Card
+      showCurrentEventLine: false
+      showDate: true
+      showNoEventsForToday: true
+      showRelativeTime: true
+      showWeekDay: true
+      type: custom:atomic-calendar-revive
+    type: vertical-stack
+  icon: ''
+  path: home
+  title: Home
+- badges: []
+  cards:
+  - cards:
+    - entities:
+      - entity: person.michel_vrauwdeunt
+      - entity: person.thonia
+      - entity: person.zoe
+      show_name: false
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
+        .card-content {\n  padding: 5\n}\n"
+      theme: nest
+      type: glance
+    - entities:
+      - cards:
+        - columns: 1
+          entities:
+          - entity: sensor.time
+          - entity: sensor.time
+          show_icon: false
+          show_name: false
+          type: glance
+        type: custom:hui-vertical-stack-card
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
+        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
+      type: entities
+    - entity: weather.huis
+      number_of_forecasts: '5'
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
+        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
+      type: custom:weather-card
+    type: vertical-stack
+  - cards:
+    - artwork: cover
+      entity: media_player.baldr
+      hide:
+        play_stop: false
+        power_state: true
+        source: true
+        volume: false
+      icon: mdi:kodi
+      shortcuts:
+        buttons:
+        - icon: mdi:music
+          id: spotify:user:spotify:playlist:37i9dQZF1DZ06evO2O09Hg
+          type: playlist
+        - icon: mdi:pine-tree
+          id: Bathroom
+          type: source
+        columns: 3
+      type: custom:mini-media-player
+    - entities:
+      - switch.versterker
+      - sensor.slaapkamer_tv_wifi_signal
+      - sensor.slaapkamer_tv_uptime
+      type: entities
+    - cards:
+      - entities:
+        - entity: switch.versterker
+        - entity: sensor.date
+        - entity: sensor.date_time
+        type: glance
+      type: vertical-stack
+    type: vertical-stack
+  icon: mdi:audio-video
+  title: Media
+- badges: []
+  cards:
+  - cards:
+    - entities:
+      - entity: person.michel_vrauwdeunt
+      - entity: person.thonia
+      - entity: person.zoe
+      show_name: false
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
+        .card-content {\n  padding: 5\n}\n"
+      theme: nest
+      type: glance
+    - entities:
+      - cards:
+        - columns: 1
+          entities:
+          - entity: sensor.time
+          - entity: sensor.time
+          show_icon: false
+          show_name: false
+          type: glance
+        type: custom:hui-vertical-stack-card
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
+        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
+      type: entities
+    - entity: weather.huis
+      number_of_forecasts: '5'
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
+        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
+      type: custom:weather-card
+    type: vertical-stack
+  - cards:
+    - entities:
+      - entity: switch.circadian_lighting_zithoek
+      - entity: sensor.woonkamer_eettafellampen_illuminance
+      - entity: input_boolean.automatic_lights
+      - entity: switch.circadian_lighting_eettafel
+      type: glance
+    - columns: 3
+      entities:
+      - entity: light.spot
+      - entity: light.muur
+      - entity: light.plank
+      - entity: light.tafel
+      title: Woonkamer
+      type: glance
+    type: vertical-stack
+  icon: mdi:lightbulb-group
+  path: lights
+  title: lights
+- badges: []
+  cards:
+  - entities:
+    - sensor.docker_version
+    - sensor.docker_containers_running
+    - sensor.docker_containers_total
+    type: glance
+  - entities:
+    - switch.docker_mayan
+    - switch.docker_redis
+    - switch.docker_postgresql
+    type: entities
+  - entities:
+    - switch.reboot_woonkamer_eettafellampen_sonoff
+    - light.woonkamer_eettafellampen
+    - sensor.woonkamer_eettafellampen_illuminance
+    - binary_sensor.woonkamer_eettafellampen_physical_switch_sensor
+    - sensor.woonkamer_eettafellampen_wifi_signal
+    - sensor.woonkamer_eettafellampen_uptime
+    - device_tracker.eettafellampen
+    type: entities
+  path: systeem
+  title: Systeem

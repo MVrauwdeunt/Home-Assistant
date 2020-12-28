@@ -1,0 +1,13 @@
+---
+name: Docker
+rename:
+  influxdb: InfluxDB
+  mqtt: Mosquitto
+  unifi: UniFi
+monitored_conditions:
+  - version
+  - containers_running
+  - containers_total
+  - state
+  - status
+  - memory

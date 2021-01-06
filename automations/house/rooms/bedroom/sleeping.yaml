@@ -10,34 +10,18 @@ trigger:
     entity_id: switch.sleeping
     to: 'on'
 
-condition:
-  - condition: state
-    entity_id: switch.guests
-    state: 'off'
+  # - condition: state
+  #   entity_id: switch.guests
+  #   state: 'off'
 
 action:
-  - service: notify.mobile_app_oneplus_michel
+  - service: notify.notify
     data:
       title: "Good night"
       message: "Have a good nights sleep. Turning the lights and PC off"
-  # - service: switch.turn_off
-  #   data:
-  #     entity_id: switch.desktop_odin
 #  - service: switch.turn_on
 #    data:
 #    entity_id: switch.freya
-  - service: light.turn_on
-    data:
-      entity_id: light.muur
-      effect: "night_mode"
-  - service: light.turn_on
-    data:
-      entity_id: light.spot
-      effect: "night_mode"
-  - service: light.turn_on
-    data:
-      entity_id: light.tafel
-      effect: "night_mode"
   - service: light.turn_off
     data:
       entity_id: light.plank
@@ -52,9 +36,9 @@ action:
 #    data_template:
 #    media_content_id: >
 #    {{ ["smb://freya/Music/Nature/Birds/Birds Singing.mp3", "smb://freya/Music/Nature/Birds/Forest and Nature.mp3", "smb://freya/Music/Nature/Birds/Forest Birds Singing.mp3" ] | random }}
-  - service: switch.turn_off
-    data:
-      entity_id: switch.desktop_odin
+  # - service: switch.turn_off
+  #   data:
+  #     entity_id: switch.desktop_odin
   - delay: 0:10
   - service: light.turn_off
     data:

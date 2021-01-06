@@ -1,0 +1,5 @@
+platform: github
+access_token: !secret github_access_token
+repositories:
+  - path: 'esphome/esphome'
+  - path: 'sidoh/esp8266_milight_hub'

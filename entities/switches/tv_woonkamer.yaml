@@ -1,8 +1,8 @@
 platform: command_line
 switches:
-    livingroomtv_power:
-      command_on: !secret baldr_tv_on
-      command_off: !secret baldr_tv_off
-      command_state: ssh osmc@baldr "echo 'pow 0' | /usr/osmc/bin/cec-client -s -d 1 | grep 'power status:'"
-      value_template: '{{ "power status: on" }}'
-      friendly_name: Woonkamer TV
+  tv_woonkamer:
+    command_on: ssh osmc@baldr 'echo "on 0" | /usr/osmc/bin/cec-client -s -d 1'
+    command_off: ssh osmc@baldr 'echo "standby 0" | /usr/osmc/bin/cec-client -s -d 1'
+    command_state: ssh osmc@baldr 'echo "pow 0" | /usr/osmc/bin/cec-client -s -d 1 | grep "power status:"'
+    value_template: '{{ value == "power status: on" }}'
+    friendly_name: Woonkamer TV

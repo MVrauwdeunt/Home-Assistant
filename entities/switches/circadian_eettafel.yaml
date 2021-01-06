@@ -4,9 +4,12 @@ lights_ct:
   - light.tafel
 
 min_brightness: 15
-max_brightness: 60
+max_brightness: 70
 
-sleep_entity: switch.sleeping
-sleep_state: on
+disable_entity: 'sensor.eettafel_override'
+disable_state: 'on'
+
+sleep_entity: 'switch.sleeping'
+sleep_state: 'on'
 sleep_brightness: 1
 sleep_colortemp: 6500

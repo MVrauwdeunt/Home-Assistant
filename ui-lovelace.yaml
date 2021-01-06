@@ -226,9 +226,10 @@ views:
 - badges: []
   cards:
   - entities:
-    - sensor.docker_version
-    - sensor.docker_containers_running
-    - sensor.docker_containers_total
+    - entity: sensor.homeassistant_git_version
+    - entity: sensor.docker_version
+    - entity: sensor.esphome_git_version
+    - entity: sensor.milight_git_version
     type: glance
   - entities:
     - switch.docker_mayan
@@ -243,6 +244,20 @@ views:
     - sensor.woonkamer_eettafellampen_wifi_signal
     - sensor.woonkamer_eettafellampen_uptime
     - device_tracker.eettafellampen
+    type: entities
+  - entities:
+    - entity: binary_sensor.woonkamer_pir_sensor
+    - entity: sensor.woonkamer_temperatuur
+    - entity: sensor.woonkamer_luchtvochtigheid
+    type: glance
+  - entities:
+    - entity: sensor.esphome_version
+    - entity: binary_sensor.woonkamer_pir_sensor
+    - entity: sensor.woonkamer_temperatuur
+    - entity: sensor.woonkamer_temperatuur
+    - entity: sensor.woonkamer_wifi_signal
+    - entity: sensor.woonkamer_uptime
+    - entity: sensor.woonkamer_illuminance
     type: entities
   path: systeem
   title: Systeem

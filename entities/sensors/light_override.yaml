@@ -1,0 +1,26 @@
+platform: template
+sensors:
+  eettafel_override:
+    friendly_name: "eettafel"
+    value_template: >    
+      {% set eettafel = (state_attr('light.tafel', 'brightness')|float/255*100)|round %}
+      {% set brightness = state_attr('switch.circadian_lighting_eettafel', 'brightness')|float|round %}
+      {% if (eettafel > 10+brightness) or eettafel < 10-brightness
+      and (is_state('light.tafel', 'on')) %}
+      on
+      {% else %}
+      off
+      {% endif %}
+  zithoek_override:
+    friendly_name: "zithoek"
+    value_template: >
+      {% set spot = (state_attr('light.spot', 'brightness')|float/255*100)|round %}
+      {% set muur = (state_attr('light.muur', 'brightness')|float/255*100)|round %}
+      {% set brightness = state_attr('switch.circadian_lighting_zithoek', 'brightness')|float|round %}
+      {%if (muur > 10+brightness) or (muur < 10-brightness)
+      or (spot > 10+brightness) or (spot < 10-brightness)
+      and (is_state('light.muur', 'on')) and (is_state('light.spot', 'on')) %}
+      on
+      {% else %}
+      off
+      {% endif %}

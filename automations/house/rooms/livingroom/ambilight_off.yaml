@@ -7,6 +7,10 @@ trigger:
   - platform: mqtt
     topic: 'milight/updates/0x2294/rgb_cct/0'
     payload: '{"state":"OFF"}'
+  - platform: state
+    entity_id: switch.tv_woonkamer
+    to: 'off'
+
 action:
   - service: light.turn_off
     data:

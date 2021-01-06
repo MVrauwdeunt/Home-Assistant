@@ -1,0 +1,11 @@
+platform: template
+sensors:
+    esphome_git_version:
+        friendly_name: 'ESPHome'
+        value_template: "{{ state_attr('sensor.esphome', 'latest_release_tag').replace('v','') }}"
+    milight_git_version:
+        friendly_name: 'Milight'
+        value_template: "{{ state_attr('sensor.esp8266_milight_hub', 'latest_release_tag') }}"
+    homeassistant_git_version:
+        friendly_name: 'Home_assistant'
+        value_template: "{{ state_attr('binary_sensor.updater', 'newest_version') }}"

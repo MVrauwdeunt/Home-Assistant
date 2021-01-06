@@ -7,9 +7,18 @@ trigger:
   - platform: mqtt
     topic: 'milight/updates/0x2294/rgb_cct/0'
     payload: '{"state":"ON"}'
+  - platform: state
+    entity_id: switch.tv_woonkamer
+    to: 'on'
+
 #condition:
+condition:
+  - condition: state
+    entity_id: switch.tv_woonkamer
+    state: 'on'
 
 action:
   - service: light.turn_on
     data:
-      entity_id: light.ambilight 
+      entity_id: light.ambilight
+      effect: "Kaars2"

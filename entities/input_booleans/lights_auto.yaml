@@ -4,7 +4,7 @@
   #
   # https://www.home-assistant.io/components/input_boolean/
   #
-  automatic_lights:
-    name: Automatisch
-    initial: false
-    icon: mdi:LightbulbMultipleOffOutline
+automatic_lights:
+  name: Automatisch
+  initial: false
+  icon: mdi:LightbulbMultipleOffOutline

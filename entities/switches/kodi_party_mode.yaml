@@ -1,0 +1,4 @@
+platform: command_line
+switches:
+  kodi_party_mode:
+    command_on:  '/config/asgard/kodiscript/partymode_music.sh'

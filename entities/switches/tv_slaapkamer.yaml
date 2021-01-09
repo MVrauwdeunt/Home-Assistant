@@ -1,5 +1,5 @@
 platform: mqtt
-name: "TV Slaapkamer"
+name: "Slaapkamer TV"
 state_topic: "stat/TV/POWER"
 command_topic: "cmnd/TV/POWER"
 availability_topic: "tele/TV/LWT"

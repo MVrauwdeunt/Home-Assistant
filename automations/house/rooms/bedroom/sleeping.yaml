@@ -43,12 +43,16 @@ action:
   - service: light.turn_off
     data:
       entity_id: light.spot
+      transitiopn: 5
   - service: light.turn_off
     data:
       entity_id: light.muur
+      transition: 5
   - service: light.turn_off
     data:
       entity_id: light.plank
+      transition: 5
   - service: light.turn_off
     data:
       entity_id: light.tafel
+      transition: 5

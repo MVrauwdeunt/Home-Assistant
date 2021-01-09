@@ -2,7 +2,7 @@ alias: "Woonkamer Lights Off"
 #initial_state: 'on'
 trigger:
   - platform: numeric_state
-    entity_id: sensor.woonkamer_eettafellampen_illuminance
+    entity_id: sensor.woonkamer_illuminance
     above: 20
 
 condition:

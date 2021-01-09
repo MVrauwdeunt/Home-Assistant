@@ -1,4 +1,4 @@
 platform: template
 sensors:
   alarm_clock_time:
-    value_template: "{{ as_timestamp(states('sensor.michel_volgende_alarm')) | timestamp_custom('%H:%M') }}"6Panhead
+    value_template: "{{ as_timestamp(states('sensor.michel_volgende_alarm')) | timestamp_custom('%H:%M') }}"

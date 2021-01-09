@@ -1,2 +1,6 @@
 light.ambilight:
   icon: mdi:television-ambient-light
+switch.versterker:
+  icon: mdi:amplifier
+switch.tv_woonkamer:
+  icon: mdi:television

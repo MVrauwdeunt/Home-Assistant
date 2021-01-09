@@ -3,7 +3,7 @@ alias: "Woonkamer Lights On"
 
 trigger:
   - platform: numeric_state
-    entity_id: sensor.woonkamer_eettafellampen_illuminance
+    entity_id: sensor.woonkamer_illuminance
     below: 15
 
   - platform: state
@@ -15,7 +15,7 @@ condition:
     entity_id: switch.sleeping
     state: 'off'
   - condition: numeric_state
-    entity_id: sensor.woonkamer_eettafellampen_illuminance
+    entity_id: sensor.woonkamer_illuminance
     below: 20
   - condition: state
     entity_id: group.tracked_people

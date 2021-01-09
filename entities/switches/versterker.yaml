@@ -9,3 +9,4 @@ payload_off: "OFF"
 optimistic: false
 qos: 0
 retain: true
+icon: mdi:amplifier

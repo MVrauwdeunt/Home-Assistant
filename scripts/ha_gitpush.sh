@@ -9,4 +9,8 @@ git add .
 git commit -m "config files on `date +'%d-%m-%Y %H:%M:%S'`"
 
 # Push changes towards GitHub
+<<<<<<< HEAD
 git push -u origin main
+=======
+git push
+>>>>>>> 650807d010a1a0bc106f49cdfcc91233495674c4

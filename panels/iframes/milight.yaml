@@ -1,4 +1,4 @@
-tasmoadmin:
+milight:
   title: MiLight
   icon: mdi:power
   url: !secret panel_iframe_milight_url

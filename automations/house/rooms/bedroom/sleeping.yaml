@@ -24,7 +24,7 @@ action:
 #    entity_id: switch.freya
   - service: light.turn_off
     data:
-      entity_id: light.plank
+      entity_id: light.woonkamer
       transition: 5
   - service: light.turn_off
     data:
@@ -32,8 +32,8 @@ action:
   - service: light.turn_on
     data:
       entity_id: light.woonkamer
-      effect: night_mode
-    
+      effect: Night_mode
+
 #  - wait_template: "{{ not is_state('media_player.freya', 'off') }}"
 #  - service: media_player.play_media
 #    data:
@@ -50,13 +50,5 @@ action:
 
   - service: light.turn_off
     data:
-      entity_id: light.spot
-      transitiopn: 5
-  - service: light.turn_off
-    data:
-      entity_id: light.muur
-      transition: 5
-  - service: light.turn_off
-    data:
-      entity_id: light.tafel
+      entity_id: light.woonkamer
       transition: 5

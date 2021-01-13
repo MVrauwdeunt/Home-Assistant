@@ -6,6 +6,6 @@ trigger:
 
 action:
   - delay:
-      minutes: 20
+      minutes: 5
 
   - service: shell_command.git_push

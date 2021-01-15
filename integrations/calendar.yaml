@@ -1,2 +1,7 @@
-
+---
+  #
+  # This loads up my Nextcloud calendars
+  #
+  # https://www.home-assistant.io/integrations/caldav/
+  #
 calendar: !include_dir_merge_named ../entities/calendars

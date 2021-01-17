@@ -49,33 +49,34 @@ views:
       entity: media_player.baldr
       hide:
         play_stop: false
-        power_state: true
+        power: true
         source: true
         volume: false
       icon: mdi:kodi
       shortcuts:
         buttons:
         - icon: mdi:music
-          id: spotify:user:spotify:playlist:37i9dQZF1DZ06evO2O09Hg
-          type: playlist
+          id: shell_command.partymode
+          type: service
         - icon: mdi:pine-tree
           id: Bathroom
           type: source
         columns: 3
+      sound_mode: icon
+      toggle_power: false
       type: custom:mini-media-player
+      volume_stateless: false
     - entities:
       - entity: switch.versterker
-      - entity: sensor.slaapkamer_tv_wifi_signal
-      - entity: sensor.slaapkamer_tv_uptime
-      - entity: switch.livingroomtv_power
-      type: entities
+      - entity: switch.tv_woonkamer
+      type: glance
     type: vertical-stack
   - cards:
     - columns: 3
       entities:
-      - entity: light.woonkamer
-      - entity: light.spot
-      - entity: light.muur
+      - entity: sensor.woonkamer_temperatuur
+      - entity: sensor.woonkamer_illuminance
+      - entity: sensor.woonkamer_luchtvochtigheid
       - entity: light.plank
       - entity: light.tafel
       - entity: light.ambilight
@@ -141,7 +142,7 @@ views:
       entity: media_player.baldr
       hide:
         play_stop: false
-        power_state: true
+        power: true
         source: true
         volume: false
       icon: mdi:kodi
@@ -155,19 +156,20 @@ views:
           type: source
         columns: 3
       type: custom:mini-media-player
-    - entities:
-      - switch.versterker
-      - sensor.slaapkamer_tv_wifi_signal
-      - sensor.slaapkamer_tv_uptime
-      type: entities
     - cards:
       - entities:
         - entity: switch.versterker
-        - entity: sensor.date
-        - entity: sensor.date_time
+        - entity: switch.slaapkamer_tv
         type: glance
       type: vertical-stack
     type: vertical-stack
+  - cards:
+    - entities:
+      - entity: switch.slaapkamer_tv
+      - entity: sensor.eettafel_override
+      - entity: sensor.zithoek_override
+      type: glance
+    type: horizontal-stack
   icon: mdi:audio-video
   title: Media
 - badges: []
@@ -225,11 +227,14 @@ views:
   title: lights
 - badges: []
   cards:
-  - entities:
+  - columns: 5
+    entities:
     - entity: sensor.homeassistant_git_version
     - entity: sensor.docker_version
     - entity: sensor.esphome_git_version
     - entity: sensor.milight_git_version
+    state_color: true
+    title: Versions
     type: glance
   - entities:
     - switch.docker_mayan

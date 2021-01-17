@@ -5,7 +5,7 @@ trigger:
   platform: template
   value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}'
 
-  action:
+action:
   - service: homeassistant.turn_off
     data:
       entity_id: switch.sleeping

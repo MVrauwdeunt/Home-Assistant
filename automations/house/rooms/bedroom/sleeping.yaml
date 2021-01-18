@@ -35,7 +35,7 @@ action:
   - service: light.turn_on
     data:
       entity_id: light.woonkamer
-      effect: Night_mode
+      effect: night_mode
 
 #  - wait_template: "{{ not is_state('media_player.freya', 'off') }}"
 #  - service: media_player.play_media

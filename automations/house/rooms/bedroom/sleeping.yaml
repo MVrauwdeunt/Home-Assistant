@@ -24,8 +24,20 @@ action:
 #    entity_id: switch.freya
   - service: light.turn_off
     data:
-      entity_id: light.woonkamer
+      entity_id: light.muur
       transition: 5
+  - service: light.turn_off
+    data:
+      entity_id: light.spot
+      transition: 5
+  - service: light.turn_off
+    data:
+      entity_id: light.plank
+      transition: 5
+  - service: light.turn_off
+    data:
+      entity_id: light.eettafel
+      transition: 5      
   - service: light.turn_off
     data:
       entity_id: light.ambilight

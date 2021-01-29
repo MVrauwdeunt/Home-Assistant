@@ -1,0 +1,8 @@
+---
+  # Get Octoprint info in Homeassistant
+  #
+  # https://www.home-assistant.io/integrations/octoprint/
+  #
+octoprint:
+  host: octopi_host
+  api_key: octopi_api_key

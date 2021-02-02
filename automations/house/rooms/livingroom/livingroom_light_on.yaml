@@ -7,6 +7,12 @@ trigger:
     below: 15
 
   - platform: state
+    entity_id: group.tracked_people
+    from: "not_home"
+    # Optional
+    to: "home"
+
+  - platform: state
     entity_id: switch.sleeping
     to: 'off'
 
@@ -34,17 +40,20 @@ action:
       transition: 5
       kelvin: "{{ state_attr('sensor.circadian_values', 'colortemp') | int }}"
       brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
+
   - service: light.turn_on
     data:
       entity_id: light.spot
       transition: 5      
       kelvin: "{{ state_attr('sensor.circadian_values', 'colortemp') | int }}"
       brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
+
   - service: light.turn_on
     data:
       entity_id: light.plank
       transition: 5
       brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
+
   - service: light.turn_on
     data:
       entity_id: light.tafel

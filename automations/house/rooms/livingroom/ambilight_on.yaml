@@ -16,6 +16,12 @@ condition:
   - condition: state
     entity_id: switch.tv_woonkamer
     state: 'on'
+  - condition: numeric_state
+    entity_id: sensor.woonkamer_illuminance
+    below: 20
+  - condition: state
+    entity_id: group.tracked_people
+    state: home
 
 action:
   - service: light.turn_on

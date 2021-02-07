@@ -7,3 +7,4 @@ browser_mod:
       name: telefoon_michel
     b1799e39_5b4be061:
       name: wallpanel
+      camera: true

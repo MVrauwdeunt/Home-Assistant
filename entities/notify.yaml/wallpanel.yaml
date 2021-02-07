@@ -1,0 +1,4 @@
+platform: tts
+name: wallpanel
+tts_service: tts.google_say
+media_player: media_player.wallpanel

@@ -1,2 +1,1 @@
-tts:
-  - platform: google_translate
+tts: !include_dir_list ../entities/tts

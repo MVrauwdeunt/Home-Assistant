@@ -1,0 +1,4 @@
+platform: google_translate
+base_url: https://hass.gladsheimr.nl
+language: 'nl'
+service_name: google_say

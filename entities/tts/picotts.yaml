@@ -1,0 +1,4 @@
+platform: picotts
+language: 'en-GB'
+base_url: https://has1.example.com
+cache: false

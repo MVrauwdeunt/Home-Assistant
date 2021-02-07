@@ -1,1 +1,9 @@
 browser_mod:
+  prefix: 'browser_mod_'
+  devices:
+    0450257c_20b1e159:
+      name: desktop_odin
+    3c80c02e_af69b899:
+      name: telefoon_michel
+    b1799e39_5b4be061:
+      name: wallpanel

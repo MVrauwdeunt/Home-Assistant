@@ -1,0 +1,4 @@
+platform: ovapi
+name: Bus Spijkenisse
+timing_point_code: 53470110
+show_future_departures: 4

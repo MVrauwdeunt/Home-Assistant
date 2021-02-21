@@ -1,0 +1,4 @@
+platform: ovapi
+name: Bus Brielle
+timing_point_code: 53470040
+show_future_departures: 4

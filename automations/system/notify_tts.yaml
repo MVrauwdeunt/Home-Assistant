@@ -1,0 +1,16 @@
+alias: "tts "
+
+trigger:
+  platform: homeassistant
+  event: start
+
+action:
+  # - service: tts.google_say
+  #   entity_id: media_player.desktop_wallpanel
+  #   data:
+  #     message: "Het is {{states('sensor.woonkamer_temperatuur')}} graden in huis."
+  #     cache: false
+  #     language: "nl"
+  - service: notify.wallpanel
+    data:
+      message: "Slaaplekker. Ik heb de lampen en pc uitgezet"

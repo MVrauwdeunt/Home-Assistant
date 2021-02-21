@@ -10,6 +10,9 @@ trigger:
   - platform: state
     entity_id: switch.tv_woonkamer
     to: 'off'
+  - platform: state
+    entity_id: switch.sleeping
+    to: 'on'
 
 action:
   - service: light.turn_off

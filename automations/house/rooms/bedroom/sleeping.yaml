@@ -19,34 +19,58 @@ action:
     data:
       title: "Good night"
       message: "Have a good nights sleep. Turning the lights and PC off"
+
+  - service: notify.wallpanel
+    data:
+      message: "Slaaplekker. Ik heb de lampen en pc uitgezet"
 #  - service: switch.turn_on
 #    data:
 #    entity_id: switch.freya
+
+## turning living room lights off
+
   - service: light.turn_off
     data:
       entity_id: light.muur
       transition: 5
+
   - service: light.turn_off
     data:
       entity_id: light.spot
       transition: 5
+
   - service: light.turn_off
     data:
       entity_id: light.plank
       transition: 5
+
   - service: light.turn_off
     data:
       entity_id: light.eettafel
       transition: 5      
+
   - service: light.turn_off
     data:
       entity_id: light.ambilight
+
+## Wait a couple off seconds before activating the MiLight Night-mode effect 
   - delay: 
-      seconds: 10
+      seconds: 5
+
+## Activate Nightmode effect
+  - service: light.turn_on
+    data:
+      entity_id: light.muur
+      effect: night_mode
 
   - service: light.turn_on
     data:
-      entity_id: light.woonkamer
+      entity_id: light.spot
+      effect: night_mode
+
+  - service: light.turn_on
+    data:
+      entity_id: light.eettafel
       effect: night_mode
 
 #  - wait_template: "{{ not is_state('media_player.freya', 'off') }}"
@@ -60,6 +84,8 @@ action:
   # - service: switch.turn_off
   #   data:
   #     entity_id: switch.desktop_odin
+
+  ## Wait 10 minutes before turning off all the lights
   - delay:
       minutes: 10
 

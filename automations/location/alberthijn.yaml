@@ -1,0 +1,15 @@
+alias: "test"
+trigger:
+  - platform: zone
+    entity_id: device_tracker.michel
+    zone: zone.albert_heijn_rozenburg
+    event: enter
+condition: []
+action:
+  - service: notify.notify
+    data:
+      title: Time to shop?
+      message: Click to open the shopping list
+      data:
+        clickAction: /shopping-list
+        url: /shopping-list

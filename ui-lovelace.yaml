@@ -1,3 +1,4 @@
+title: 3D Printer
 views:
 - badges: []
   cards:
@@ -38,11 +39,31 @@ views:
       - columns: 3
         entities:
         - entity: light.woonkamer
-        - entity: light.spot
-        - entity: light.muur
-        - entity: light.plank
-        - entity: light.tafel
-        - entity: light.ambilight
+          tap_action:
+            action: call-service
+            service: browser_mod.popup
+            service_data:
+              card:
+                cards:
+                - cards:
+                  - entity: light.spot
+                    icon: mdi:spotlight-beam
+                    type: light
+                  - entity: light.muur
+                    icon: mdi:wall-sconce-round
+                    type: light
+                  - entity: light.plank
+                    icon: mdi:led-strip-variant
+                    type: light
+                  - entity: light.tafel
+                    icon: mdi:ceiling-light
+                    type: light
+                  type: horizontal-stack
+                type: custom:stack-in-card
+              deviceID:
+              - this
+              large: false
+              title: verlichting
         type: glance
       type: vertical-stack
     - artwork: cover
@@ -72,23 +93,29 @@ views:
       type: glance
     type: vertical-stack
   - cards:
-    - columns: 3
-      entities:
-      - entity: sensor.woonkamer_temperatuur
-      - entity: sensor.woonkamer_illuminance
-      - entity: sensor.woonkamer_luchtvochtigheid
-      - entity: light.plank
-      - entity: light.tafel
-      - entity: light.ambilight
-      type: glance
+    - cards:
+      - columns: 3
+        entities:
+        - entity: light.woonkamer
+        - entity: light.spot
+        - entity: light.muur
+        - entity: light.plank
+        - entity: light.tafel
+        - entity: light.ambilight
+        type: glance
+      type: vertical-stack
     - dimFinishedEvents: true
       enableModeChange: true
       entities:
       - color: red
         entity: calendar.werkrooster
         icon: mdi:office
-      - entity: calendar.verjaardagen
-      - entity: calendar.feyenoord
+      - color: green
+        entity: calendar.verjaardagen
+        icon: mdi:balloon
+      - color: green
+        entity: calendar.feyenoord
+        icon: mdi:soccer
       - entity: calendar.persoonlijk
       firstDayOfWeek: 1
       maxDaysToShow: 7
@@ -159,7 +186,7 @@ views:
     - cards:
       - entities:
         - entity: switch.versterker
-        - entity: switch.slaapkamer_tv
+        - entity: switch.tv_woonkamer
         type: glance
       type: vertical-stack
     type: vertical-stack
@@ -266,3 +293,60 @@ views:
     type: entities
   path: systeem
   title: Systeem
+- badges: []
+  cards:
+  - cards:
+    - cards:
+      - columns: 3
+        entities:
+        - entity: sensor.kelder_3d_printer_uptime
+        - entity: sensor.octoprint_current_state
+        - entity: device_tracker.octopi
+        type: glance
+      type: vertical-stack
+    - artwork: cover
+      entity: media_player.baldr
+      hide:
+        play_stop: false
+        power: true
+        source: true
+        volume: false
+      icon: mdi:kodi
+      shortcuts:
+        buttons:
+        - icon: mdi:music
+          id: shell_command.partymode
+          type: service
+        - icon: mdi:pine-tree
+          id: Bathroom
+          type: source
+        columns: 3
+      sound_mode: icon
+      toggle_power: false
+      type: custom:mini-media-player
+      volume_stateless: false
+    - entities:
+      - entity: switch.kelder_3d_printer
+      - entity: switch.reboot_kelder_3d_printer_sonoff
+      type: glance
+    type: vertical-stack
+  icon: mdi:printer-3d
+- badges: []
+  cards:
+  - entities:
+    - entity: person.michel_vrauwdeunt
+    - entity: sensor.woonkamer_temperatuur
+    - entity: person.thonia
+    show_name: false
+    theme: nest
+    type: glance
+  - entity: media_player.wallpanel
+    type: media-control
+  - type: shopping-list
+  - entities:
+    - entity: sensor.alarm_clock_time
+    - entity: switch.kodi_party_mode
+    - entity: sensor.bus
+    type: glance
+  path: test
+  title: test

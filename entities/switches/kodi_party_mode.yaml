@@ -2,3 +2,6 @@ platform: command_line
 switches:
   kodi_party_mode:
     command_on:  '/config/Scripts/partymode_music.sh'
+    # command_state: '{{ state_attr("media_player.baldr", "media_content_type") }}'
+    # value_template: "{{ is_state_attr('media_player.baldr', 'media_content_type', 'music') }}"
+    friendly_name: Muziek

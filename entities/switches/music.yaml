@@ -1,0 +1,10 @@
+platform: template
+switches:
+  music:
+    value_template: "{{ is_state_attr('media_player.baldr', 'media_content_type', 'music') }}"
+    turn_on:
+      service: shell_command.partymode
+    turn_off:
+      service: switch.turn_off
+      data:
+        entity_id: switch.target

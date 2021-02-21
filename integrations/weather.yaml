@@ -1,0 +1,5 @@
+weather:
+  - platform: buienradar
+    name: "Rozenburg"
+    # Force 'Meetstation Volkel' to be used:
+    forecast: true

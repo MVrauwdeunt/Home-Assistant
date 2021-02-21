@@ -11,6 +11,7 @@ sensors:
       {% else %}
       off
       {% endif %}
+
   zithoek_override:
     friendly_name: "zithoek"
     value_template: >

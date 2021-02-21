@@ -22,6 +22,9 @@ condition:
   - condition: state
     entity_id: group.tracked_people
     state: home
+  - condition: state
+    entity_id: switch.sleeping
+    state: 'off'
 
 action:
   - service: light.turn_on

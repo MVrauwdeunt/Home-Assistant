@@ -1,26 +1,5 @@
-- id: '1610569949675'
-  alias: Nieuwe automatisering
-  description: Gjfg
-  trigger:
-  - type: value
-    platform: device
-    device_id: e017b877e75f27cf313527417db0d5a2
-    entity_id: sensor.woonkamer_luchtvochtigheid
-    domain: sensor
-    above: 100
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-  condition: []
-  action:
-  - type: toggle
-    device_id: fda7f09c6c84d3336d7277e8a595f69d
-    entity_id: switch.reboot_woonkamer_eettafellampen_sonoff
-    domain: switch
-  mode: single
 - id: '1613302275852'
-  alias: Test
+  alias: Albertheijn
   description: Locatie test
   trigger:
   - platform: zone

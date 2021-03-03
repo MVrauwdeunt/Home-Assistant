@@ -5,6 +5,8 @@ browser_mod:
       name: desktop_odin
     3c80c02e_af69b899:
       name: telefoon_michel
+    98630559-f5babaaf:
+      name: telefoon_thonia
     b89c23ff_304db13e:
       name: wallpanel
       camera: true

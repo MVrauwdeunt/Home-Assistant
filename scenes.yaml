@@ -2,161 +2,36 @@
   name: Woonkamer Nightmode
   entities:
     light.muur:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - white_mode
-      - night_mode
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
-      brightness: 3
-      color_temp: 251
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
       effect: night_mode
       friendly_name: muur
-      supported_features: 63
       state: 'on'
     light.spot:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - white_mode
-      - night_mode
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
-      brightness: 3
-      color_temp: 251
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
       effect: night_mode
       friendly_name: Spot
-      supported_features: 63
       state: 'on'
     light.tafel:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - white_mode
-      - night_mode
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
-      brightness: 3
-      color_temp: 251
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      effect: white_mode
+      effect: night_mode
       friendly_name: tafel
-      supported_features: 63
       state: 'on'
     light.ambilight:
-      effect_list:
-      - Solid
-      - BOBLIGHTSERVER
-      - GRABBER
-      - V4L
-      - Atomic swirl
-      - Blue mood blobs
-      - Breath
-      - Candle
-      - Cinema brighten lights
-      - Cinema dim lights
-      - Cold mood blobs
-      - Collision
-      - Color traces
-      - Double swirl
-      - Fire
-      - Flags Germany/Sweden
-      - Full color mood blobs
-      - Green mood blobs
-      - Kaars2
-      - Knight rider
-      - Led Test
-      - Light clock
-      - Lights
-      - Notify blue
-      - Pac-Man
-      - Plasma
-      - Police Lights Single
-      - Police Lights Solid
-      - Rainbow mood
-      - Rainbow swirl
-      - Rainbow swirl fast
-      - Random
-      - Red mood blobs
-      - Sea waves
-      - Snake
-      - Sparks
-      - Strobe red
-      - Strobe white
-      - System Shutdown
-      - Trails
-      - Trails color
-      - Warm mood blobs
-      - Waves with Color
-      - X-Mas
       friendly_name: 'Ambilight '
-      icon: mdi:lightbulb
-      supported_features: 21
       state: 'off'
     light.plank:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
       friendly_name: plank
-      supported_features: 63
       state: 'off'
+- id: '1614758915455'
+  name: Woonkamer Lights on
+  entities:
+    light.muur:
+      effect: white_mode
+      state: 'on'
+    light.spot:
+      effect: white_mode
+      state: 'on'
+    light.plank:
+      state: 'on'
+    light.plank:
+      state: 'on'
+    light.tafel:
+      effect: white_mode
+      state: 'on'

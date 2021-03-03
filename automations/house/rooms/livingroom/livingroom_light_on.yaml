@@ -36,27 +36,11 @@ action:
 
   - service: light.turn_on
     data:
-      entity_id: light.muur
+      entity_id: 
+        - light.muur
+        - light.spot
+        - light.tafel
+        - light.plank
       transition: 5
       kelvin: "{{ state_attr('sensor.circadian_values', 'colortemp') | int }}"
       brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
-
-  - service: light.turn_on
-    data:
-      entity_id: light.spot
-      transition: 5      
-      kelvin: "{{ state_attr('sensor.circadian_values', 'colortemp') | int }}"
-      brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
-
-  - service: light.turn_on
-    data:
-      entity_id: light.plank
-      transition: 5
-      brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
-
-  - service: light.turn_on
-    data:
-      entity_id: light.tafel
-      transition: 5
-      kelvin: "{{ state_attr('sensor.circadian_values', 'colortemp') | int }}"
-      brightness_pct: "{{ state_attr('switch.circadian_lighting_eettafel', 'brightness') | int }}"

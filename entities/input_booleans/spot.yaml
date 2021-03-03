@@ -1,0 +1,4 @@
+spot:
+  name: Spot switch
+  initial: false
+  icon: mdi:LightbulbMultipleOffOutline

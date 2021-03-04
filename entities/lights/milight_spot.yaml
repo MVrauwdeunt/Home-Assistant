@@ -1,4 +1,5 @@
 name: "Spot"
+unique_id: 0x2294-1
 command_topic: milight/0x2294/rgb_cct/1
 state_topic: milight/states/0x2294/rgb_cct/1
 #<<: &MILIGHT_PARAMS

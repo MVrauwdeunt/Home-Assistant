@@ -1,10 +1,11 @@
 name: "plank"
+unique_id: 0x2294-4
 command_topic: milight/0x2294/rgb_cct/4
 state_topic: milight/states/0x2294/rgb_cct/4
 #<<: &MILIGHT_PARAMS
 platform: mqtt
 schema: json
-color_temp: true
+color_temp: false
 rgb: true
 brightness: true
 effect: true

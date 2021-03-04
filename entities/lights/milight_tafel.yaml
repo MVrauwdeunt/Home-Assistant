@@ -1,5 +1,6 @@
 ---
 name: "tafel"
+unique_id: 0x2294-3
 command_topic: milight/0x2294/rgb_cct/3
 state_topic: milight/states/0x2294/rgb_cct/3
 #<<: &MILIGHT_PARAMS

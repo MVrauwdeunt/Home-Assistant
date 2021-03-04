@@ -1,4 +1,5 @@
 name: "muur"
+unique_id: 0x2294-2
 command_topic: milight/0x2294/rgb_cct/2
 state_topic: milight/states/0x2294/rgb_cct/2
 #<<: &MILIGHT_PARAMS

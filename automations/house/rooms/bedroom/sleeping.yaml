@@ -19,6 +19,11 @@ action:
     data:
       title: "Good night"
       message: "Have a good nights sleep. Turning the lights and PC off"
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.22
+    target:
+      device_id: cd163c421cb588be2d1fdfd3ba9259e7
 
   - service: notify.wallpanel
     data:
@@ -31,24 +36,13 @@ action:
 
   - service: light.turn_off
     data:
-      entity_id: light.muur
       transition: 5
-
-  - service: light.turn_off
-    data:
-      entity_id: light.spot
-      transition: 5
-
-  - service: light.turn_off
-    data:
-      entity_id: light.plank
-      transition: 5
-
-  - service: light.turn_off
-    data:
-      entity_id: light.eettafel
+      entity_id: 
+        - light.muur
+        - light.spot
+        - light.plank
+        - light.tafel
       transition: 5      
-
   - service: light.turn_off
     data:
       entity_id: light.ambilight
@@ -56,22 +50,17 @@ action:
 ## Wait a couple off seconds before activating the MiLight Night-mode effect 
   - delay: 
       seconds: 5
-
+  - service: scene.turn_on
+    target:
+      entity_id: scene.woonkamer_nightmode_2
 ## Activate Nightmode effect
-  - service: light.turn_on
-    data:
-      entity_id: light.muur
-      effect: night_mode
-
-  - service: light.turn_on
-    data:
-      entity_id: light.spot
-      effect: night_mode
-
-  - service: light.turn_on
-    data:
-      entity_id: light.eettafel
-      effect: night_mode
+  # - service: light.turn_on
+  #   data:
+  #     entity_id:
+  #       - light.muur
+  #       - light.spot
+  #       - light.tafel
+  #     effect: night_mode
 
 #  - wait_template: "{{ not is_state('media_player.freya', 'off') }}"
 #  - service: media_player.play_media
@@ -91,5 +80,9 @@ action:
 
   - service: light.turn_off
     data:
-      entity_id: light.woonkamer
-      transition: 5
+      entity_id: 
+        - light.muur
+        - light.spot
+        - light.plank
+        - light.tafel
+      # transition: 5

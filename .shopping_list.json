@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "name": "kippenbouillon",
+        "id": "5397edb5ad1547ec9abcc6cf4f226696",
+        "complete": false
+    },
+    {
+        "name": "koffie",
+        "id": "565ba3dea2074901b3dd9499b5e508e8",
+        "complete": false
+    },
+    {
+        "name": "cola",
+        "id": "f1a061cc9a154065b66be7a95df149e2",
+        "complete": false
+    },
+    {
+        "name": "lemon",
+        "id": "9a6df3feb3a44aaaae1a7472751264e3",
+        "complete": false
+    }
+]

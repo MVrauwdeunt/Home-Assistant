@@ -22,12 +22,11 @@ action:
   - service: media_player.volume_set
     data:
       volume_level: 0.22
-    target:
       device_id: cd163c421cb588be2d1fdfd3ba9259e7
 
   - service: notify.wallpanel
     data:
-      message: "Slaaplekker. Ik heb de lampen en pc uitgezet"
+      message: "Slaaplekker."
 #  - service: switch.turn_on
 #    data:
 #    entity_id: switch.freya

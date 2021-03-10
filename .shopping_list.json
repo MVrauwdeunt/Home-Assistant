@@ -2,21 +2,26 @@
     {
         "name": "kippenbouillon",
         "id": "5397edb5ad1547ec9abcc6cf4f226696",
-        "complete": false
+        "complete": true
     },
     {
         "name": "koffie",
         "id": "565ba3dea2074901b3dd9499b5e508e8",
-        "complete": false
+        "complete": true
     },
     {
         "name": "cola",
         "id": "f1a061cc9a154065b66be7a95df149e2",
-        "complete": false
+        "complete": true
     },
     {
         "name": "lemon",
         "id": "9a6df3feb3a44aaaae1a7472751264e3",
         "complete": false
+    },
+    {
+        "name": "kaas",
+        "id": "8c79e56eddeb411584ea1e7e0bfb7657",
+        "complete": true
     }
 ]

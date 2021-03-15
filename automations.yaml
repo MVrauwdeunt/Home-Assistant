@@ -16,3 +16,40 @@
         clickAction: /shopping-list
         url: /shopping-list
   mode: single
+- id: '1615584209554'
+  alias: 3D Printer klaar met printen.
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ender_3_printing
+    from: 'on'
+    to: 'off'
+    for: 1 seconde
+  condition:
+  - condition: state
+    entity_id: switch.sleeping
+    state: 'off'
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: Printer is klaar om te printen
+      title: Ender 3
+  mode: single
+- id: '1615618158397'
+  alias: Printer verbonden
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.ender_3_current_state
+    from: unknown
+    to: Operational
+  condition:
+  - condition: state
+    entity_id: switch.sleeping
+    state: 'off'
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Ender3 Is klaar
+      message: Klaar om te printen
+  mode: single

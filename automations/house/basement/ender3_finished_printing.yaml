@@ -1,0 +1,12 @@
+alias: Ender3 klaar met printen
+description: ''
+trigger:
+  - platform: state
+    entity_id: sensor.ender_3_current_state
+    from: "Printing"
+    to: "Operational"
+action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Ender3 Klaar met printen
+      message: Ender3 Klaar met printen

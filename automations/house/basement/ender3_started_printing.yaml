@@ -1,0 +1,12 @@
+alias: Ender3 begonnen met printen
+description: ''
+trigger:
+  - platform: state
+    entity_id: sensor.ender_3_current_state
+    to: "Printing"
+    from: "Operational"
+action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Ender3 printen
+      message: Begonen met de print

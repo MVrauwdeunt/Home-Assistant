@@ -21,7 +21,8 @@
 ip_bans.yaml
 secrets.yaml
 sabnzbd.conf
-known_devices.yaml 
+known_devices.yaml
+.shopping_list.json
 *.old
 *.db
 *.log

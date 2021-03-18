@@ -1,7 +1,42 @@
 [
     {
-        "name": "lemon",
-        "id": "5c4dd0203b3e4dd599b8241be40ce8b0",
+        "name": "kip",
+        "id": "4956f1c8907f4354acf033b9039cde26",
+        "complete": true
+    },
+    {
+        "name": "spekjes",
+        "id": "4df79cb077eb48078962c781ceb1f6b2",
+        "complete": true
+    },
+    {
+        "name": "brood",
+        "id": "48beb270d64b40dfa669460e5bf802d5",
+        "complete": true
+    },
+    {
+        "name": "creme fraise",
+        "id": "c4d48351fed740a899553cb8e9a5bd63",
+        "complete": true
+    },
+    {
+        "name": "vuilniszakken",
+        "id": "77d7242c657f4827b9eb3953f8a74449",
         "complete": false
+    },
+    {
+        "name": "chips",
+        "id": "8834958ac6ba448a9c9f7cefe4b4ad21",
+        "complete": true
+    },
+    {
+        "name": "kaas",
+        "id": "1c447d46536e4d61ae33ae786f5518c9",
+        "complete": true
+    },
+    {
+        "name": "koffie",
+        "id": "5f17b5e681ee47eebef0f745220268b9",
+        "complete": true
     }
 ]

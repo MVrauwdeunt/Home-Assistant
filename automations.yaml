@@ -8,13 +8,7 @@
     event: enter
   condition: []
   action:
-  - service: notify.notify
-    data:
-      title: Time to shop?
-      message: Click to open the shopping list
-      data:
-        clickAction: /shopping-list
-        url: /shopping-list
+  - service: notify.mobile_app_oneplus_michel
   mode: single
 - id: '1615584209554'
   alias: 3D Printer klaar met printen.

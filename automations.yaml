@@ -9,6 +9,7 @@
   condition: []
   action:
   - service: notify.mobile_app_oneplus_michel
+    data: {}
   mode: single
 - id: '1615584209554'
   alias: 3D Printer klaar met printen.

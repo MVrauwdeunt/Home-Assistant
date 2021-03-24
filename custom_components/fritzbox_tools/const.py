@@ -1,7 +1,10 @@
 """Constants for the FRITZ!Box Tools integration."""
 
 DOMAIN = "fritzbox_tools"
+DATA_FRITZ_TOOLS_INSTANCE = "fritzbox_tools_instance"
 SUPPORTED_DOMAINS = ["switch", "binary_sensor"]
+
+ATTR_HOST = "host"
 
 CONF_PROFILES = "profiles"
 
@@ -23,3 +26,7 @@ DEFAULT_PROFILES = []
 
 SERVICE_RECONNECT = "reconnect"
 SERVICE_REBOOT = "reboot"
+
+ERROR_CONNECTION_ERROR = "connection_error"
+ERROR_CONNECTION_ERROR_PROFILES = "connection_error_profiles"
+ERROR_PROFILE_NOT_FOUND = "profile_not_found"

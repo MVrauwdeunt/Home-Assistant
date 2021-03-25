@@ -2,36 +2,311 @@
   name: Woonkamer Nightmode
   entities:
     light.muur:
-      effect: night_mode
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 3
+      color_temp: 153
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: white_mode
       friendly_name: muur
+      icon: mdi:wall-sconce-flat
+      supported_features: 63
       state: 'on'
     light.spot:
-      effect: night_mode
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 3
+      color_temp: 153
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: white_mode
       friendly_name: Spot
+      icon: mdi:spotlight-beam
+      supported_features: 63
       state: 'on'
     light.tafel:
-      effect: night_mode
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 3
+      color_temp: 153
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: white_mode
       friendly_name: tafel
+      icon: mdi:ceiling-light
+      supported_features: 63
       state: 'on'
     light.ambilight:
+      effect_list:
+      - Solid
+      - BOBLIGHTSERVER
+      - GRABBER
+      - V4L
+      - Atomic swirl
+      - Blue mood blobs
+      - Breath
+      - Candle
+      - Cinema brighten lights
+      - Cinema dim lights
+      - Cold mood blobs
+      - Collision
+      - Color traces
+      - Double swirl
+      - Fire
+      - Flags Germany/Sweden
+      - Full color mood blobs
+      - Green mood blobs
+      - Kaars2
+      - Knight rider
+      - Led Test
+      - Light clock
+      - Lights
+      - Notify blue
+      - Pac-Man
+      - Plasma
+      - Police Lights Single
+      - Police Lights Solid
+      - Rainbow mood
+      - Rainbow swirl
+      - Rainbow swirl fast
+      - Random
+      - Red mood blobs
+      - Sea waves
+      - Snake
+      - Sparks
+      - Strobe red
+      - Strobe white
+      - System Shutdown
+      - Trails
+      - Trails color
+      - Warm mood blobs
+      - Waves with Color
+      - X-Mas
       friendly_name: 'Ambilight '
+      icon: mdi:television-ambient-light
+      supported_features: 21
       state: 'off'
     light.plank:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
       friendly_name: plank
+      icon: mdi:led-strip
+      supported_features: 61
+      state: 'off'
+    light.hal:
+      brightness: 3
+      friendly_name: hal
+      supported_features: 33
+      state: 'on'
+    switch.circadian_lighting_eettafel:
+      hs_color:
+      brightness:
+      friendly_name: eettafel
+      icon: mdi:theme-light-dark
+      state: 'off'
+    switch.circadian_lighting_zithoek:
+      hs_color:
+      brightness:
+      friendly_name: zithoek
+      icon: mdi:theme-light-dark
       state: 'off'
 - id: '1614758915455'
   name: Woonkamer Lights on
   entities:
     light.muur:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 46
+      color_temp: 153
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
       effect: white_mode
+      friendly_name: muur
+      icon: mdi:wall-sconce-flat
+      supported_features: 63
       state: 'on'
     light.spot:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 26
+      color_temp: 277
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
       effect: white_mode
+      friendly_name: Spot
+      icon: mdi:spotlight-beam
+      supported_features: 63
       state: 'on'
     light.plank:
-      state: 'on'
-    light.plank:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 46
+      friendly_name: plank
+      icon: mdi:led-strip
+      supported_features: 61
       state: 'on'
     light.tafel:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      brightness: 46
+      color_temp: 370
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
       effect: white_mode
+      friendly_name: tafel
+      icon: mdi:ceiling-light
+      supported_features: 63
+      state: 'on'
+    switch.circadian_lighting_eettafel:
+      hs_color:
+      - 28.681
+      - 71.373
+      brightness: 18.861639319704068
+      friendly_name: eettafel
+      icon: mdi:theme-light-dark
+      state: 'on'
+    switch.circadian_lighting_zithoek:
+      hs_color:
+      - 28.681
+      - 71.373
+      brightness: 18.861639319704068
+      friendly_name: zithoek
+      icon: mdi:theme-light-dark
       state: 'on'

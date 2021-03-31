@@ -1,0 +1,25 @@
+- name: Nightmode
+  entities:
+    light.muur:
+      brightness: 1
+      kelvin: 6500
+      effect: white_mode
+      state: 'on'
+    light.spot:
+      brightness: 1
+      kelvin: 6500
+      effect: white_mode
+      state: 'on'
+    light.tafel:
+      brightness: 1
+      kelvin: 6500
+      effect: white_mode
+      state: 'on'
+    light.ambilight:
+      state: 'off'
+    light.plank:
+      state: 'off'
+    switch.circadian_lighting_eettafel:
+      state: 'off'
+    switch.circadian_lighting_zithoek:
+      state: 'off'

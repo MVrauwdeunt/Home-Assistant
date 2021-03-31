@@ -40,7 +40,7 @@ action:
         - light.muur
         - light.spot
         - light.tafel
-      transition: 5
+      transition: 10
       kelvin: "{{ state_attr('sensor.circadian_values', 'colortemp') | int }}"
       brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"
 
@@ -48,5 +48,5 @@ action:
     data:
       entity_id: 
         - light.plank
-      transition: 5
+      transition: 10
       brightness_pct: "{{ state_attr('switch.circadian_lighting_zithoek', 'brightness') | int }}"

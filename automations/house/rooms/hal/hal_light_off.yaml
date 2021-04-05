@@ -13,6 +13,6 @@ condition:
 action:
   - service: light.turn_off
     data:
-      transition: 10
+      transition: 5
       entity_id:
       - light.hal

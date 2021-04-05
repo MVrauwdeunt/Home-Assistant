@@ -34,5 +34,5 @@ action:
     data:
       entity_id: 
         - light.hal
-      transition: 10
+      transition: 5
       brightness_pct: 15

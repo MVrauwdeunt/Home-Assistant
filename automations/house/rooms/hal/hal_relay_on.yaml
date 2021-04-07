@@ -1,5 +1,5 @@
 # make sure the relay in the shelly is on
-alias: "hallway Relay on"
+alias: "hal Relay on"
 
 trigger:
   - platform: homeassistant

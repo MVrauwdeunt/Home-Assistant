@@ -1,3 +1,4 @@
+alias: hal toggle
 trigger:
   platform: event
   event_type: esphome.button_pressed

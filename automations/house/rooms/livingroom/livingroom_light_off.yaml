@@ -17,7 +17,7 @@ action:
       entity_id: light.ambilight
   - service: light.turn_off
     data:
-      transition: 10
+      transition: 5
       entity_id:
       - light.muur
       - light.spot

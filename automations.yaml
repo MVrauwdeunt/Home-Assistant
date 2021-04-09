@@ -9,7 +9,9 @@
   condition: []
   action:
   - service: notify.mobile_app_oneplus_michel
-    data: {}
+    data:
+      message: Click to open the shopping list
+      title: Boodschappenlijst
   mode: single
 - id: '1615584209554'
   alias: 3D Printer klaar met printen.
@@ -45,6 +47,6 @@
   action:
   - service: notify.mobile_app_oneplus_michel
     data:
-      title: Ender3 Is klaar
-      message: Klaar om te printen
+      title: Ender 3 staat klaar
+      message: 3D printer is verbonden met OctoPrint
   mode: single

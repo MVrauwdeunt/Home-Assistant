@@ -7,4 +7,4 @@
 deconz:
   title: Deconz
   icon: mdi:zigbee
-  url: https://deconz.gladsheimr.nl
+  url: !secret panel_iframe_deconz_url

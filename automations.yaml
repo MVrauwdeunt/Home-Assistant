@@ -12,6 +12,9 @@
     data:
       message: Click to open the shopping list
       title: Boodschappenlijst
+      data:
+        clickAction: /shopping-list
+        url: /shopping-list
   mode: single
 - id: '1615584209554'
   alias: 3D Printer klaar met printen.

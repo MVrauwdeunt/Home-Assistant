@@ -3,7 +3,7 @@
   description: Locatie test
   trigger:
   - platform: zone
-    entity_id: device_tracker.michel
+    entity_id: person.michel_vrauwdeunt
     zone: zone.albert_heijn_rozenburg
     event: enter
   condition: []

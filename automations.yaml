@@ -32,7 +32,7 @@
   action:
   - service: notify.mobile_app_oneplus_michel
     data:
-      message: Printer is klaar om te printen
+      message: Printer is klaar met printen
       title: Ender 3
   mode: single
 - id: '1615618158397'

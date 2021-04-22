@@ -31,3 +31,5 @@ action:
     data:
       entity_id: light.ambilight
       effect: "Kaars2"
+
+  - service: light

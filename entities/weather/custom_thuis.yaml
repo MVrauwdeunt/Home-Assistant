@@ -1,0 +1,6 @@
+  # platform: buienradar
+  # name: "Rozenburg"
+  # latitude: 51.88
+  # longitude: 4.32
+  #   # Force 'Meetstation Volkel' to be used:
+  # forecast: true

@@ -2,5 +2,5 @@
 intent_script:
   TurnHalOn:
     action:
-      service: light.turn_on
+      service: light.toggle
       entity_id: light.hal

@@ -1,0 +1,6 @@
+# intent_script:  !include_dir_list ../intent_scripts
+intent_script:
+  TurnHalOn:
+    action:
+      service: light.turn_on
+      entity_id: light.hal

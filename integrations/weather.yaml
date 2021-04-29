@@ -1,5 +1,5 @@
-# weather: !include_dir_list ../entities/weather
-weather:
+weather: !include_dir_list ../entities/weather
+# weather:
   # - platform: buienradar
   #   name: "Rozenburg"
   #   latitude: 51.88

@@ -1,0 +1,11 @@
+alias: "Set bedroom light color (blue)"
+trigger:
+  platform: event
+  event_type: hass_shoppinglist
+  event_data: {}
+  #   name: 'bedroom light'
+  #   color: 'blue'
+action:
+  service: shopping_list.add_item
+  data_template:
+    name: "{{ trigger.event.data.boodschap | string }}"

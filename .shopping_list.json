@@ -1,17 +1,27 @@
 [
     {
-        "name": "Kaas",
-        "id": "5c059f63b6f844efb2e5e6171b9e956e",
-        "complete": false
+        "name": "7-up",
+        "id": "68662153289245089ecb40036f03197d",
+        "complete": true
     },
     {
-        "name": "Brood",
-        "id": "13982f633a4043d1b91c8def3622125e",
-        "complete": false
+        "name": "Cola",
+        "id": "4c3b9f6d0b244ef2a619ce03eb0659b9",
+        "complete": true
     },
     {
-        "name": "Fristi",
-        "id": "8f9d0b3ce2034ca0940a1849a1ed68f5",
-        "complete": false
+        "name": "vaatwasblokjes",
+        "id": "096fdce743d348699d136ccb218ba959",
+        "complete": true
+    },
+    {
+        "name": "aardappels",
+        "id": "bc6673da903b414bb22fa4e19d58a82e",
+        "complete": true
+    },
+    {
+        "name": "cordon-blue",
+        "id": "1325a460b4e2411aaba7579aa42b575e",
+        "complete": true
     }
 ]

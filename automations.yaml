@@ -53,3 +53,21 @@
       title: Ender 3 staat klaar
       message: 3D printer is verbonden met OctoPrint
   mode: single
+- id: '1619958186322'
+  alias: Lidl
+  description: Locatie test
+  trigger:
+  - platform: zone
+    entity_id: person.michel_vrauwdeunt
+    zone: zone.lidl
+    event: enter
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: Click to open the shopping list
+      title: Boodschappenlijst
+      data:
+        clickAction: /shopping-list
+        url: /shopping-list
+  mode: single

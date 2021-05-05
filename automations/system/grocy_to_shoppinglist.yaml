@@ -1,0 +1,36 @@
+alias: Connect Grocy to Hass shoppinglists
+trigger:
+  - platform: state
+    entity_id: sensor.grocy_shopping_list
+
+action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: >
+        {%- set shopping_list = state_attr('sensor.grocy_shopping_list', 'products') -%}
+        {%- set previous = "-" + trigger.from_state.state -%}
+        {% set shopping_list=shopping_list.pop() %}
+        {%- for item in shopping_list %}
+          {{ item.product.name }}
+        {%- endfor -%}
+      title: Boodschappenlijst
+      data:
+        clickAction: /shopping-list
+        url: /shopping-list
+
+  # - service_template: >
+  #     {%- set shopping_list = state_attr('sensor.grocy_shopping_list', 'products') -%}
+  #     {%- for item in shopping_list %}
+  #     service: shopping_list.add_item
+  #       data:
+  #         name: {{ item.product.name }}
+  #     {%- endfor -%}
+
+  # - service_template: >
+  #     {%- if states('sensor.grocy_shopping_list')|int > 0 -%}
+  #     {%- for item in shopping_list %}
+  #     service: shopping_list.add_item
+  #       data:
+  #         name: {{ item.product.name }}
+  #     {%- endfor -%}
+  #     {%- endif -%}

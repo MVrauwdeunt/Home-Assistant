@@ -24,32 +24,28 @@ action:
     target:
       device_id: cd163c421cb588be2d1fdfd3ba9259e7
     data:
-      volume_level: 0.2
+      volume_level: 20
 
   - service: notify.wallpanel
     data:
       message: "Slaaplekker."
-  - service: switch.turn_off
-    data:
-      entity_id:
-      - switch.circadian_lighting_zithoek
-      - switch.circadian_lighting_eettafel
 
 ## turning living room lights off
 
   - service: light.turn_off
     data:
       entity_id: 
-        - light.muur
-        - light.spot
         - light.plank
-        - light.tafel
         - light.hal
       transition: 5      
   - service: light.turn_off
     data:
       entity_id: light.ambilight
-
+  
+  - service: switch.turn_on
+    data:
+      entity_id:
+        - switch.
 #  - wait_template: "{{ not is_state('media_player.freya', 'off') }}"
 #  - service: media_player.play_media
 #    data:

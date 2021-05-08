@@ -9,8 +9,8 @@ action:
   - service: homeassistant.turn_off
     data:
       entity_id: switch.sleeping
-  - service: switch.turn_on
+  - service: switch.turn_off
     data:
       entity_id:
-      - switch.circadian_lighting_zithoek
-      - switch.circadian_lighting_eettafel
+        - switch.adaptive_lighting_sleep_mode_zithoek
+        - switch.adaptive_lighting_sleep_mode_eettafel

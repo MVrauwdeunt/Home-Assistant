@@ -1,8 +1,7 @@
 # This is my current Home Assistant installation.
 
-### Home page
-![home_page](https://git.digitaal-rechercheurs.nl:9090/squandor/homeassistant/raw/branch/master/www/img/home_page.png)
-
+### Wallpanel running on a ASUS 10.1 inch tablet
+![Wallpanel](https://raw.githubusercontent.com/Warlock77/Home-Assistant/main/www/images/screenshots/Wallpanel.png)
 
 <!-- start-table -->
 
@@ -18,7 +17,7 @@
         <tr>
             <td>Sonoff</td>
             <td>ESPHome</td>
-            <td>3</td>
+            <td>2</td>
         </tr>
         <tr>
             <td>Shelly 1</td>

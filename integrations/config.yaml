@@ -5,5 +5,18 @@
 # https://www.home-assistant.io/components/config/
 #
 intent:
-
+recorder:
+  purge_keep_days: 5
+  exclude:
+    domains:
+      - automation
+      - updater
+    entity_globs:
+      - sensor.weather_*
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+    event_types:
+      - call_service # Don't record service calls
 config:

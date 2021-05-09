@@ -1,4 +1,7 @@
-title: 3D Printer
+resources:
+- type: module
+  url: /browser_mod.js
+title: Asgard
 views:
 - badges: []
   cards:
@@ -27,7 +30,7 @@ views:
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
         \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
       type: entities
-    - entity: weather.huis
+    - entity: weather.rozenburg
       number_of_forecasts: '5'
       style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
@@ -119,7 +122,7 @@ views:
       - entity: calendar.persoonlijk
       firstDayOfWeek: 1
       maxDaysToShow: 7
-      name: Calendar Card
+      name: Agenda
       showCurrentEventLine: false
       showDate: true
       showNoEventsForToday: true
@@ -148,7 +151,7 @@ views:
         - columns: 1
           entities:
           - entity: sensor.time
-          - entity: sensor.time
+          - entity: sensor.alarm_clock_time
           show_icon: false
           show_name: false
           type: glance
@@ -157,7 +160,7 @@ views:
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
         \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
       type: entities
-    - entity: weather.huis
+    - entity: weather.rozenburg
       number_of_forecasts: '5'
       style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
@@ -192,7 +195,7 @@ views:
     type: vertical-stack
   - cards:
     - entities:
-      - entity: switch.slaapkamer_tv
+      - entity: switch.tv_slaapkamer_relay
       - entity: sensor.eettafel_override
       - entity: sensor.zithoek_override
       type: glance
@@ -217,7 +220,7 @@ views:
         - columns: 1
           entities:
           - entity: sensor.time
-          - entity: sensor.time
+          - entity: sensor.alarm_clock_time
           show_icon: false
           show_name: false
           type: glance
@@ -226,7 +229,7 @@ views:
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
         \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
       type: entities
-    - entity: weather.huis
+    - entity: weather.rozenburg
       number_of_forecasts: '5'
       style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
@@ -235,10 +238,15 @@ views:
     type: vertical-stack
   - cards:
     - entities:
-      - entity: switch.circadian_lighting_zithoek
-      - entity: sensor.woonkamer_eettafellampen_illuminance
-      - entity: input_boolean.automatic_lights
-      - entity: switch.circadian_lighting_eettafel
+      - entity: switch.adaptive_lighting_zithoek
+        name: Zithoek
+      - entity: switch.adaptive_lighting_sleep_mode_zithoek
+        name: Slaapstand
+      - entity: sensor.woonkamer_illuminance
+      - entity: switch.adaptive_lighting_eettafel_2
+        name: Eettafel
+      - entity: switch.adaptive_lighting_sleep_mode_eettafel
+        name: Slaapstand
       type: glance
     - columns: 3
       entities:
@@ -249,11 +257,167 @@ views:
       title: Woonkamer
       type: glance
     type: vertical-stack
+  - entities:
+    - entity: light.hal
+    - entity: binary_sensor.hal_schakelaar
+    - entity: light.hal_relais
+    title: Hal
+    type: glance
+  - entities:
+    - entity: switch.adaptive_lighting_adapt_brightness_zithoek
+    - entity: switch.adaptive_lighting_adapt_brightness_eettafel
+    - entity: switch.adaptive_lighting_adapt_color_zithoek
+    - entity: switch.adaptive_lighting_adapt_color_eettafel
+    type: glance
   icon: mdi:lightbulb-group
   path: lights
   title: lights
 - badges: []
   cards:
+  - cards:
+    - entities:
+      - entity: person.michel_vrauwdeunt
+      - entity: person.thonia
+      - entity: person.zoe
+      show_name: false
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
+        .card-content {\n  padding: 5\n}\n"
+      theme: nest
+      type: glance
+    - entities:
+      - cards:
+        - columns: 1
+          entities:
+          - entity: sensor.time
+          - entity: sensor.alarm_clock_time
+          show_icon: false
+          show_name: false
+          type: glance
+        type: custom:hui-vertical-stack-card
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
+        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
+      type: entities
+    - details: true
+      entity: weather.rozenburg
+      hourly_forecast: false
+      number_of_forecasts: '5'
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
+        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
+      type: custom:weather-card
+    type: vertical-stack
+  - cards:
+    - entities:
+      - entity: weather.rozenburg
+      - entity: sensor.season
+        name: Seizoen
+      - entity: sensor.neerslag_buienalarm_regen_data
+        name: Neerslag
+      type: glance
+    - entity: camera.buienradar_loop
+      show_name: false
+      show_state: false
+      type: picture-entity
+    type: vertical-stack
+  - cards:
+    - cards:
+      - columns: 3
+        entities:
+        - entity: sensor.rotterdam_feel_temperature
+          name: Temperatuur
+        - entity: sensor.rotterdam_full_condition
+          name: Conditie
+        - entity: sensor.rotterdam_humidity
+          name: Luchtvochtigheid
+        - entity: sensor.rotterdam_precipitation_forecast_average
+          name: Neerslag
+        - entity: sensor.rotterdam_wind_direction
+          name: Windrichting
+        - entity: sensor.rotterdam_wind_speed
+          name: Windsnelheid
+        type: glance
+      type: vertical-stack
+    - entities:
+      - sensor.neerslag_buienalarm_regen_data
+      - sensor.neerslag_buienradar_regen_data
+      title: Neerslag
+      type: custom:neerslag-card
+    type: vertical-stack
+  icon: mdi:cloud
+  path: weer
+  title: Weer
+- badges: []
+  cards:
+  - cards:
+    - entities:
+      - entity: person.michel_vrauwdeunt
+      - entity: person.thonia
+      - entity: person.zoe
+      show_name: false
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
+        .card-content {\n  padding: 5\n}\n"
+      theme: nest
+      type: glance
+    - entities:
+      - cards:
+        - columns: 1
+          entities:
+          - entity: sensor.time
+          - entity: sensor.alarm_clock_time
+          show_icon: false
+          show_name: false
+          type: glance
+        type: custom:hui-vertical-stack-card
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
+        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
+      type: entities
+    - details: true
+      entity: weather.rozenburg
+      hourly_forecast: false
+      number_of_forecasts: '5'
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
+        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
+      type: custom:weather-card
+    type: vertical-stack
+  - cards:
+    - cards:
+      - columns: 3
+        entities:
+        - entity: sensor.kelder_3d_printer_uptime
+        - entity: sensor.ender_3_current_state
+        - entity: binary_sensor.ender_3_printing
+        type: glance
+      type: vertical-stack
+    - cards:
+      - entity: sensor.ender_3_actual_tool0_temp
+        max: 250
+        min: 0
+        name: Nozzle
+        type: gauge
+      - entity: sensor.ender_3_actual_bed_temp
+        max: 100
+        min: 0
+        name: Bed
+        type: gauge
+      type: horizontal-stack
+    - entities:
+      - entity: switch.3d_printer_relais
+        name: stroomschakelaar
+      type: glance
+    type: vertical-stack
+  icon: mdi:printer-3d
+- badges: []
+  cards:
+  - entities:
+    - switch.docker_mayan
+    - switch.docker_redis
+    - switch.docker_postgresql
+    type: entities
   - columns: 5
     entities:
     - entity: sensor.homeassistant_git_version
@@ -263,19 +427,7 @@ views:
     state_color: true
     title: Versions
     type: glance
-  - entities:
-    - switch.docker_mayan
-    - switch.docker_redis
-    - switch.docker_postgresql
-    type: entities
-  - entities:
-    - switch.reboot_woonkamer_eettafellampen_sonoff
-    - light.woonkamer_eettafellampen
-    - sensor.woonkamer_eettafellampen_illuminance
-    - binary_sensor.woonkamer_eettafellampen_physical_switch_sensor
-    - sensor.woonkamer_eettafellampen_wifi_signal
-    - sensor.woonkamer_eettafellampen_uptime
-    - device_tracker.eettafellampen
+  - entities: []
     type: entities
   - entities:
     - entity: binary_sensor.woonkamer_pir_sensor
@@ -283,7 +435,7 @@ views:
     - entity: sensor.woonkamer_luchtvochtigheid
     type: glance
   - entities:
-    - entity: sensor.esphome_version
+    - entity: sensor.esphome_git_version
     - entity: binary_sensor.woonkamer_pir_sensor
     - entity: sensor.woonkamer_temperatuur
     - entity: sensor.woonkamer_temperatuur
@@ -295,44 +447,6 @@ views:
   title: Systeem
 - badges: []
   cards:
-  - cards:
-    - cards:
-      - columns: 3
-        entities:
-        - entity: sensor.kelder_3d_printer_uptime
-        - entity: sensor.octoprint_current_state
-        - entity: device_tracker.octopi
-        type: glance
-      type: vertical-stack
-    - artwork: cover
-      entity: media_player.baldr
-      hide:
-        play_stop: false
-        power: true
-        source: true
-        volume: false
-      icon: mdi:kodi
-      shortcuts:
-        buttons:
-        - icon: mdi:music
-          id: shell_command.partymode
-          type: service
-        - icon: mdi:pine-tree
-          id: Bathroom
-          type: source
-        columns: 3
-      sound_mode: icon
-      toggle_power: false
-      type: custom:mini-media-player
-      volume_stateless: false
-    - entities:
-      - entity: switch.kelder_3d_printer
-      - entity: switch.reboot_kelder_3d_printer_sonoff
-      type: glance
-    type: vertical-stack
-  icon: mdi:printer-3d
-- badges: []
-  cards:
   - entities:
     - entity: person.michel_vrauwdeunt
     - entity: sensor.woonkamer_temperatuur
@@ -340,13 +454,41 @@ views:
     show_name: false
     theme: nest
     type: glance
-  - entity: media_player.wallpanel
-    type: media-control
-  - type: shopping-list
+  - title: Boodschappen
+    type: shopping-list
   - entities:
     - entity: sensor.alarm_clock_time
     - entity: switch.kodi_party_mode
-    - entity: sensor.bus
     type: glance
+  - entity: media_player.wallpanel
+    type: media-control
+  - entity: sensor.time
+    from: bottom
+    max: 100
+    min: 0
+    scale: 30px
+    style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+      \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n.card-content\
+      \ {\n  padding: 5\n}\n"
+    theme: nest
+    title: null
+    type: custom:bignumber-card
+  - entities:
+    - entity: weather.rozenburg
+    - entity: sensor.date_time
+    - entity: sensor.date_time_utc
+    type: glance
+  - entities:
+    - sensor.grocy_chores
+    - binary_sensor.grocy_expired_products
+    - binary_sensor.grocy_expiring_products
+    - sensor.grocy_meal_plan
+    - binary_sensor.grocy_missing_products
+    - binary_sensor.grocy_overdue_chores
+    - binary_sensor.grocy_overdue_tasks
+    - sensor.grocy_shopping_list
+    - sensor.grocy_stock
+    - sensor.grocy_tasks
+    type: entities
   path: test
   title: test

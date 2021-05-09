@@ -1,0 +1,11 @@
+alias: "Update git repo's"
+
+trigger:
+  platform: homeassistant
+  event: start
+
+action:
+  - delay:
+      minutes: 5
+
+  - service: shell_command.git_push

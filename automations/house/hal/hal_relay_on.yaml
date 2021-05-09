@@ -1,0 +1,23 @@
+# make sure the relay in the shelly is on
+alias: "hal Relay on"
+
+trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: switch.sleeping
+    to: 'off'
+
+condition:
+  - condition: state
+    entity_id: switch.sleeping
+    state: 'off'
+  - condition: state
+    entity_id: light.hal_relais
+    state: ´off´
+
+action:
+  - service: light.turn_on
+    data:
+      entity_id: 
+        - light.hal_relais

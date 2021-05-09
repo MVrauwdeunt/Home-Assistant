@@ -1,0 +1,16 @@
+  # Time to wake up
+alias: Wakeup Time
+initial_state: 'on'
+trigger:
+  platform: template
+  value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}'
+
+action:
+  - service: homeassistant.turn_off
+    data:
+      entity_id: switch.sleeping
+  - service: switch.turn_off
+    data:
+      entity_id:
+        - switch.adaptive_lighting_sleep_mode_zithoek
+        - switch.adaptive_lighting_sleep_mode_eettafel

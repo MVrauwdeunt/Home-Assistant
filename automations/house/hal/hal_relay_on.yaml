@@ -1,4 +1,5 @@
 # make sure the relay in the shelly is on
+id: d334dc2f-f7f5-4fd9-acfe-77e7286fa900
 alias: "hal Relay on"
 
 trigger:

@@ -1,3 +1,4 @@
+id: 4198aaea-bab7-4406-bf52-430cbe163ac1
 alias: "ambilight On"
 initial_state: 'on'
 trigger:

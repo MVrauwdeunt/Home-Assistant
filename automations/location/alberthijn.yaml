@@ -1,8 +1,13 @@
+# id: '1619958186322'
 # alias: "test"
 # trigger:
 #   - platform: zone
 #     entity_id: device_tracker.michel
 #     zone: zone.albert_heijn_rozenburg
+#     event: enter
+#   - platform: zone
+#     entity_id: person.michel_vrauwdeunt
+#     zone: zone.lidl
 #     event: enter
 # condition: []
 # action:
@@ -13,5 +18,4 @@
 #       data:
 #         clickAction: /shopping-list
 #         url: /shopping-list
-
-# notify.mobile_app_oneplus_michel
+# mode: single

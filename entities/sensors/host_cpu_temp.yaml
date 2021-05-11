@@ -1,0 +1,14 @@
+  platform: command_line
+  name: CPU Temperature           # CPU Temperatur in °C
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"       # If errors occur, remove degree symbol
+  value_template: '{{ value | multiply(0.001) | round(1) }}'
+  # COMMANDLine
+  # - platform: command_line
+  #   name: NUC CPU Temperature Core Zone 0
+  #   command: "cat /sys/devices/virtual/thermal/thermal_zone0/temp"
+  #   value_template: '{{ value | multiply(0.001) | round(2) }}'
+  # - platform: command_line
+  #   name: NUC CPU Temperature Core Zone 2
+  #   command: "cat /sys/devices/virtual/thermal/thermal_zone2/temp"
+  #   value_template: '{{ value | multiply(0.001) | round(2) }}'

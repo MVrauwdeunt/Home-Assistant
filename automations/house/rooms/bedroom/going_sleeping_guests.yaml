@@ -1,3 +1,4 @@
+id: 4795d679-601c-42c6-a5fa-e89ccadfef65
 alias: Sleeping Guests
 initial_state: 'on'
 trigger:

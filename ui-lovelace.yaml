@@ -327,7 +327,7 @@ views:
         entities:
         - entity: sensor.rotterdam_feel_temperature
           name: Temperatuur
-        - entity: sensor.rotterdam_full_condition
+        - entity: sensor.rotterdam_symbol
           name: Conditie
         - entity: sensor.rotterdam_humidity
           name: Luchtvochtigheid
@@ -414,20 +414,78 @@ views:
 - badges: []
   cards:
   - entities:
-    - switch.docker_mayan
-    - switch.docker_redis
-    - switch.docker_postgresql
-    type: entities
-  - columns: 5
-    entities:
-    - entity: sensor.homeassistant_git_version
-    - entity: sensor.docker_version
-    - entity: sensor.esphome_git_version
-    - entity: sensor.milight_git_version
-    state_color: true
-    title: Versions
-    type: glance
-  - entities: []
+    - entity: sensor.system_uptime
+      icon: mdi:desktop-classic
+      secondary_info: 'Since: [[ sensor.last_boot_date_time ]]'
+      type: custom:secondaryinfo-entity-row
+    - entity: sensor.uptime
+      icon: mdi:home-assistant
+    - entities:
+      - entity: sensor.homeassistant_git_version
+        name: Latest
+      entity: sensor.current_version
+      icon: mdi:home-assistant
+      name: HA Installed Version
+      state_header: Current
+      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.homeassistant_git_version').split('.')[1]\
+        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
+        \ 165, 0);\n  {% endif %};\n}\n"
+      type: custom:multiple-entity-row
+    - entity: sensor.hacs
+      name: HACS
+      style: ":host {\n  {% if states(config.entity) != '0' %}\n    color: rgb(255,\
+        \ 165, 0);\n    --paper-item-icon-color: rgb(255, 165, 0);\n  {% endif %};\n\
+        }\n"
+      tap_action:
+        action: navigate
+        navigation_path: /hacs/entry
+    - entity: sensor.home_assistant_log
+      style: ":host {\n  {% if states(config.entity) >= '0.5' %}\n    color: rgb(255,\
+        \ 165, 0);\n    --paper-item-icon-color: rgb(255, 165, 0);\n  {% endif %};\n\
+        }\n"
+      tap_action:
+        action: url
+        url_path: http://192.168.178.250:8123/developer-tools/logs
+    - entity: sensor.home_assistant_v2_db
+      icon: mdi:database
+    - entity: sensor.nuc_model
+      icon: mdi:desktop-classic
+      secondary_info: 'Board Name: [[ sensor.nuc_board_name ]]'
+      type: custom:secondaryinfo-entity-row
+    - entity: sensor.bios_vendor
+      icon: mdi:desktop-classic
+      secondary_info: 'Version: [[ sensor.nuc_bios_version ]]'
+      type: custom:secondaryinfo-entity-row
+    - columns: 2
+      entities:
+      - entity: sensor.processor_use
+        icon: mdi:chip
+        name: CPU
+      - entity: sensor.memory_use_percent
+        icon: mdi:memory
+        name: RAM
+      - entity: sensor.cpu_temperature
+        icon: mdi:thermometer
+        name: Temp
+      - entity: sensor.disk_use_percent
+        icon: mdi:harddisk
+        name: Disk
+      positions:
+        indicator: 'off'
+      severity:
+      - color: green
+        from: 0
+        to: 60
+      - color: orange
+        from: 61
+        to: 80
+      - color: red
+        from: 81
+        to: 100
+      style: "bar-card-title {\n  text-shadow: 1px 1px 5px black;\n}\nbar-card-value\
+        \ {\n  text-shadow: 1px 1px 5px black;\n} "
+      type: custom:bar-card
+    show_header_toggle: false
     type: entities
   - entities:
     - entity: binary_sensor.woonkamer_pir_sensor
@@ -445,6 +503,51 @@ views:
     type: entities
   path: systeem
   title: Systeem
+- badges: []
+  cards:
+  - cards:
+    - cards:
+      - columns: 5
+        entities:
+        - entity: sensor.docker_deconz_state
+          name: Deconz
+        - entity: sensor.docker_esphome_state
+          name: ESPHome
+        - entity: sensor.docker_grafana_state
+          name: Grafana
+        - entity: sensor.docker_influxdb_state
+          name: InfluxDB
+        - entity: sensor.docker_mqtt_state
+          name: MQTT
+        title: Smarthome Docker containers
+        type: glance
+      - columns: 5
+        entities:
+        - entity: sensor.docker_airsonic_state
+          name: Airsonic
+        - entity: sensor.docker_hydra_state
+          name: Hydra
+        - entity: sensor.docker_jellyfin_state
+          name: Jellyfin
+        - entity: sensor.docker_lidarr_state
+          name: lidarr
+        - entity: sensor.docker_radarr_state
+          name: Radarr
+        - entity: sensor.docker_sabnzbd_state
+          name: SabNZBd
+        - entity: sensor.docker_sonarr_state
+          name: Sonarr
+        - entity: sensor.docker_spotweb_state
+          name: Spotweb
+        - entity: sensor.docker_transmission_state
+          name: Transmission
+        title: Media Docker containers
+        type: glance
+      type: vertical-stack
+    type: vertical-stack
+  icon: mdi:docker
+  path: docker
+  title: Docker
 - badges: []
   cards:
   - entities:

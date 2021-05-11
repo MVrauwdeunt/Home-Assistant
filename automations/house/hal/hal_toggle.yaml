@@ -1,3 +1,4 @@
+id: 63545d8a-e4e0-4d75-91a0-be141ab1360d
 alias: hal toggle
 trigger:
   platform: event

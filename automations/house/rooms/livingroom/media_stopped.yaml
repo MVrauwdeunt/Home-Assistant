@@ -1,3 +1,4 @@
+id: 3dddc97e-47e8-426c-a051-7fe14a3e6c59
 alias: "Media player Stopped"
 initial_state: 'on'
 trigger:

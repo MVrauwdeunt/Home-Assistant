@@ -1,4 +1,5 @@
 ---
+id: f11b575e-26e2-40ed-aafd-504862b00dae
 alias: "Turn automatics lights off"
 trigger:
   - platform: state

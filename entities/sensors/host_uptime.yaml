@@ -1,0 +1,5 @@
+  platform: command_line
+  name: System uptime      
+  command: "uptime -s"
+  # unit_of_measurement: "°C"       # If errors occur, remove degree symbol
+  # value_template: "{{ as_timestamp('value') | timestamp_custom('%A %B %-m, %H:%M') }}"

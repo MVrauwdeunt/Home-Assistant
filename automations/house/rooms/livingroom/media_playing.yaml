@@ -1,4 +1,5 @@
 ---
+id: 2dec9601-a7a3-4125-badf-f3cde1dd33c5
   # Turn on the amplifier when playing media
 alias: "Media player playing"
 initial_state: on

@@ -53,22 +53,14 @@
       title: Ender 3 staat klaar
       message: 3D printer is verbonden met OctoPrint
   mode: single
-- id: '1619958186322'
-  alias: Lidl
-  description: Locatie test
-  trigger:
-  - platform: zone
-    entity_id: person.michel_vrauwdeunt
-    zone: zone.lidl
-    event: enter
-  condition: []
-  action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: Click to open the shopping list
-      title: Boodschappenlijst
-      data:
-        clickAction: /shopping-list
-        url: /shopping-list
-  mode: single
 
+- id: '1620548369947'
+  alias: Home Assistant Update Notification for Android
+  description: ''
+  use_blueprint:
+    path: update-notifier-for-android.yaml
+    input:
+      clickAction: https://hass.gladsheimr.nl/config/info
+      delay: 0
+      notify_device: e775efe73342b7e445bd2d8482b2b198
+      group: Available Updates

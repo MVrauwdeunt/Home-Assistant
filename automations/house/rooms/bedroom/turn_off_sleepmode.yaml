@@ -1,3 +1,4 @@
+id: 6539f7e4-7b3b-4936-acec-68da0e2e342f
 alias: Turn off sleep mode automatically
 initial_state: 'on'
 trigger:

@@ -1,0 +1,13 @@
+influxdb:
+  api_version: 2
+  ssl: false
+  host: !secret influx_ip_address
+  port: 9999
+  token: !secret influx_token
+  organization: !secret influx_organisation
+  bucket: HomeAssistant
+  tags:
+    source: HA
+  tags_attributes:
+    - friendly_name
+  default_measurement: units

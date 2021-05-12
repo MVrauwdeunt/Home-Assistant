@@ -8,6 +8,14 @@ monitored_conditions:
   - version
   - containers_running
   - containers_total
+  - containers_paused
+  - containers_stopped
+  - containers_cpu_percentage
+  - containers_1cpu_percentage
+  - containers_memory
+  - containers_memory_percentage
+  - images
   - state
   - status
   - memory
+  - image

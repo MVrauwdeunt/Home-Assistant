@@ -14,6 +14,10 @@
 # This is my current Home Assistant installation.
 [![HA Version](https://img.shields.io/badge/Home%20Assistant-{{states('sensor.current_version')}}-brightgreen)](https://github.com/home-assistant/home-assistant/releases/{{states.sensor.current_version.state}})
 
+Home Assistant runs on a server which runs {{states('sensor.docker_containers_running')}} docker containers. Some are related to my smarthome Home Assistant offcourse, ESPHome, Mosquitto, Deconz.
+There are a couple of containers which work with Home Assistant but could be fun or usefull in other situations. For instance Grocy, Barcode Buddy, VSCode and Rhasspy.
+Then there are several containers related to my multimedia setup. Automated download and handling of audio, video and subtitles and such. And last the containers for controlling, 
+securing and backup of the server and network. Authelia, Duplicati and Unifi among others
 
 ## Images
 ### Wallpanel running on a ASUS 10.1 inch tablet

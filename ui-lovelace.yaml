@@ -67,6 +67,8 @@ views:
               - this
               large: false
               title: verlichting
+        - entity: sensor.woonkamer_illuminance
+          name: Licht
         type: glance
       type: vertical-stack
     - artwork: cover
@@ -229,6 +231,82 @@ views:
         \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
         \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
       type: entities
+    - details: true
+      entity: weather.rozenburg
+      hourly_forecast: false
+      number_of_forecasts: '5'
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
+        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
+      type: custom:weather-card
+    type: vertical-stack
+  - cards:
+    - entities:
+      - entity: weather.rozenburg
+      - entity: sensor.season
+        name: Seizoen
+      - entity: sensor.neerslag_buienalarm_regen_data
+        name: Neerslag
+      type: glance
+    - entity: camera.buienradar_loop
+      show_name: false
+      show_state: false
+      type: picture-entity
+    type: vertical-stack
+  - cards:
+    - cards:
+      - columns: 3
+        entities:
+        - entity: sensor.rotterdam_feel_temperature
+          name: Temperatuur
+        - entity: sensor.rotterdam_symbol
+          name: Conditie
+        - entity: sensor.rotterdam_humidity
+          name: Luchtvochtigheid
+        - entity: sensor.rotterdam_precipitation_forecast_average
+          name: Neerslag
+        - entity: sensor.rotterdam_wind_direction
+          name: Windrichting
+        - entity: sensor.rotterdam_wind_speed
+          name: Windsnelheid
+        type: glance
+      type: vertical-stack
+    - entities:
+      - sensor.neerslag_buienalarm_regen_data
+      - sensor.neerslag_buienradar_regen_data
+      title: Neerslag
+      type: custom:neerslag-card
+    type: vertical-stack
+  icon: mdi:cloud
+  path: weer
+  title: Weer
+- badges: []
+  cards:
+  - cards:
+    - entities:
+      - entity: person.michel_vrauwdeunt
+      - entity: person.thonia
+      - entity: person.zoe
+      show_name: false
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
+        .card-content {\n  padding: 5\n}\n"
+      theme: nest
+      type: glance
+    - entities:
+      - cards:
+        - columns: 1
+          entities:
+          - entity: sensor.time
+          - entity: sensor.alarm_clock_time
+          show_icon: false
+          show_name: false
+          type: glance
+        type: custom:hui-vertical-stack-card
+      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
+        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
+        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
+      type: entities
     - entity: weather.rozenburg
       number_of_forecasts: '5'
       style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
@@ -309,82 +387,6 @@ views:
       type: custom:weather-card
     type: vertical-stack
   - cards:
-    - entities:
-      - entity: weather.rozenburg
-      - entity: sensor.season
-        name: Seizoen
-      - entity: sensor.neerslag_buienalarm_regen_data
-        name: Neerslag
-      type: glance
-    - entity: camera.buienradar_loop
-      show_name: false
-      show_state: false
-      type: picture-entity
-    type: vertical-stack
-  - cards:
-    - cards:
-      - columns: 3
-        entities:
-        - entity: sensor.rotterdam_feel_temperature
-          name: Temperatuur
-        - entity: sensor.rotterdam_symbol
-          name: Conditie
-        - entity: sensor.rotterdam_humidity
-          name: Luchtvochtigheid
-        - entity: sensor.rotterdam_precipitation_forecast_average
-          name: Neerslag
-        - entity: sensor.rotterdam_wind_direction
-          name: Windrichting
-        - entity: sensor.rotterdam_wind_speed
-          name: Windsnelheid
-        type: glance
-      type: vertical-stack
-    - entities:
-      - sensor.neerslag_buienalarm_regen_data
-      - sensor.neerslag_buienradar_regen_data
-      title: Neerslag
-      type: custom:neerslag-card
-    type: vertical-stack
-  icon: mdi:cloud
-  path: weer
-  title: Weer
-- badges: []
-  cards:
-  - cards:
-    - entities:
-      - entity: person.michel_vrauwdeunt
-      - entity: person.thonia
-      - entity: person.zoe
-      show_name: false
-      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
-        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n}\n\
-        .card-content {\n  padding: 5\n}\n"
-      theme: nest
-      type: glance
-    - entities:
-      - cards:
-        - columns: 1
-          entities:
-          - entity: sensor.time
-          - entity: sensor.alarm_clock_time
-          show_icon: false
-          show_name: false
-          type: glance
-        type: custom:hui-vertical-stack-card
-      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
-        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  font-size:\
-        \ 30px\n}\n.card-content {\n  padding: 0\n}\n"
-      type: entities
-    - details: true
-      entity: weather.rozenburg
-      hourly_forecast: false
-      number_of_forecasts: '5'
-      style: "ha-card {\n  --ha-card-background: transparant;\n  --ha-card-box-shadow:\
-        \ 'inset 0px 0px 0px 0px';\n  box-shadow: none;\n  background: none;\n  position:\
-        \ relative\n}\n.card-content {\n  padding: 0\n}\n"
-      type: custom:weather-card
-    type: vertical-stack
-  - cards:
     - cards:
       - columns: 3
         entities:
@@ -420,25 +422,6 @@ views:
       type: custom:secondaryinfo-entity-row
     - entity: sensor.uptime
       icon: mdi:home-assistant
-    - entities:
-      - entity: sensor.homeassistant_git_version
-        name: Latest
-      entity: sensor.current_version
-      icon: mdi:home-assistant
-      name: HA Installed Version
-      state_header: Current
-      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.homeassistant_git_version').split('.')[1]\
-        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
-        \ 165, 0);\n  {% endif %};\n}\n"
-      type: custom:multiple-entity-row
-    - entity: sensor.hacs
-      name: HACS
-      style: ":host {\n  {% if states(config.entity) != '0' %}\n    color: rgb(255,\
-        \ 165, 0);\n    --paper-item-icon-color: rgb(255, 165, 0);\n  {% endif %};\n\
-        }\n"
-      tap_action:
-        action: navigate
-        navigation_path: /hacs/entry
     - entity: sensor.home_assistant_log
       style: ":host {\n  {% if states(config.entity) >= '0.5' %}\n    color: rgb(255,\
         \ 165, 0);\n    --paper-item-icon-color: rgb(255, 165, 0);\n  {% endif %};\n\
@@ -458,10 +441,10 @@ views:
       type: custom:secondaryinfo-entity-row
     - columns: 2
       entities:
-      - entity: sensor.processor_use
+      - entity: sensor.docker_cpu
         icon: mdi:chip
         name: CPU
-      - entity: sensor.memory_use_percent
+      - entity: sensor.docker_memory_percent
         icon: mdi:memory
         name: RAM
       - entity: sensor.cpu_temperature
@@ -488,60 +471,185 @@ views:
     show_header_toggle: false
     type: entities
   - entities:
-    - entity: binary_sensor.woonkamer_pir_sensor
-    - entity: sensor.woonkamer_temperatuur
-    - entity: sensor.woonkamer_luchtvochtigheid
-    type: glance
-  - entities:
-    - entity: sensor.esphome_git_version
-    - entity: binary_sensor.woonkamer_pir_sensor
-    - entity: sensor.woonkamer_temperatuur
-    - entity: sensor.woonkamer_temperatuur
-    - entity: sensor.woonkamer_wifi_signal
-    - entity: sensor.woonkamer_uptime
-    - entity: sensor.woonkamer_illuminance
+    - entities:
+      - entity: sensor.homeassistant_git_version
+        name: Laatste
+      entity: sensor.current_version
+      icon: mdi:home-assistant
+      name: Home Assistant Versie
+      state_header: Huidig
+      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.homeassistant_git_version').split('.')[1]\
+        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
+        \ 165, 0);\n  {% endif %};\n}\n"
+      type: custom:multiple-entity-row
+    - entities:
+      - entity: sensor.esphome_git_version
+        name: Laatste
+      entity: sensor.hal_esphome_version
+      icon: mdi:home-assistant
+      name: Shelly hal versie
+      state_header: Huidig
+      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.esphome_git_version').split('.')[1]\
+        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
+        \ 165, 0);\n  {% endif %};\n}\n"
+      tap_action:
+        action: navigate
+        navigation_path: /esphome
+      type: custom:multiple-entity-row
+    - entities:
+      - entity: sensor.esphome_git_version
+        name: Laatste
+      entity: sensor.3d_printer_esphome_version
+      icon: mdi:home-assistant
+      name: Sonoff 3D printer versie
+      state_header: Huidig
+      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.esphome_git_version').split('.')[1]\
+        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
+        \ 165, 0);\n  {% endif %};\n}\n"
+      tap_action:
+        action: navigate
+        navigation_path: /esphome
+      type: custom:multiple-entity-row
+    - entities:
+      - entity: sensor.esphome_git_version
+        name: Laatste
+      entity: sensor.tv_slaapkamer_esphome_version
+      icon: mdi:home-assistant
+      name: Sonoff TV Slaapkamer versie
+      state_header: huidig
+      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.esphome_git_version').split('.')[1]\
+        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
+        \ 165, 0);\n  {% endif %};\n}\n"
+      tap_action:
+        action: navigate
+        navigation_path: /esphome
+      type: custom:multiple-entity-row
+    - entities:
+      - entity: sensor.esphome_git_version
+        name: Laatste
+      entity: sensor.3d_printer_esphome_version
+      icon: mdi:home-assistant
+      name: Wemos Woonkamer Sensor versie
+      state_header: Huidig
+      style: ":host {\n  {% if states(config.entity).split('.')[1] != states('sensor.esphome_git_version').split('.')[1]\
+        \ %}\n    color: rgb(255, 165, 0);\n    --paper-item-icon-color: rgb(255,\
+        \ 165, 0);\n  {% endif %};\n}\n"
+      tap_action:
+        action: navigate
+        navigation_path: /esphome
+      type: custom:multiple-entity-row
+    - entity: sensor.hacs
+      name: HACS
+      style: ":host {\n  {% if states(config.entity) != '0' %}\n    color: rgb(255,\
+        \ 165, 0);\n    --paper-item-icon-color: rgb(255, 165, 0);\n  {% endif %};\n\
+        }\n"
+      tap_action:
+        action: navigate
+        navigation_path: /hacs/entry
+    show_header_toggle: false
     type: entities
   path: systeem
   title: Systeem
 - badges: []
   cards:
+  - entities:
+    - entity: sensor.docker_containers_total
+      name: Totaal
+    - entity: sensor.docker_containers_stopped
+      name: gestopt
+    - entity: sensor.docker_version
+      name: Versie
+    - entity: sensor.docker_containers_running
+      name: Draaiend
+    - entity: sensor.docker_containers_paused
+      name: gepauzeerd
+    type: glance
+  - entities:
+    - entity: sensor.docker_cpu
+    - entity: sensor.docker_memory_percent
+    - entity: sensor.docker_images
+    type: entities
   - cards:
     - cards:
       - columns: 5
         entities:
-        - entity: sensor.docker_deconz_state
+        - entity: sensor.docker_deconz_status
           name: Deconz
-        - entity: sensor.docker_esphome_state
+        - entity: sensor.docker_esphome_status
           name: ESPHome
-        - entity: sensor.docker_grafana_state
-          name: Grafana
-        - entity: sensor.docker_influxdb_state
-          name: InfluxDB
-        - entity: sensor.docker_mqtt_state
+        - entity: sensor.docker_mqtt_status
           name: MQTT
-        title: Smarthome Docker containers
+        - entity: sensor.docker_grocy_status
+          name: Grocy
+        - entity: sensor.docker_barcodebuddy_status
+          name: Barcode
+        title: Smarthome
         type: glance
       - columns: 5
         entities:
-        - entity: sensor.docker_airsonic_state
+        - entity: sensor.docker_airsonic_status
           name: Airsonic
-        - entity: sensor.docker_hydra_state
+        - entity: sensor.docker_hydra_status
           name: Hydra
-        - entity: sensor.docker_jellyfin_state
+        - entity: sensor.docker_jellyfin_status
           name: Jellyfin
-        - entity: sensor.docker_lidarr_state
+        - entity: sensor.docker_lidarr_status
           name: lidarr
-        - entity: sensor.docker_radarr_state
+        - entity: sensor.docker_ombi_status
+          name: Ombi
+        - entity: sensor.docker_radarr_status
           name: Radarr
-        - entity: sensor.docker_sabnzbd_state
+        - entity: sensor.docker_sabnzbd_status
           name: SabNZBd
-        - entity: sensor.docker_sonarr_state
+        - entity: sensor.docker_sonarr_status
           name: Sonarr
-        - entity: sensor.docker_spotweb_state
+        - entity: sensor.docker_spotweb_status
           name: Spotweb
-        - entity: sensor.docker_transmission_state
+        - entity: sensor.docker_transmission_status
           name: Transmission
-        title: Media Docker containers
+        title: Media
+        type: glance
+      type: vertical-stack
+    type: vertical-stack
+  - cards:
+    - cards:
+      - columns: 5
+        entities:
+        - entity: sensor.docker_grafana_status
+          name: Grafana
+        - entity: sensor.docker_influxdb_status
+          name: InfluxDB
+        - entity: sensor.docker_mariadb_status
+          name: MariaDB
+        - entity: sensor.docker_postgresql_status
+          name: PostgresQL
+        - entity: sensor.docker_redis_status
+          name: Redis
+        title: Database
+        type: glance
+      - columns: 5
+        entities:
+        - entity: sensor.docker_authelia_status
+          name: Authelia
+        - entity: sensor.docker_cf_companion_status
+          name: Cloudflare
+        - entity: sensor.docker_duplicati_status
+          name: Duplicati
+        - entity: sensor.docker_heimdall_status
+          name: Heimdall
+        - entity: sensor.docker_organizr_status
+          name: Organizr
+        - entity: sensor.docker_phpmyadmin_status
+          name: PHPMyAdmin
+        - entity: sensor.docker_smokeping_status
+          name: Smokeping
+        - entity: sensor.docker_traefik_certdumper_status
+          name: CertDumper
+        - entity: sensor.docker_traefik_status
+          name: Traefik
+        - entity: sensor.docker_unifi_status
+          name: Unifi
+        title: Systeem
         type: glance
       type: vertical-stack
     type: vertical-stack

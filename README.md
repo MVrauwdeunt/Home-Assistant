@@ -1,6 +1,10 @@
 # This is my current Home Assistant installation.
-[![HA Version](https://img.shields.io/badge/Home%20Assistant-2021.5.1-brightgreen)](https://github.com/home-assistant/home-assistant/releases/2021.5.1)
+[![HA Version](https://img.shields.io/badge/Home%20Assistant-2021.5.2-brightgreen)](https://github.com/home-assistant/home-assistant/releases/2021.5.2)
 
+Home Assistant runs on a server which runs 38 docker containers. Some are related to my smarthome Home Assistant offcourse, ESPHome, Mosquitto, Deconz.
+There are a couple of containers which work with Home Assistant but could be fun or usefull in other situations. For instance Grocy, Barcode Buddy, VSCode and Rhasspy.
+Then there are several containers related to my multimedia setup. Automated download and handling of audio, video and subtitles and such. And last the containers for controlling, 
+securing and backup of the server and network. Authelia, Duplicati and Unifi among others
 
 ## Images
 ### Wallpanel running on a ASUS 10.1 inch tablet
@@ -8,9 +12,9 @@
 
 Description | value
 -- | --
-Number of automations | 26
-Number of entities | 567
-Number of sensors | 349
+Number of automations | 27
+Number of entities | 623
+Number of sensors | 401
 
 
 ## The integrations that I use
@@ -27,6 +31,7 @@ Number of sensors | 349
   Connection to my Grocy installation
 - [Buienalarm](https://github.com/gieljnssns/buienalarm-sensor-homeassistant/tree/master)
   Get local weather info
+- [Breaking Changes](https://github.com/custom-components/breaking_changes)
 - [Monitor Docker](https://github.com/ualex73/monitor_docker)
   Get info from the docker which runs it all
 - [Adaptive Lighting](https://www.home-assistant.io/integrations/adaptive_lighting)

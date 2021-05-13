@@ -1,0 +1,5 @@
+device_tracker:
+  - platform: ping
+    hosts:
+      device_name_1: 192.168.178.39
+      count: 5

@@ -8,4 +8,4 @@ sensors:
       {% set time = states('sensor.time') %}
       {{ time >= start|timestamp_custom('%H:%M')
 
-      AND time <= stop|timestamp_custom('%H:%M') }}
+      and time <= stop|timestamp_custom('%H:%M') }}

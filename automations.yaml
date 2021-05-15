@@ -68,22 +68,9 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ states.sensor.time.state == as_timestamp(state_attr(''calendar.werkrooster'',
-      ''start_time'')) - (30*60) }}'
-  condition: []
-  action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      title: Tijd om te werken
-      message: Maak je klaar om te gaan werken
-  mode: single
-- id: '1620911662831'
-  alias: Werkpc aan zetten
-  description: ''
-  trigger:
-  - platform: template
-    value_template: '{{ states.sensor.time.state == as_timestamp(state_attr(''calendar.werkrooster'',
-      ''start_time'')) - (30*60) }}'
+    value_template: >
+      {% set start = as_timestamp(state_attr('calendar.werkrooster', 'start_time')) - (30*60) %}
+      {{ states.sensor.time.state == start | timestamp_custom('%H:%M', True) }}'
   condition: []
   action:
   - service: notify.mobile_app_oneplus_michel

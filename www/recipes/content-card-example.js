@@ -40,3 +40,42 @@ class ContentCardExample extends HTMLElement {
 }
 
 customElements.define('content-card-example', ContentCardExample);
+
+class ContentCardExample extends HTMLElement {
+  static getConfigElement() {
+    return document.createElement("content-card-editor");
+  }
+
+  static getStubConfig() {
+    return { entity: "sun.sun" }
+  }
+
+  ...
+}
+
+customElements.define('content-card-example', ContentCardExample);
+
+class ContentCardEditor extends LitElement {
+
+  setConfig(config) {
+    this._config = config;
+  }
+
+  configChanged(newConfig) {
+    const event = new Event("config-changed", {
+      bubbles: true,
+      composed: true
+    });
+    event.detail = {config: newConfig};
+    this.dispatchEvent(event);
+  }
+}
+
+customElements.define("content-card-editor", ContentCardEditor);
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "content-card-example",
+  name: "Content Card",
+  preview: false, // Optional - defaults to false
+  description: "A custom card made by me!" // Optional
+});

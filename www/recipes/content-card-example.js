@@ -19,7 +19,9 @@ class ContentCardExample extends HTMLElement {
     this.content.innerHTML = `
       The state of ${entityId} is ${stateStr}!
       <br><br>
-      <img src="https://grocy.gladsheimr.nl/api/files/recipepictures/Yjd6Mmp1ODRyZHdrd21kc2poNDIxbXRlcml5YWtpLmpwZw==">
+      <img src="https://grocy.gladsheimr.nl/api/files/recipepictures/Yjd6Mmp1ODRyZHdrd21kc2poNDIxbXRlcml5YWtpLmpwZw==" width="33%">
+      <br>
+      <img src="https://grocy.gladsheimr.nl/api/files/recipepictures/Yjd6Mmp1ODRyZHdrd21kc2poNDIxbXRlcml5YWtpLmpwZw==" width="33%">
     `;
   }
 

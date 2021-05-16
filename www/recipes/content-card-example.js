@@ -5,7 +5,7 @@ class ContentCardExample extends HTMLElement {
     // Initialize the content if it's not there yet.
     if (!this.content) {
       this.innerHTML = `
-        <ha-card header="Example-card">
+        <ha-card header="Recipes">
           <div class="card-content"></div>
         </ha-card>
       `;
@@ -19,7 +19,7 @@ class ContentCardExample extends HTMLElement {
     this.content.innerHTML = `
       The state of ${entityId} is ${stateStr}!
       <br><br>
-      <img src="http://via.placeholder.com/350x150">
+      <img src="https://grocy.gladsheimr.nl/api/files/recipepictures/Yjd6Mmp1ODRyZHdrd21kc2poNDIxbXRlcml5YWtpLmpwZw==">
     `;
   }
 
@@ -40,42 +40,3 @@ class ContentCardExample extends HTMLElement {
 }
 
 customElements.define('content-card-example', ContentCardExample);
-
-class ContentCardExample extends HTMLElement {
-  static getConfigElement() {
-    return document.createElement("content-card-editor");
-  }
-
-  static getStubConfig() {
-    return { entity: "sun.sun" }
-  }
-
-  ...
-}
-
-customElements.define('content-card-example', ContentCardExample);
-
-class ContentCardEditor extends LitElement {
-
-  setConfig(config) {
-    this._config = config;
-  }
-
-  configChanged(newConfig) {
-    const event = new Event("config-changed", {
-      bubbles: true,
-      composed: true
-    });
-    event.detail = {config: newConfig};
-    this.dispatchEvent(event);
-  }
-}
-
-customElements.define("content-card-editor", ContentCardEditor);
-window.customCards = window.customCards || [];
-window.customCards.push({
-  type: "content-card-example",
-  name: "Content Card",
-  preview: false, // Optional - defaults to false
-  description: "A custom card made by me!" // Optional
-});

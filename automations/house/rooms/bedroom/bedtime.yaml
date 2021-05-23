@@ -9,7 +9,7 @@ trigger:
 condition: []
 
 action:
-  - service: notify.notify
+  - service: notify.
     data:
         message: Have a good nights sleep. Turning the lights and PC off
         title: Good night

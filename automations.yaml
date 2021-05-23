@@ -92,3 +92,51 @@
       title: Deconz werkt niet
       message: Deconz is niet beschikbaar. is het ip adres verandert?
   mode: single
+- id: '1621680846116'
+  alias: Eurovision Songfestival
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:55'
+  condition:
+  - condition: template
+    value_template: '{{ now().date() == "2021-05-22" }}'
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.ambilight
+    data:
+      effect: Italie finland
+  mode: single
+- id: '1621681800474'
+  alias: Eurovision Songfestival (Dupliceren)
+  description: ''
+  trigger:
+  - platform: time
+    at: 0:45
+  condition:
+  - condition: template
+    value_template: '{{ now().date() == "2021-05-23" }}'
+  - condition: state
+    entity_id: switch.sleeping
+    state: 'Off'
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.ambilight
+    data:
+      effect: Kaars2
+  mode: single
+- id: '1621803861224'
+  alias: include test
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.sleeping
+    to: 'True'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: '!include ../announcements/goodnight.yaml'
+  mode: single

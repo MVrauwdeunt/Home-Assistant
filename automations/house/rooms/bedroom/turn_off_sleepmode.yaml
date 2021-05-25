@@ -11,5 +11,4 @@ condition:
 action:
   service: homeassistant.turn_off
   data:
-    entity_id: switch.sleeping 
-
+    entity_id: switch.sleeping

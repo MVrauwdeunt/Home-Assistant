@@ -127,16 +127,3 @@
     data:
       effect: Kaars2
   mode: single
-- id: '1621803861224'
-  alias: include test
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: switch.sleeping
-    to: 'True'
-  condition: []
-  action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: '!include ../announcements/goodnight.yaml'
-  mode: single

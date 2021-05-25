@@ -9,7 +9,7 @@ trigger:
 condition: []
 
 action:
-  - service: notify.
+  - service: notify.mobile_app_oneplus_michel
     data:
         message: Have a good nights sleep. Turning the lights and PC off
         title: Good night
@@ -21,8 +21,8 @@ action:
         volume_level: 0.20
 
   - service: notify.wallpanel
-    data:
-        message: Slaaplekker
+    data_template:
+      message: !include ../../../../announcements/goodnight.yaml
 
   - service: light.turn_off
     target:

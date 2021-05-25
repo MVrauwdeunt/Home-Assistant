@@ -4,3 +4,5 @@
   # https://www.home-assistant.io/integrations/climate/
   #
 climate: !include_dir_merge_named ../entities/climate
+
+# !include ../announcements/goodnight.yaml

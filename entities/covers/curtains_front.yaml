@@ -1,11 +1,12 @@
 platform: template
 covers:
-  front:
-    friendly_name: "voor"
-    value_template: "{{ states('sensor.curtains_front')|float > 0 }}"
-    open_cover:
-      service: script.curtains_front
-    close_cover:
-      service: script.curtains_front
-    stop_cover:
-      service: script.curtains_front
+  curtain:
+      friendly_name: "voor"
+      device_class: curtain
+      value_template: "{{ states('sensor.curtains_front')|float > 0 }}"
+      open_cover:
+        service: script.curtains_front
+      close_cover:
+        service: script.curtains_front
+      stop_cover:
+        service: script.curtains_front

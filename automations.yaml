@@ -127,3 +127,25 @@
     data:
       effect: Kaars2
   mode: single
+- id: '1622024793389'
+  alias: Dog test
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.woonkamer_sensor_pir_sensor
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.wallpanel
+    data:
+      volume_level: 1
+  - service: media_player.play_media
+    data:
+      media_content_id: /local/sounds/Dog2.mp3
+      media_content_type: mp3
+    target:
+      entity_id: media_player.wallpanel
+  mode: single

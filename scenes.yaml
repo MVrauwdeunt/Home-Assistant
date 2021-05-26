@@ -16,8 +16,11 @@
       - '6'
       - '7'
       - '8'
-      brightness: 46
-      color_temp: 153
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 191
       hs_color:
       - 0
       - 0
@@ -28,6 +31,7 @@
       xy_color:
       - 0.323
       - 0.329
+      color_temp: 153
       effect: white_mode
       friendly_name: muur
       icon: mdi:wall-sconce-flat
@@ -48,8 +52,11 @@
       - '6'
       - '7'
       - '8'
-      brightness: 26
-      color_temp: 277
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 191
       hs_color:
       - 0
       - 0
@@ -60,6 +67,7 @@
       xy_color:
       - 0.323
       - 0.329
+      color_temp: 153
       effect: white_mode
       friendly_name: Spot
       icon: mdi:spotlight-beam
@@ -76,7 +84,10 @@
       - '6'
       - '7'
       - '8'
-      brightness: 46
+      supported_color_modes:
+      - hs
+      color_mode: unknown
+      brightness: 191
       friendly_name: plank
       icon: mdi:led-strip
       supported_features: 61
@@ -96,8 +107,11 @@
       - '6'
       - '7'
       - '8'
-      brightness: 46
-      color_temp: 370
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 191
       hs_color:
       - 0
       - 0
@@ -108,27 +122,167 @@
       xy_color:
       - 0.323
       - 0.329
+      color_temp: 153
       effect: white_mode
       friendly_name: tafel
       icon: mdi:ceiling-light
       supported_features: 63
       state: 'on'
-    switch.circadian_lighting_eettafel:
+    light.ambilight:
+      effect_list:
+      - Solid
+      - Boblight Server
+      - Platform Capture
+      - USB Capture
+      - Atomic swirl
+      - Blue mood blobs
+      - Breath
+      - Candle
+      - Cinema brighten lights
+      - Cinema dim lights
+      - Cold mood blobs
+      - Collision
+      - Color traces
+      - Double swirl
+      - Fire
+      - Flags Germany/Sweden
+      - Full color mood blobs
+      - Green mood blobs
+      - Italie finland
+      - Kaars2
+      - Knight rider
+      - Led Test
+      - Light clock
+      - Lights
+      - My Modded Effect
+      - Notify blue
+      - Pac-Man
+      - Plasma
+      - Police Lights Single
+      - Police Lights Solid
+      - Rainbow mood
+      - Rainbow swirl
+      - Rainbow swirl fast
+      - Random
+      - Red mood blobs
+      - Sea waves
+      - Snake
+      - Sparks
+      - Strobe red
+      - Strobe white
+      - System Shutdown
+      - Trails
+      - Trails color
+      - Warm mood blobs
+      - Waves with Color
+      - X-Mas
+      supported_color_modes:
+      - hs
+      color_mode: hs
+      brightness: 255
       hs_color:
-      - 28.681
-      - 71.373
-      brightness: 18.861639319704068
-      friendly_name: eettafel
-      icon: mdi:theme-light-dark
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: Kaars2
+      friendly_name: Ambilight
+      icon: mdi:television-ambient-light
+      supported_features: 21
       state: 'on'
-    switch.circadian_lighting_zithoek:
+    light.ambilight_priority:
+      effect_list:
+      - Solid
+      - Atomic swirl
+      - Blue mood blobs
+      - Breath
+      - Candle
+      - Cinema brighten lights
+      - Cinema dim lights
+      - Cold mood blobs
+      - Collision
+      - Color traces
+      - Double swirl
+      - Fire
+      - Flags Germany/Sweden
+      - Full color mood blobs
+      - Green mood blobs
+      - Italie finland
+      - Kaars2
+      - Knight rider
+      - Led Test
+      - Light clock
+      - Lights
+      - My Modded Effect
+      - Notify blue
+      - Pac-Man
+      - Plasma
+      - Police Lights Single
+      - Police Lights Solid
+      - Rainbow mood
+      - Rainbow swirl
+      - Rainbow swirl fast
+      - Random
+      - Red mood blobs
+      - Sea waves
+      - Snake
+      - Sparks
+      - Strobe red
+      - Strobe white
+      - System Shutdown
+      - Trails
+      - Trails color
+      - Warm mood blobs
+      - Waves with Color
+      - X-Mas
+      supported_color_modes:
+      - hs
+      color_mode: hs
+      brightness: 255
       hs_color:
-      - 28.681
-      - 71.373
-      brightness: 18.861639319704068
-      friendly_name: zithoek
-      icon: mdi:theme-light-dark
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: Kaars2
+      friendly_name: Ambilight Priority
+      icon: mdi:lava-lamp
+      supported_features: 21
       state: 'on'
+    switch.ambilight_component_all:
+      friendly_name: Ambilight Component All
+      state: 'on'
+    switch.ambilight_component_smoothing:
+      friendly_name: Ambilight Component Smoothing
+      state: 'on'
+    switch.ambilight_component_blackbar_detection:
+      friendly_name: Ambilight Component Blackbar Detection
+      state: 'on'
+    switch.ambilight_component_forwarder:
+      friendly_name: Ambilight Component Forwarder
+      state: 'off'
+    switch.ambilight_component_boblight_server:
+      friendly_name: Ambilight Component Boblight Server
+      state: 'off'
+    switch.ambilight_component_platform_capture:
+      friendly_name: Ambilight Component Platform Capture
+      state: 'on'
+    switch.ambilight_component_led_device:
+      friendly_name: Ambilight Component LED Device
+      state: 'on'
+    switch.ambilight_component_usb_capture:
+      friendly_name: Ambilight Component USB Capture
+      state: 'off'
 - id: '1616751914695'
   name: Nightmode
   entities:
@@ -262,3 +416,239 @@
       icon: mdi:led-strip
       supported_features: 61
       state: 'off'
+- id: '1622029163671'
+  name: Playing video
+  entities:
+    light.ambilight:
+      effect_list:
+      - Solid
+      - Boblight Server
+      - Platform Capture
+      - USB Capture
+      - Atomic swirl
+      - Blue mood blobs
+      - Breath
+      - Candle
+      - Cinema brighten lights
+      - Cinema dim lights
+      - Cold mood blobs
+      - Collision
+      - Color traces
+      - Double swirl
+      - Fire
+      - Flags Germany/Sweden
+      - Full color mood blobs
+      - Green mood blobs
+      - Italie finland
+      - Kaars2
+      - Knight rider
+      - Led Test
+      - Light clock
+      - Lights
+      - My Modded Effect
+      - Notify blue
+      - Pac-Man
+      - Plasma
+      - Police Lights Single
+      - Police Lights Solid
+      - Rainbow mood
+      - Rainbow swirl
+      - Rainbow swirl fast
+      - Random
+      - Red mood blobs
+      - Sea waves
+      - Snake
+      - Sparks
+      - Strobe red
+      - Strobe white
+      - System Shutdown
+      - Trails
+      - Trails color
+      - Warm mood blobs
+      - Waves with Color
+      - X-Mas
+      supported_color_modes:
+      - hs
+      color_mode: hs
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      effect: Platform Capture
+      friendly_name: Ambilight
+      icon: mdi:television-ambient-light
+      supported_features: 21
+      state: 'on'
+    light.ambilight_priority:
+      effect_list:
+      - Solid
+      - Atomic swirl
+      - Blue mood blobs
+      - Breath
+      - Candle
+      - Cinema brighten lights
+      - Cinema dim lights
+      - Cold mood blobs
+      - Collision
+      - Color traces
+      - Double swirl
+      - Fire
+      - Flags Germany/Sweden
+      - Full color mood blobs
+      - Green mood blobs
+      - Italie finland
+      - Kaars2
+      - Knight rider
+      - Led Test
+      - Light clock
+      - Lights
+      - My Modded Effect
+      - Notify blue
+      - Pac-Man
+      - Plasma
+      - Police Lights Single
+      - Police Lights Solid
+      - Rainbow mood
+      - Rainbow swirl
+      - Rainbow swirl fast
+      - Random
+      - Red mood blobs
+      - Sea waves
+      - Snake
+      - Sparks
+      - Strobe red
+      - Strobe white
+      - System Shutdown
+      - Trails
+      - Trails color
+      - Warm mood blobs
+      - Waves with Color
+      - X-Mas
+      supported_color_modes:
+      - hs
+      friendly_name: Ambilight Priority
+      icon: mdi:lightbulb
+      supported_features: 21
+      state: 'off'
+    switch.ambilight_component_all:
+      friendly_name: Ambilight Component All
+      state: 'on'
+    switch.ambilight_component_smoothing:
+      friendly_name: Ambilight Component Smoothing
+      state: 'on'
+    switch.ambilight_component_blackbar_detection:
+      friendly_name: Ambilight Component Blackbar Detection
+      state: 'on'
+    switch.ambilight_component_forwarder:
+      friendly_name: Ambilight Component Forwarder
+      state: 'off'
+    switch.ambilight_component_boblight_server:
+      friendly_name: Ambilight Component Boblight Server
+      state: 'off'
+    switch.ambilight_component_platform_capture:
+      friendly_name: Ambilight Component Platform Capture
+      state: 'on'
+    switch.ambilight_component_led_device:
+      friendly_name: Ambilight Component LED Device
+      state: 'on'
+    switch.ambilight_component_usb_capture:
+      friendly_name: Ambilight Component USB Capture
+      state: 'off'
+    light.plank:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      supported_color_modes:
+      - hs
+      color_mode: unknown
+      brightness: 13
+      friendly_name: plank
+      icon: mdi:led-strip
+      supported_features: 61
+      state: 'on'
+    light.spot:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 13
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      color_temp: 370
+      effect: white_mode
+      friendly_name: Spot
+      icon: mdi:spotlight-beam
+      supported_features: 63
+      state: 'on'
+    light.muur:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - white_mode
+      - night_mode
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 13
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      color_temp: 370
+      effect: white_mode
+      friendly_name: muur
+      icon: mdi:wall-sconce-flat
+      supported_features: 63
+      state: 'on'

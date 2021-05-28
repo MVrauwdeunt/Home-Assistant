@@ -151,13 +151,44 @@ import { html, LitElement } from "https://unpkg.com/lit?module";
             ${this.notShowing.length > 0 && this.notShowing.length != null ? html
               `
               <div class="secondary not-showing">
-                  ${this.translate("Look in Grocy for {number} more items").replace("{number}", this.notShowing.length)}
+              ${this.translate("Look in Grocy for {number} more items").replace("{number}", this.notShowing.length)}
               </div>
               `
-            : ""}
+              : ""}
+              ${this.show_create_task ? html
+                `
+                <mwc-button class="hide-button" @click=${ev => this._toggleAddTask()}><ha-icon icon="mdi:chevron-down"></ha-icon> Add task</mwc-button>
+                <div style="display: none;" id="add-task-row" class="add-row">
+                  <mwc-button @click=${ev => this._addTask()}><ha-icon class="add-icon" icon="mdi:plus"></ha-icon></mwc-button>
+                  <paper-input
+                    id="add-task"
+                    class="add-input"
+                    no-label-float
+                    placeholder=${this.translate("Add task")}>
+                  </paper-input>
+                  <paper-input
+                    id="add-date"
+                    class="add-input"
+                    no-label-float
+                    placeholder=${this.translate("Optional due date/time")}
+                    value="${this._formatDate()}">
+                  </paper-input>
+                </div>
+                `
+              : ""}
           </ha-card>`}
       `;
     } 
+
+    _formatDate(){
+      var currentdate = new Date(); 
+      var datetime = currentdate.getFullYear() + "-"
+                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
+                + currentdate.getDate() + " "  
+                + ("0" + (currentdate.getHours() + 1)).slice(-2) + ":"  
+                + ("0" + (currentdate.getMinutes() + 1)).slice(-2);
+      return datetime;
+    }
 
     _trackChore(choreId){
       this._hass.callService("grocy", "execute_chore", {
@@ -170,6 +201,39 @@ import { html, LitElement } from "https://unpkg.com/lit?module";
       this._hass.callService("grocy", "complete_task", {
         task_id: taskId
       });
+    }
+
+    _toggleAddTask(){
+      console.log("toggling");
+      var x = this.shadowRoot.getElementById("add-task-row");
+      if (x.style.display === "none") {
+        x.style.display = "flex";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+    _addTask(){
+      var taskName = this.shadowRoot.getElementById('add-task').value;
+      var taskDueDate = this.shadowRoot.getElementById('add-date').value;
+      if(taskName == null || taskName == "")
+      {
+        alert(this.translate("'Name' can't be empty"));
+      }
+      else if(taskDueDate == null) {
+        this._hass.callService("grocy", "add_generic", {
+          entity_type: "tasks",
+          data: { "name": taskName }
+        });
+        console.log("Adding task: " + taskName)
+      }
+      else {
+        this._hass.callService("grocy", "add_generic", {
+          entity_type: "tasks",
+          data: { "name": taskName, "due_date": taskDueDate }
+        });
+        console.log("Adding task: " + taskName + ", due: " + taskDueDate)
+      }
     }
 
     _renderStyle() {
@@ -197,7 +261,22 @@ import { html, LitElement } from "https://unpkg.com/lit?module";
             .secondary {
               display: block;
               color: #8c96a5;
-          }
+            }
+            .add-row {
+              padding-bottom: 16px;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              width: 100%;
+            }
+            .add-input {
+              padding-right: 16px;
+              width: 100%;
+            }
+            .hide-button {
+              margin-top: -16px;
+              padding: 0 16px 16px 16px;
+            }
           </style>
         `;
       }
@@ -217,6 +296,7 @@ import { html, LitElement } from "https://unpkg.com/lit?module";
         this.show_category = this.config.show_category == null ? true : this.config.show_category;
         this.show_description = this.config.show_description == null ? true : this.config.show_description;
         this.show_empty = this.config.show_empty == null ? true : this.config.show_empty;
+        this.show_create_task = this.config.show_create_task == null ? false : this.config.show_create_task;
       }
 
     set hass(hass) {
@@ -249,15 +329,19 @@ import { html, LitElement } from "https://unpkg.com/lit?module";
           else {
             if (this.entities[i].attributes.chores != undefined || this.entities[i].attributes.chores != null) {
               items = this.entities[i].attributes.chores;
-              items.map(item =>{
-                item.type = "chore"
-              });
+              if(items != undefined)
+                items.map(item =>{
+                  item.type = "chore"
+                });
             }
             else {
               items = this.entities[i].attributes.tasks;
-              items.map(item =>{
-                item.type = "task"
-              });
+              if(items != undefined)
+              {
+                items.map(item =>{
+                  item.type = "task"
+                });
+              }
             }
             if (items != null){
               if (this.filter != null) {

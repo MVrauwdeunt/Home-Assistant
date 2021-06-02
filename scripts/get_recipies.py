@@ -36,7 +36,7 @@ def ingredient(recept_id):
 
 response = requests.get('https://grocy.gladsheimr.nl/api/objects/recipes', headers=headers)
 test = response.json()
-blaat = "["
+content = u""
 for p in test:
     if (p['type']) == 'normal':
         name = p['name']
@@ -50,13 +50,15 @@ for p in test:
         response_dict = json.loads(response)
         #print(response)
         #print(json.dumps(response_dict, indent = 4, sort_keys=False))
-        if blaat != '[':
-            blaat = blaat + ', ' + response
+        if content != '[':
+            content += ', ' + response
         else:
-            blaat = blaat + response 
-blaat = blaat + "]"
-blaat_dict = json.loads(blaat)
+            content += response 
+#content += "]"
+#content_dict = json.loads(content)
+
     #print(response)
-print(json.dumps(blaat_dict, indent = 4, sort_keys=False))
+#print(json.dumps(content_dict, indent = 4, sort_keys=False))
+print(content)
 #print(json)
 # https://grocy.gladsheimr.nl/api/files/recipepictures/MmVubHZjOGxhd2tocnpjY3VrdnZhOW92ZW5zY2hvdGVsLW1ldC1ibG9lbWtvb2wuanBn?force_serve_as=picture:

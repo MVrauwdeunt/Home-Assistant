@@ -57,7 +57,7 @@ for p in test:
 content += "]"
 
 content_dict = json.loads(content)
-content = '{"recepten": {"Zweedse roomsaus": ["ingredients": ["Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=1#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/YjZ0bmVzcm0zMWE2MDJrNDVvZWxtblp3ZWVkc2Utcm9vbXNhdXMucG5n"]}}'
+content = '{"recepten": {"Zweedse roomsaus":{ "ingredients": ["Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=1#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/YjZ0bmVzcm0zMWE2MDJrNDVvZWxtblp3ZWVkc2Utcm9vbXNhdXMucG5n"}}}'
 
     #print(response)
 #print(json.dumps(content_dict, indent = 4, sort_keys=False))

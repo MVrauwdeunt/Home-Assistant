@@ -57,10 +57,10 @@ for p in test:
 content += "]"
 
 content_dict = json.loads(content)
-content = '[{"recepten": {"Zweedse kookroom", "Hachee" }}]'
-content = json.loads(content)
+content = '[{"recepten": {"Zweedse kookroom":{ "ingredients": [ "Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"]}, "Hachee": {"ingredients": ["Hachee kruiden", "Hachee mix", "Rundvlees", "Aardappelen", "Uien", "Laurier", "Kruidnagel", "Croma"] }}}]'
+content_dict = json.loads(content)
     #print(response)
 #print(json.dumps(content_dict, indent = 4, sort_keys=False))
-print(content)
+print(content_dict)
 #print(json)
 # https://grocy.gladsheimr.nl/api/files/recipepictures/MmVubHZjOGxhd2tocnpjY3VrdnZhOW92ZW5zY2hvdGVsLW1ldC1ibG9lbWtvb2wuanBn?force_serve_as=picture:

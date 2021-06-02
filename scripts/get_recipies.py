@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/local/bin/python
+# coding: utf8
 import json
 import requests
 import base64
@@ -32,31 +33,30 @@ def ingredient(recept_id):
             name = name + '"' + ingredient['name'] + '"'
     return name + "]"
 
-def test():
-    response = requests.get('https://grocy.gladsheimr.nl/api/objects/recipes', headers=headers)
-    test = response.json()
-    blaat = "["
-    for p in test:
-        if (p['type']) == 'normal':
-            name = p['name']
-            photo = p['picture_file_name']
-            link = "https://grocy.gladsheimr.nl/recipes?recipe=" + p['id'] + "#fullscreen"
-            data = ingredient(p['id'])
-            encodedBytes = base64.b64encode(photo.encode("utf-8"))
-            encodedStr = str(encodedBytes, "utf-8")
-            photo = "https://grocy.gladsheimr.nl/api/files/recipepictures/" + encodedStr
-            response = '{"name": "' + name + '", "ingredients": ' + data + ', "link": "' + link + '", "photo": "' + photo + '"}'
-            response_dict = json.loads(response)
-            #print(response)
-            #print(json.dumps(response_dict, indent = 4, sort_keys=False))
-            if blaat != '[':
-                blaat = blaat + ', ' + response
-            else:
-                blaat = blaat + response 
-    blaat = blaat + "]"
-    blaat_dict = json.loads(blaat)
+
+response = requests.get('https://grocy.gladsheimr.nl/api/objects/recipes', headers=headers)
+test = response.json()
+blaat = "["
+for p in test:
+    if (p['type']) == 'normal':
+        name = p['name']
+        photo = p['picture_file_name']
+        link = "https://grocy.gladsheimr.nl/recipes?recipe=" + p['id'] + "#fullscreen"
+        data = ingredient(p['id'])
+        encodedBytes = base64.b64encode(photo.encode("utf-8"))
+        encodedStr = str(encodedBytes, "utf-8")
+        photo = "https://grocy.gladsheimr.nl/api/files/recipepictures/" + encodedStr
+        response = '{"name": "' + name + '", "ingredients": ' + data + ', "link": "' + link + '", "photo": "' + photo + '"}'
+        response_dict = json.loads(response)
         #print(response)
-    return json.dumps(blaat_dict, indent = 4, sort_keys=False)
+        #print(json.dumps(response_dict, indent = 4, sort_keys=False))
+        if blaat != '[':
+            blaat = blaat + ', ' + response
+        else:
+            blaat = blaat + response 
+blaat = blaat + "]"
+blaat_dict = json.loads(blaat)
+    #print(response)
+print(json.dumps(blaat_dict, indent = 4, sort_keys=False))
 #print(json)
 # https://grocy.gladsheimr.nl/api/files/recipepictures/MmVubHZjOGxhd2tocnpjY3VrdnZhOW92ZW5zY2hvdGVsLW1ldC1ibG9lbWtvb2wuanBn?force_serve_as=picture:
-print(test())

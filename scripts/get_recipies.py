@@ -50,15 +50,15 @@ for p in test:
         #response_dict = json.loads(response)
         #print(response)
         #print(json.dumps(response_dict, indent = 4, sort_keys=False))
-        if content == "[":
+        if content != "[":
             content += u", %s" % response
         else:
             content += response 
 content += "]"
 content_dict = json.loads(content)
-#content = '{"name": "Zweedse roomsaus", "ingredients": ["Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=1#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/YjZ0bmVzcm0zMWE2MDJrNDVvZWxtblp3ZWVkc2Utcm9vbXNhdXMucG5n"}'
+content = '{"recepten": {"name": "Zweedse roomsaus", "ingredients": ["Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=1#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/YjZ0bmVzcm0zMWE2MDJrNDVvZWxtblp3ZWVkc2Utcm9vbXNhdXMucG5n"}}'
     #print(response)
-print(json.dumps(content_dict, indent = 4, sort_keys=False))
-#print(content_dict)
+#print(json.dumps(content_dict, indent = 4, sort_keys=False))
+print(content)
 #print(json)
 # https://grocy.gladsheimr.nl/api/files/recipepictures/MmVubHZjOGxhd2tocnpjY3VrdnZhOW92ZW5zY2hvdGVsLW1ldC1ibG9lbWtvb2wuanBn?force_serve_as=picture:

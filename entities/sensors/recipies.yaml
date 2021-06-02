@@ -1,3 +1,4 @@
 platform: command_line
 name: recipies
 command: /config/scripts/get_recipies.py
+value_template: "{{ value_json[] }}"

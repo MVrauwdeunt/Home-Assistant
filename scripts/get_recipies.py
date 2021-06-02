@@ -46,11 +46,11 @@ for p in test:
         encodedBytes = base64.b64encode(photo.encode("utf-8"))
         encodedStr = str(encodedBytes, "utf-8")
         photo = "https://grocy.gladsheimr.nl/api/files/recipepictures/" + encodedStr
-        response = '{"name": "' + name + '", "ingredients": ' + data + ', "link": "' + link + '", "photo": "' + photo + '"}'
-        response_dict = json.loads(response)
+        response = u'{"name": "%s", "ingredients": %s, "link": "%s", "photo": "%s"}' % (name, data, link, photo)
+        #response_dict = json.loads(response)
         #print(response)
         #print(json.dumps(response_dict, indent = 4, sort_keys=False))
-        if content != '[':
+        if content:
             content += u", %s" % response
         else:
             content += response 
@@ -59,6 +59,6 @@ for p in test:
 
     #print(response)
 #print(json.dumps(content_dict, indent = 4, sort_keys=False))
-print("Zweedse roomsaus")
+print(content)
 #print(json)
 # https://grocy.gladsheimr.nl/api/files/recipepictures/MmVubHZjOGxhd2tocnpjY3VrdnZhOW92ZW5zY2hvdGVsLW1ldC1ibG9lbWtvb2wuanBn?force_serve_as=picture:

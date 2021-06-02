@@ -57,8 +57,7 @@ for p in test:
 content += "]"
 
 content_dict = json.loads(content)
-content = '{"recepten": {"Zweedse roomsaus":{ "ingredients": ["Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=1#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/YjZ0bmVzcm0zMWE2MDJrNDVvZWxtblp3ZWVkc2Utcm9vbXNhdXMucG5n"}, "Roerbakmie": {"ingredients": ["Roerbakmie", "Roerbakmie mix", "Kipfilet blokjes", "Kippen bouillon", "Prei"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=3#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/ZWZjOTRodDlqN2d5MzdpY2lhamV1anJvZXJiYWttaWUucG5n"}}'
-
+content = '{"recepten": { "Zweedse roomsaus":{ "ingredients": [ "Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=1#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/YjZ0bmVzcm0zMWE2MDJrNDVvZWxtblp3ZWVkc2Utcm9vbXNhdXMucG5n"}, "Roerbakmie": { "ingredients": ["Roerbakmie", "Roerbakmie mix", "Kipfilet blokjes", "Kippen bouillon", "Prei"], "link": "https://grocy.gladsheimr.nl/recipes?recipe=3#fullscreen", "photo": "https://grocy.gladsheimr.nl/api/files/recipepictures/ZWZjOTRodDlqN2d5MzdpY2lhamV1anJvZXJiYWttaWUucG5n"}}}'
     #print(response)
 #print(json.dumps(content_dict, indent = 4, sort_keys=False))
 print(content)

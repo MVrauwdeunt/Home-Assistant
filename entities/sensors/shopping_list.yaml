@@ -1,3 +1,6 @@
 platform: command_line
 name: shopping_list
 command: /config/scripts/shopping_list.py
+json_attributes:
+  - 'boodschappen'
+value_template: '{{ value_json.boodschappen | count }}'

@@ -36,7 +36,7 @@ def ingredient(recept_id):
 
 response = requests.get('https://grocy.gladsheimr.nl/api/objects/recipes', headers=headers)
 test = response.json()
-content = u"["
+content = u'{"recepten": ['
 for p in test:
     if (p['type']) == 'normal':
         name = p['name']
@@ -50,16 +50,16 @@ for p in test:
         #response_dict = json.loads(response)
         #print(response)
         #print(json.dumps(response_dict, indent = 4, sort_keys=False))
-        if content != "[":
+        if content != '{"recepten": [':
             content += u", %s" % response
         else:
             content += response 
-content += "]"
+content += "]}"
 
 content_dict = json.loads(content)
 # content = '[{"recepten": {"name": "Zweedse kookroom", "ingredients": {"Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"}}, {"name": "Hachee", "ingredients": {Hachee kruiden", "Hachee mix", "Rundvlees", "Aardappelen", "Uien", "Laurier", "Kruidnagel", "Croma"}}}]'
 
-content = '{"recepten": [{"name": "Zweedse kookroom", "age": 30} , {"name":"Hachee", "age":55, "city":"Rotterdam"}]}'
+#content = '{"recepten": [{"name": "Zweedse kookroom", "age": 30} , {"name":"Hachee", "age":55, "city":"Rotterdam"}]}'
 content_dict = json.loads(content)
 
     #print(response)

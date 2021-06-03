@@ -58,11 +58,12 @@ content += "]"
 
 content_dict = json.loads(content)
 # content = '[{"recepten": {"name": "Zweedse kookroom", "ingredients": {"Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"}}, {"name": "Hachee", "ingredients": {Hachee kruiden", "Hachee mix", "Rundvlees", "Aardappelen", "Uien", "Laurier", "Kruidnagel", "Croma"}}}]'
+
+content = '{"recepten": [{"name": "Zweedse kookroom", "age": 30} , {"name":"Hachee", "age":55, "city":"Rotterdam"}]}'
 content_dict = json.loads(content)
-content =  '[{"recepten": [{"name": "Zweedse kookroom", "age": 30} , {"name":"Hachee", "age":55, "city":"Rotterdam"}]}]'
-y = json.dumps(content.dict)
+
     #print(response)
-#print(json.dumps(content_dict, indent = 4, sort_keys=False))
-print(y)
+print(json.dumps(content_dict, indent = 4, sort_keys=False))
+#print(json.dumps(content))
 #print(json)
 # https://grocy.gladsheimr.nl/api/files/recipepictures/MmVubHZjOGxhd2tocnpjY3VrdnZhOW92ZW5zY2hvdGVsLW1ldC1ibG9lbWtvb2wuanBn?force_serve_as=picture:

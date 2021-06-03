@@ -11,5 +11,5 @@ for entry in shoppingListData:
     if not entry['complete']:
         content += u"'{%s}', " % entry['name']
 
-content += u"\n"
+content += u"]}"
 print(content)

@@ -57,6 +57,5 @@ for p in test:
 content += "]}"
 
 content_dict = json.loads(content)
-content_dict = json.loads(content)
 
 print(json.dumps(content_dict, indent = 4, sort_keys=False))

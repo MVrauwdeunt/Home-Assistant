@@ -149,3 +149,17 @@
     target:
       entity_id: media_player.wallpanel
   mode: single
+- id: '1622671459948'
+  alias: Regen melding
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.neerslag_buienalarm_regen_data
+    above: '1'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: Het gaat regenen
+      title: Regen
+  mode: single

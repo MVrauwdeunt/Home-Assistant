@@ -1,6 +1,0 @@
-platform: command_line
-name: recipies
-command: /config/scripts/get_recipies.py
-json_attributes:
-  - 'recepten'
-value_template: '{{ value_json.[0] }}'

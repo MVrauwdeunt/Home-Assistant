@@ -58,8 +58,9 @@ content += "]"
 
 content_dict = json.loads(content)
 # content = '[{"recepten": {"name": "Zweedse kookroom", "ingredients": {"Kookroom", "Bloem", "Rundvlees bouillon", "Honing", "Worchestersaus", "Mosterd"}}, {"name": "Hachee", "ingredients": {Hachee kruiden", "Hachee mix", "Rundvlees", "Aardappelen", "Uien", "Laurier", "Kruidnagel", "Croma"}}}]'
+content_dict = json.loads(content)
 content =  '[{"recepten": [{"name": "Zweedse kookroom", "age": 30} , {"name":"Hachee", "age":55, "city":"Rotterdam"}]}]'
-y = json.dumps(content)
+y = json.dumps(content.dict)
     #print(response)
 #print(json.dumps(content_dict, indent = 4, sort_keys=False))
 print(y)

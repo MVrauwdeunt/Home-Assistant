@@ -163,3 +163,30 @@
       message: Het gaat regenen
       title: Regen
   mode: single
+- id: '1622889354417'
+  alias: Test zone message
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.michel_vrauwdeunt
+    zone: zone.albert_heijn_rozenburg
+    event: enter
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      message: Hoi
+      title: test
+      target: person.michel_vrauwdeunt
+  mode: single
+- id: '1622895169244'
+  alias: Send actionable notifications when entering a zone for Android
+  description: ''
+  use_blueprint:
+    path: Martinnygaard/actionable-notifications-for-android-when-entering-or-leaving-a-zone.yaml
+    input:
+      notify_device: e775efe73342b7e445bd2d8482b2b198
+      trigger_entity: person.michel_vrauwdeunt
+      trigger_event: enter
+      trigger_zone: zone.albert_heijn_rozenburg
+      notification_message: Boodschappen

@@ -41,12 +41,13 @@ for p in test:
     if (p['type']) == 'normal':
         name = p['name']
         photo = p['picture_file_name']
+        description = p['description']
         link = "https://grocy.gladsheimr.nl/recipes?recipe=" + p['id'] + "#fullscreen"
-        data = ingredient(p['id'])
+        ingredients = ingredient(p['id'])
         encodedBytes = base64.b64encode(photo.encode("utf-8"))
         encodedStr = str(encodedBytes, "utf-8")
         photo = "https://grocy.gladsheimr.nl/api/files/recipepictures/" + encodedStr
-        response = u'{"name": "%s", "ingredients": %s, "link": "%s", "photo": "%s"}' % (name, data, link, photo)
+        response = u'{"name": "%s", "ingredients": %s, "link": "%s", "photo": "%s"}' % (name, ingredients, link, photo)
         #response_dict = json.loads(response)
         #print(response)
         #print(json.dumps(response_dict, indent = 4, sort_keys=False))

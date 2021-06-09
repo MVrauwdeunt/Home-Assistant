@@ -1,0 +1,10 @@
+platform: template
+sensors:
+  kattenvoer:
+    friendly_name: kattenvoer
+    value_template: >-
+      {%- for i in state_attr('sensor.grocy_stock', 'products') %}
+      {%- if i.id == 93 %}
+      {{ i.available_amount | round }}
+      {%- endif %}
+      {%- endfor %}

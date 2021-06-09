@@ -190,3 +190,33 @@
       trigger_event: enter
       trigger_zone: zone.albert_heijn_rozenburg
       notification_message: Boodschappen
+- id: '1623156285450'
+  alias: Poekie eten gegeven
+  description: Feed the cat
+  trigger:
+  - platform: time
+    at: '20:00'
+  condition: []
+  action:
+  - service: grocy.consume_product_from_stock
+    data:
+      product_id: 93
+      amount: 1
+  mode: single
+- id: '1623157040847'
+  alias: Poekie eten bijna op
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.kattenvoer
+    below: '5'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: Oh no poekie zit bijna zonder eten
+      title: 'Poekie '
+  - service: shopping_list.add_item
+    data:
+      name: Kattenvoer
+  mode: single

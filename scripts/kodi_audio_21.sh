@@ -1,0 +1,1 @@
+curl --user Kodi:"\qYCju=xQPsD3qqs"  -v -H "Content-type: applicatiomethod":"Settings.SetSettingValue", "params":{"setting":"audiooutput.audiodevice","value":"surround21:CARD=Device,DEV=0"},"id":1}' http://localhost:80/jsonrpc

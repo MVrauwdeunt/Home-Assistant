@@ -220,3 +220,18 @@
     data:
       name: Kattenvoer
   mode: single
+- id: '1623356346155'
+  alias: Nieuwe automatisering
+  description: ''
+  trigger:
+  - platform: time
+    at: 03:00
+  condition:
+  - condition: zone
+    entity_id: person.michel_vrauwdeunt
+    zone: zone.lidl
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: test
+  mode: single

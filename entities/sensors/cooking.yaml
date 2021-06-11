@@ -1,0 +1,9 @@
+platform: template
+sensors:
+  cooking:
+    friendly_name: Cooking
+    value_template: '{{ state_attr("sensor.recipies", "recepten")[0].id | round }}'
+    attribute_templates:
+  # unit_of_measurement: "Days"
+  # attributes:
+      step_1: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[1].split('</li>')[0]}}"

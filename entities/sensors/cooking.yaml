@@ -2,8 +2,22 @@ platform: template
 sensors:
   cooking:
     friendly_name: Cooking
-    value_template: '{{ state_attr("sensor.recipies", "recepten")[0].id | round }}'
+    value_template: '{{ state_attr("sensor.recipies", "recepten")[0].name }}'
     attribute_templates:
   # unit_of_measurement: "Days"
   # attributes:
+      # {%- set id = 0 %}
+      # {{ state_attr('sensor.recipies', 'recepten')[id].name}}
+      # {%- if '<li>' in state_attr('sensor.recipies', 'recepten')[id].description %}
+      # {%- for i in state_attr('sensor.recipies', 'recepten')[id].description.split('<ol>')[1].split('<li>')%}
+      # {%- if not loop.first %}
+      # step_{{ loop.index-1 }}: {{ i.split('</li>')[0].split('<br />')[0] }}
+      # {%- endif %}
+      # {% endfor %}
+      # {%- endif %}
       step_1: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[1].split('</li>')[0]}}"
+      step_2: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[2].split('</li>')[0]}}"
+      step_3: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[3].split('</li>')[0]}}"
+      step_4: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[4].split('</li>')[0]}}"
+      step_5: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[5].split('</li>')[0]}}"
+      step_6: "{{ state_attr('sensor.recipies', 'recepten')[0].description.split('<li>')[6].split('</li>')[0]}}"

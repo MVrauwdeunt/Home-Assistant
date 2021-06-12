@@ -235,3 +235,28 @@
     data:
       message: test
   mode: single
+- id: '1623414912233'
+  alias: test recept
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Stap 1
+      message: Stap 1
+  mode: single
+- id: '1623414912300'
+  alias: test recept
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: '{{ state_attr(''sensor.cooking'', ''step_1'') }}'
+  mode: single

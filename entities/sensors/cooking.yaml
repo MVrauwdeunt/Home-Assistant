@@ -3,11 +3,7 @@ sensors:
   cooking:
     friendly_name: Cooking
     value_template: >-
-      {% if input_number.recipe_id')|round != -1 %}
       {{ state_attr('sensor.recipies', 'recepten')[states('input_number.recipe_id')|round].name }}
-      {% else %}
-      "Geen recept geselecteerd"
-      {%%}
     attribute_templates:
   # unit_of_measurement: "Days"
   # attributes:

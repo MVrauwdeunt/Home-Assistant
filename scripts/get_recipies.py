@@ -4,6 +4,15 @@ import json
 import requests
 import base64
 
+secrets_file = "../secrets.yaml"
+
+def read_secrets(secret):
+    with open(secrets_file, 'r') as read_obj:
+        for line in read_obj:
+            if secret in line:
+                return line.split()[1]
+    return False
+
 headers = {
     'accept': 'application/json',
     'GROCY-API-KEY': 'xMbVdqgvVC2aCJ8k9yCXoyElGy8HydOhyx7KNIiZJbiL7zC3nr',
@@ -60,3 +69,4 @@ content += "]}"
 content_dict = json.loads(content)
 
 print(json.dumps(content_dict, indent = 4, sort_keys=False))
+#print(read_secrets(groci_url))

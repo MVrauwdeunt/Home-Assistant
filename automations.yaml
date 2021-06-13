@@ -236,17 +236,18 @@
       message: test
   mode: single
 - id: '1623414912233'
-  alias: test recept
-  description: ''
+  alias: Recipe select step
+  description: Select steps
   trigger:
-  - platform: sun
-    event: sunrise
+  - platform: event
+    event_type: rhasspy_HassRecipeSelect
+    event_data: {}
   condition: []
   action:
   - service: notify.mobile_app_oneplus_michel
     data:
-      title: Stap 1
-      message: Stap 1
+      title: Stap {{ trigger.event.data.number | string }}
+      message: '{%- set i = "step_" + trigger.event.data.number | string %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
   mode: single
 - id: '1623414912300'
   alias: test recept
@@ -259,4 +260,86 @@
   - service: notify.mobile_app_oneplus_michel
     data:
       message: '{{ state_attr(''sensor.cooking'', ''step_1'') }}'
+  mode: single
+- id: '1623505526163'
+  alias: Recipe Last
+  description: Send next step
+  trigger:
+  - platform: event
+    event_type: rhasspy_HassRecipeStep
+    event_data:
+      modifier: vorige
+  condition:
+  - condition: template
+    value_template: "{%- set w = states('input_number.recipe_step')|int - 1 %}\n{%-\
+      \ set i = \"step_\" + w|string %}  \n{{ state_attr('sensor.cooking', i) != None\
+      \ }}"
+  action:
+  - service: input_number.decrement
+    target:
+      entity_id: input_number.recipe_step
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Stap {{ states('input_number.recipe_step').split('.')[0] }}
+      message: '{%- set i = "step_" + states(''input_number.recipe_step'').split(''.'')[0]
+        %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
+  mode: single
+- id: '1623505894399'
+  alias: Recipe curent
+  description: Send current step
+  trigger:
+  - platform: event
+    event_type: rhasspy_HassRecipeStep
+    event_data:
+      modifier: huidige
+  condition:
+  - condition: numeric_state
+    entity_id: input_number.recipe_step
+    above: '0'
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Stap {{ states('input_number.recipe_step').split('.')[0] }}
+      message: '{%- set i = "step_" + states(''input_number.recipe_step'').split(''.'')[0]
+        %}  {%- set message = state_attr(''sensor.cooking'', i) %} {%- if message
+        != None%} {{ message }} {% endif %}'
+  mode: single
+- id: '1623523159083'
+  alias: Recipe clear
+  description: ''
+  trigger:
+  - platform: template
+    value_template: "{%- set w = states('input_number.recipe_step')|int + 1 %}\n{%-\
+      \ set i = \"step_\" + w|string %} \n{{ state_attr('sensor.cooking', i) == None\
+      \ }}"
+  condition: []
+  action:
+  - service: input_number.set_value
+    target:
+      entity_id: input_number.recipe_step
+    data:
+      value: 0
+  mode: single
+- id: '1623526529325'
+  alias: Recipe next
+  description: Send next step
+  trigger:
+  - platform: event
+    event_type: rhasspy_HassRecipeStep
+    event_data:
+      modifier: volgende
+  condition:
+  - condition: template
+    value_template: "{%- set w = states('input_number.recipe_step')|int + 1 %}\n{%-\
+      \ set i = \"step_\" + w|string %}  \n{{ state_attr('sensor.cooking', i) != None\
+      \ }}"
+  action:
+  - service: input_number.increment
+    target:
+      entity_id: input_number.recipe_step
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Stap {{ states('input_number.recipe_step').split('.')[0] }}
+      message: '{%- set i = "step_" + states(''input_number.recipe_step'').split(''.'')[0]
+        %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
   mode: single

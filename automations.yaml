@@ -171,13 +171,16 @@
     entity_id: person.michel_vrauwdeunt
     zone: zone.albert_heijn_rozenburg
     event: enter
-  condition: []
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.shopping_list
+    above: '0'
   action:
   - service: notify.notify
     data:
       message: Hoi
       title: test
-      target: person.michel_vrauwdeunt
+      target: {}
   mode: single
 - id: '1622895169244'
   alias: Send actionable notifications when entering a zone for Android
@@ -240,7 +243,7 @@
   description: Select steps
   trigger:
   - platform: event
-    event_type: rhasspy_HassRecipeSelect
+    event_type: rhasspy_HassRecipeSelectStep
     event_data: {}
   condition: []
   action:
@@ -248,18 +251,6 @@
     data:
       title: Stap {{ trigger.event.data.number | string }}
       message: '{%- set i = "step_" + trigger.event.data.number | string %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
-  mode: single
-- id: '1623414912300'
-  alias: test recept
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunrise
-  condition: []
-  action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: '{{ state_attr(''sensor.cooking'', ''step_1'') }}'
   mode: single
 - id: '1623505526163'
   alias: Recipe Last
@@ -342,4 +333,26 @@
       title: Stap {{ states('input_number.recipe_step').split('.')[0] }}
       message: '{%- set i = "step_" + states(''input_number.recipe_step'').split(''.'')[0]
         %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
+  mode: single
+- id: '1623606798603'
+  alias: Recipe select recept
+  description: Select recept
+  trigger:
+  - platform: event
+    event_type: rhasspy_HassRecepies
+    event_data: {}
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      title: Recept geselecteerd
+      message: '{%- set w = trigger.event.data.recept| int %} {%- set recept = state_attr(''sensor.recipies'',
+        ''recepten'') %} {%- for i in recept %} {%- if w == i.id|int %} {{ i.name
+        }} {%- endif %} {%- endfor %}'
+  - service: python_script.set_state
+    data_template:
+      entity_id: input_number.recipe_id
+      state: '{%- set w = trigger.event.data.recept| int %} {%- set recept = state_attr(''sensor.recipies'',
+        ''recepten'') %} {%- for i in recept %} {%- if w == i.id|int %}  {{ loop.index
+        }} {%- endif %} {%- endfor %}'
   mode: single

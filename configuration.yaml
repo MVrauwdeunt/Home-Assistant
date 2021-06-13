@@ -18,3 +18,4 @@ homeassistant:
 
 updater:
 mobile_app:
+python_script:

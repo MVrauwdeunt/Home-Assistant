@@ -21,3 +21,4 @@ recorder:
     event_types:
       - call_service # Don't record service calls
 config:
+  python_script: !include_dir_list ../scripts/python_scripts

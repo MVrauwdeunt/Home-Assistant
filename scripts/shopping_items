@@ -1,0 +1,19 @@
+#! /usr/bin/python3
+
+import requests
+import json
+
+headers = {
+    'accept': 'application/json',
+    'GROCY-API-KEY': 'xMbVdqgvVC2aCJ8k9yCXoyElGy8HydOhyx7KNIiZJbiL7zC3nr',
+}
+
+response = requests.get('https://grocy.gladsheimr.nl/api/objects/products', headers=headers)
+json = response.json()
+# json = '{"products": ' + json
+
+
+for p in json:
+    print(f"({p['name']})")
+
+#print(json)

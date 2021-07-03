@@ -6,7 +6,10 @@
     entity_id: person.michel_vrauwdeunt
     zone: zone.albert_heijn_rozenburg
     event: enter
-  condition: []
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.shopping_list
+    above: '0'
   action:
   - service: notify.mobile_app_oneplus_michel
     data:
@@ -163,36 +166,6 @@
       message: Het gaat regenen
       title: Regen
   mode: single
-- id: '1622889354417'
-  alias: Test zone message
-  description: ''
-  trigger:
-  - platform: zone
-    entity_id: person.michel_vrauwdeunt
-    zone: zone.albert_heijn_rozenburg
-    event: enter
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.shopping_list
-    above: '0'
-  action:
-  - service: notify.notify
-    data:
-      message: Hoi
-      title: test
-      target: {}
-  mode: single
-- id: '1622895169244'
-  alias: Send actionable notifications when entering a zone for Android
-  description: ''
-  use_blueprint:
-    path: Martinnygaard/actionable-notifications-for-android-when-entering-or-leaving-a-zone.yaml
-    input:
-      notify_device: e775efe73342b7e445bd2d8482b2b198
-      trigger_entity: person.michel_vrauwdeunt
-      trigger_event: enter
-      trigger_zone: zone.albert_heijn_rozenburg
-      notification_message: Boodschappen
 - id: '1623156285450'
   alias: Poekie eten gegeven
   description: Feed the cat
@@ -213,7 +186,12 @@
   - platform: numeric_state
     entity_id: sensor.kattenvoer
     below: '5'
-  condition: []
+  condition:
+  - condition: template
+    value_template: '{%- set list = state_attr(''sensor.shopping_list'', ''boodschappen'')
+      | lower %}
+
+      {{ ''kattenvoer'' not in list }}'
   action:
   - service: notify.mobile_app_oneplus_michel
     data:
@@ -222,21 +200,6 @@
   - service: shopping_list.add_item
     data:
       name: Kattenvoer
-  mode: single
-- id: '1623356346155'
-  alias: Nieuwe automatisering
-  description: ''
-  trigger:
-  - platform: time
-    at: 03:00
-  condition:
-  - condition: zone
-    entity_id: person.michel_vrauwdeunt
-    zone: zone.lidl
-  action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: test
   mode: single
 - id: '1623414912233'
   alias: Recipe select step
@@ -251,9 +214,13 @@
     data:
       title: Stap {{ trigger.event.data.number | string }}
       message: '{%- set i = "step_" + trigger.event.data.number | string %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
+  - service: python_script.set_state
+    data_template:
+      entity_id: input_number.recipe_step
+      state: '{{trigger.event.data.number| int }}'
   mode: single
 - id: '1623505526163'
-  alias: Recipe Last
+  alias: Recipe Last step
   description: Send next step
   trigger:
   - platform: event
@@ -276,7 +243,7 @@
         %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
   mode: single
 - id: '1623505894399'
-  alias: Recipe curent
+  alias: Recipe curent step
   description: Send current step
   trigger:
   - platform: event
@@ -296,7 +263,7 @@
         != None%} {{ message }} {% endif %}'
   mode: single
 - id: '1623523159083'
-  alias: Recipe clear
+  alias: Recipe clear step
   description: ''
   trigger:
   - platform: template
@@ -312,7 +279,7 @@
       value: 0
   mode: single
 - id: '1623526529325'
-  alias: Recipe next
+  alias: Recipe next step
   description: Send next step
   trigger:
   - platform: event
@@ -335,11 +302,11 @@
         %} {{state_attr(''sensor.cooking'',i)|replace("''","")|replace("[","")|replace("]","")}}'
   mode: single
 - id: '1623606798603'
-  alias: Recipe select recept
+  alias: Recipe select recipe
   description: Select recept
   trigger:
   - platform: event
-    event_type: rhasspy_HassRecepies
+    event_type: rhasspy_HassRecipeSelect
     event_data: {}
   condition: []
   action:
@@ -353,6 +320,32 @@
     data_template:
       entity_id: input_number.recipe_id
       state: '{%- set w = trigger.event.data.recept| int %} {%- set recept = state_attr(''sensor.recipies'',
-        ''recepten'') %} {%- for i in recept %} {%- if w == i.id|int %}  {{ loop.index
+        ''recepten'') %} {%- for i in recept %} {%- if w == i.id|int %}  {{ loop.index-1
         }} {%- endif %} {%- endfor %}'
+  mode: single
+- id: '1623618935950'
+  alias: shopping_list_test
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.grocy_shopping_list
+    above: '0'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: '{{ trigger.state }}'
+  - condition: template
+    value_template: '{%- set hs = state_attr(''sensor.shopping_list'', ''boodschappen'')
+      %}
+
+      {%- set gc = state_attr(''sensor.grocy_shopping_list'', ''products'') %}
+
+      {%- for product in gc %}
+
+      {%- set test = product.product.name %}
+
+      {{ test|lower not in hs|lower }}
+
+      {%- endfor %}'
   mode: single

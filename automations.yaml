@@ -6,18 +6,38 @@
     entity_id: person.michel_vrauwdeunt
     zone: zone.albert_heijn_rozenburg
     event: enter
+    id: michel
+  - platform: zone
+    entity_id: person.thonia
+    zone: zone.albert_heijn_rozenburg
+    event: enter
+    id: thonia
   condition:
   - condition: numeric_state
     entity_id: sensor.shopping_list
     above: '0'
   action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: Click to open the shopping list
-      title: Boodschappenlijst
-      data:
-        clickAction: /shopping-list
-        url: /shopping-list
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: michel
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Klik om de boodschappenlijst te openen
+          title: Boodschappenlijst
+          data:
+            clickAction: /shopping-list
+            url: /shopping-list
+    - conditions:
+      - condition: trigger
+        id: thonia
+      sequence:
+      - service: notify.mobile_app_oneplus_thonia
+        data:
+          message: Klik om de boodschappenlijst te openen
+          title: Boodschappenlijst
+    default: []
   mode: single
 - id: '1615584209554'
   alias: 3D Printer klaar met printen.

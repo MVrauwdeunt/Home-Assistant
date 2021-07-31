@@ -369,3 +369,69 @@
 
       {%- endfor %}'
   mode: single
+- id: '1627474269057'
+  alias: Ambilight Capture on
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.baldr'', ''media_content_type'',
+      ''tvshow'') }}'
+    id: serie playing
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.baldr'', ''media_content_type'',
+      ''movie'') }}'
+    id: movie playing
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    above: '15'
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.ambilight
+    data:
+      effect: Platform Capture
+  mode: single
+- id: '1627476676939'
+  alias: Ambilight Capture off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.baldr
+    id: idle
+    to: idle
+  - platform: state
+    entity_id: media_player.baldr
+    id: paused
+    from: playing
+    to: paused
+    for: 0:05:00
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.baldr'', ''media_content_type'',
+      ''music'') }}'
+    id: music playing
+  - platform: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    above: '20'
+  condition: []
+  action:
+  - condition: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    below: '15'
+  - service: light.turn_on
+    target:
+      entity_id: light.ambilight
+    data:
+      effect: Kaars2
+  - condition: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    above: '15'
+  - service: light.turn_on
+    target:
+      entity_id: light.ambilight
+    data:
+      effect: Kaars2
+  - service: light.turn_off
+    target:
+      entity_id: light.ambilight
+  mode: single

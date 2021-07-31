@@ -32,7 +32,7 @@ def ingredient(recept_id):
     for i in recipe:
         amount = i['amount']
         product_id = i['product_id']
-        url = "https://grocy.gladsheimr.nl/api/objects/products/" + product_id
+        url = "https://grocy.gladsheimr.nl/api/objects/products/" + str(product_id)
         item = requests.get(url, headers=headers)
         ingredient = item.json()
 
@@ -52,7 +52,7 @@ for p in test:
         number = p['id']
         photo = p['picture_file_name']
         description = p['description']
-        link = "https://grocy.gladsheimr.nl/recipes?recipe=" + p['id'] + "#fullscreen"
+        link = "https://grocy.gladsheimr.nl/recipes?recipe=" + str(p['id']) + "#fullscreen"
         ingredients = ingredient(p['id'])
         encodedBytes = base64.b64encode(photo.encode("utf-8"))
         encodedStr = str(encodedBytes, "utf-8")

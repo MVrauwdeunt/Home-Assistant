@@ -1,0 +1,7 @@
+platform: command_line
+switches:
+  kodi_audio_51:
+    command_on:  '/config/Scripts/kodi_audio_51.sh'
+    # command_state: '{{ state_attr("media_player.baldr", "media_content_type") }}'
+    # value_template: "{{ is_state_attr('media_player.baldr', 'media_content_type', 'music') }}"
+    friendly_name: kodi_audio_51

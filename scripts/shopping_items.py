@@ -43,7 +43,7 @@ def hass_shopping():
 def Diff(li1, li2):
     hass = [i for i in li1 if i not in li2]
     grocy = [i for i in li2 if i not in li1]
-    lists = {"missing":[{"grocy": grocy}, {"hass": hass}]}
+    lists = {"missing": grocy }
     return lists
  
 # Driver Code

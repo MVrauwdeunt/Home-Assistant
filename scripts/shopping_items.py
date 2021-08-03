@@ -26,7 +26,8 @@ def grocy_shopping():
     for p in json:
         product_id = p['product_id']
         #test = product_name(name)
-        grocy.append(product_name(p['product_id']).lower())
+        #u', {"name": "%s"}' % entry['name']
+        grocy.append({"name": product_name(p['product_id']).lower()})
     return grocy
 def hass_shopping():
     with open('../.shopping_list.json') as data_file:

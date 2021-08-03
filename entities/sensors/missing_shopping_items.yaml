@@ -2,5 +2,5 @@ platform: command_line
 name: shopping_list_missing
 command: /config/scripts/get_shopping_list.py
 json_attributes:
-  - 'missing'
+  - 'missing.grocy'
 value_template: '{{ value_json.missing | count }}'

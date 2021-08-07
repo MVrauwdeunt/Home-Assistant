@@ -12,16 +12,6 @@
     zone: zone.albert_heijn_rozenburg
     event: enter
     id: thonia
-  - platform: zone
-    entity_id: person.michel_vrauwdeunt
-    zone: zone.lidl
-    event: enter
-    id: michel
-  - platform: zone
-    entity_id: person.thonia
-    zone: zone.lidl
-    event: enter
-    id: thonia
   condition:
   - condition: numeric_state
     entity_id: sensor.shopping_list
@@ -394,7 +384,7 @@
   condition:
   - condition: numeric_state
     entity_id: sensor.woonkamer_sensor_illuminance
-    above: '15'
+    below: '15'
   action:
   - service: light.turn_on
     target:

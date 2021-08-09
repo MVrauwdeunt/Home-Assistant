@@ -4,3 +4,4 @@ switch.versterker:
   icon: mdi:amplifier
 switch.tv_woonkamer:
   icon: mdi:television
+light.tafel_2: {}

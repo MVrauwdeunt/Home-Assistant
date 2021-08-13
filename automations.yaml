@@ -6,7 +6,6 @@
     entity_id: person.michel_vrauwdeunt
     zone: zone.albert_heijn_rozenburg
     event: enter
-    id: michel
   condition:
   - condition: numeric_state
     entity_id: sensor.shopping_list

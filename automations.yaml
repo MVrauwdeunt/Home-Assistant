@@ -415,3 +415,36 @@
     target:
       entity_id: light.ambilight
   mode: single
+- id: '1629025052523'
+  alias: Feyenoord test
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ (now().strftime("%s")| int + (30*60)) == as_timestamp(state_attr(''calendar.feyenoord'',
+      ''start_time'')) }}'
+    id: 30min
+  - platform: template
+    value_template: '{{ (now().strftime("%s")| int + (5*60)) == as_timestamp(state_attr(''calendar.feyenoord'',
+      ''start_time'')) }}'
+    id: 5min
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 30min
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Feyenoord gaat over een half uur  beginnen
+          title: 'Feyenoord '
+    - conditions:
+      - condition: trigger
+        id: 5min
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Feyenoord gaat over 5 minuten uur beginnen
+          title: 'Feyenoord '
+    default: []
+  mode: single

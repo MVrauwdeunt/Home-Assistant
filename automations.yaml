@@ -429,3 +429,15 @@
       message: Over ee half uur begint Feyenoord
       title: Feyenoord
   mode: single
+- id: '1629194232024'
+  alias: test 3d printer
+  description: ''
+  trigger:
+  - platform: time
+    at: '12:00'
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.on_off_3d_printer
+  mode: single

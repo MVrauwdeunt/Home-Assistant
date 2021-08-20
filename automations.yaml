@@ -420,14 +420,39 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ (now().strftime("%s")| int + (30*60)) == as_timestamp(state_attr(''calendar.feyenoord'',
-      ''start_time'')) }}'
+    value_template: '{{ (now().strftime("%s")| int + (5*60)) | timestamp_custom("%H:%M")
+      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time''))  | timestamp_custom("%H:%M")
+      }}
+
+      '
+    id: 5min
+  - platform: template
+    value_template: '{{ (now().strftime("%s")| int + (5*60)) | timestamp_custom("%H:%M")
+      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time''))  | timestamp_custom("%H:%M")
+      }}
+
+      '
+    id: 30min
   condition: []
   action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: Over ee half uur begint Feyenoord
-      title: Feyenoord
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 5min
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Over 5 minuten begint Feyenoord
+          title: Feyenoord
+    - conditions:
+      - condition: trigger
+        id: 30min
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Over een half uur begint Feyenoord
+          title: Feyenoord
+    default: []
   mode: single
 - id: '1629194232024'
   alias: test 3d printer

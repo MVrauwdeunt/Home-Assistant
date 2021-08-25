@@ -1,0 +1,5 @@
+platform: group
+name: Muur
+entities:
+  - light.muur_1
+  - light.muur_2

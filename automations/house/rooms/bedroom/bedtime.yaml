@@ -26,22 +26,21 @@ action:
 
   - service: light.turn_off
     target:
-        entity_id: light.ambilight  
+      entity_id: 
+        - light.ambilight
+        - light.plank
   - service: light.turn_off
     target:
       entity_id:
         - light.hal
-        - light.plank
     data:
       transition: 5
-  - delay:
-      seconds: 5
   - service: switch.turn_on
     target:
       entity_id:
         - switch.adaptive_lighting_sleep_mode_zithoek
         - switch.adaptive_lighting_sleep_mode_eettafel
-        - switch.tv_slaapkamer
+        # - switch.tv_slaapkamer
   - delay:
       minutes: 5
 

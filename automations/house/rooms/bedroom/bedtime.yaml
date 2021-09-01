@@ -46,7 +46,7 @@ action:
 
   - service: light.turn_off
     data:
-        transition: 120
+        transition: 30
     target:
         entity_id:
         - light.spot

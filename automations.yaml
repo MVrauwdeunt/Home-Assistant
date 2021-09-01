@@ -421,14 +421,14 @@
   trigger:
   - platform: template
     value_template: '{{ (now().strftime("%s")| int + (5*60)) | timestamp_custom("%H:%M")
-      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time'')) | timestamp_local  |
-      timestamp_custom("%H:%M") }}
+      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time'')  | timestamp_local)
+      | timestamp_custom("%H:%M") }}
 
       '
     id: 5min
   - platform: template
     value_template: '{{ (now().strftime("%s")| int + (30*60)) | timestamp_custom("%H:%M")
-      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time''))  | timestamp_local
+      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time'') | timestamp_local)
       | timestamp_custom("%H:%M") }}
 
       '

@@ -1,5 +1,5 @@
 platform: group
 name: Tafel
 entities:
-  - light.eettafel_1
-  - light.eettafel_2
+  - light.tafel_1
+  - light.tafel_2

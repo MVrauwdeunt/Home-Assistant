@@ -466,3 +466,18 @@
     target:
       entity_id: switch.on_off_3d_printer
   mode: single
+- id: '1630562860404'
+  alias: Werk test
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ (now().strftime("%s")| int + (30*60)) | timestamp_custom("%H:%M")
+      == as_timestamp(state_attr(''calendar.werkrooster'', ''start_time'') | timestamp_local)
+      | timestamp_custom("%H:%M") }}'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: Je moet zo werken
+      title: Werken
+  mode: single

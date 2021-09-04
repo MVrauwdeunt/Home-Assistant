@@ -20,7 +20,9 @@ action:
     data:
       transition: 5
       entity_id:
-      - light.muur
+      - light.muur_1
+      - light.muur_2
       - light.spot
       - light.plank
-      - light.tafel
+      - light.tafel_1
+      - light.tafel_2

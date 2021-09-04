@@ -471,9 +471,11 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ (now().strftime("%s")| int + (30*60)) | timestamp_custom("%H:%M")
-      == as_timestamp(state_attr(''calendar.werkrooster'', ''start_time'') | timestamp_local)
-      | timestamp_custom("%H:%M") }}'
+    value_template: '{{ (now().strftime("%s") | timestamp_local | int + (5*60)) |
+      timestamp_custom("%H:%M") == as_timestamp(state_attr(''calendar.werkrooster'',
+      ''start_time'') | timestamp_local) | timestamp_custom("%H:%M") }}
+
+      '
   condition: []
   action:
   - service: notify.mobile_app_oneplus_michel

@@ -51,7 +51,9 @@ action:
         entity_id:
         - light.spot
         - light.muur_1
-        - light.muur_2
-        - light.tafel_1
-        - light.tafel_2
+        # - light.muur_1
+        # - light.muur_2
+        - light.tafel
+        # - light.tafel_1
+        # - light.tafel_2
 mode: single

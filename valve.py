@@ -345,7 +345,7 @@ class MoesThermostat(TuyaThermostatCluster):
     DIRECT_MAPPING_ATTRS = {
         "occupied_heating_setpoint": (
             MOES_TARGET_TEMP_ATTR,
-            lambda value: round(value / 10),
+            lambda value: round(value / 100),
         ),
         "unoccupied_heating_setpoint": (
             MOES_AWAY_TEMP_ATTR,

@@ -22,3 +22,9 @@ recorder:
       - call_service # Don't record service calls
 config:
   python_script: !include_dir_list ../scripts/python_scripts
+zha:
+  zigpy_config:
+    ota:
+      ikea_provider: true
+      ledvance: true
+      otau_directory: /config/zha/ota

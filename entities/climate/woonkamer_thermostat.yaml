@@ -1,5 +1,0 @@
----
-platform: generic_thermostat
-name: Woonkamer
-heater: switch.study_heater
-target_sensor: sensor.woonkamer_sensor_temperatuur

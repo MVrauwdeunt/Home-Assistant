@@ -1,6 +1,6 @@
-platform: woonkamer
+platform: climate_group
 name: 'Woonkamer'
-temperature_unit: C  # default to celsius, 'C' or 'F'
+# temperature_unit: C  # default to celsius, 'C' or 'F'
 entities:
-  - climate.raam
-  - climate.zithoek
+  - climate.radiator_raam
+  - climate.radiator_zithoek

@@ -1,12 +1,8 @@
 browser_mod:
   prefix: 'browser_mod_'
   devices:
-    0450257c_20b1e159:
+    af00e46b-09c11102:
       name: desktop_odin
-    3c80c02e_af69b899:
-      name: oneplus_michel
-    98630559-f5babaaf:
-      name: oneplus_thonia
-    b89c23ff_304db13e:
+    acede475-ddae5a6b:
       name: wallpanel
       camera: true

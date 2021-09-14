@@ -13,6 +13,11 @@ action:
   #   data:
   #       message: Have a good nights sleep. Turning the lights and PC off
   #       title: Good night
+  - service: switch.turn_on
+    target:
+      entity_id:
+        - switch.adaptive_lighting_sleep_mode_zithoek
+        - switch.adaptive_lighting_sleep_mode_eettafel
 
   - service: media_player.volume_set
     target:
@@ -24,36 +29,39 @@ action:
     data_template:
       message: !include ../../../../announcements/goodnight.yaml
 
+  - service: switch.turn_off
+    target:
+      entity_id: 
+        - switch.tv_woonkamer
+
+  - service: media_player.turn_off
+    target:
+      entity_id:
+        - media_player.denon_avr_x1600h
+
   - service: light.turn_off
     target:
       entity_id: 
         - light.ambilight
         - light.plank
-  - service: light.turn_off
-    target:
-      entity_id:
-        - light.hal
-    data:
-      transition: 5
-  - service: switch.turn_on
-    target:
-      entity_id:
-        - switch.adaptive_lighting_sleep_mode_zithoek
-        - switch.adaptive_lighting_sleep_mode_eettafel
+
         # - switch.tv_slaapkamer
-  # - delay:
-  #     minutes: 5
+  - delay:
+      seconds: 2
 
   - service: light.turn_off
     data:
-        transition: 30
+        transition: 10
     target:
         entity_id:
+        - light.hal
         - light.spot
+        - light.muur
         - light.muur_1
-        # - light.muur_1
-        # - light.muur_2
+        - light.muur_2
         - light.tafel
-        # - light.tafel_1
-        # - light.tafel_2
+        - light.tafel_1
+        - light.tafel_2
+        - light.browser_mod_acede475_ddae5a6b
+
 mode: single

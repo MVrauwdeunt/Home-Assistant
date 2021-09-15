@@ -3,6 +3,6 @@ browser_mod:
   devices:
     af00e46b-09c11102:
       name: desktop_odin
-    acede475-ddae5a6b:
+    cb82e4aa-d057b6eb:
       name: wallpanel
       camera: true

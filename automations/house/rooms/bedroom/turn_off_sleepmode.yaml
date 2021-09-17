@@ -12,6 +12,4 @@ action:
   - service: homeassistant.turn_off
     data:
       entity_id: switch.sleeping
-  - service: light.turn_on
-    target:
-      entity_id: light.browser_mod_acede475_ddae5a6b
+

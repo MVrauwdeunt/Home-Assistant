@@ -44,6 +44,7 @@ action:
       entity_id: 
         - light.ambilight
         - light.plank
+        - light.wallpanel
 
         # - switch.tv_slaapkamer
   - delay:
@@ -56,12 +57,9 @@ action:
         entity_id:
         - light.hal
         - light.spot
-        - light.muur
         - light.muur_1
         - light.muur_2
-        - light.tafel
         - light.tafel_1
         - light.tafel_2
-        - light.browser_mod_acede475_ddae5a6b
 
 mode: single

@@ -483,3 +483,15 @@
       message: Je moet zo werken
       title: Werken
   mode: single
+- id: '1631734873996'
+  alias: Verwarming
+  description: ''
+  use_blueprint:
+    path: r3mcos3/heating.yaml
+    input:
+      heating: climate.radiator_zithoek
+      temp_sensor: sensor.woonkamer_sensor_temperatuur
+      person1: person.michel_vrauwdeunt
+      person2: person.thonia
+      set_temp: 19
+      time_after: 07:00:00

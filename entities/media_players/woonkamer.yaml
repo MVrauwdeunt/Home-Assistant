@@ -1,0 +1,5 @@
+platform: group
+name: woonkamer
+entities:
+  - media_player.baldr
+  - media_player.denon_avr_x1600h_2

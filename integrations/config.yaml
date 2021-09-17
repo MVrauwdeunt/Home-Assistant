@@ -23,6 +23,7 @@ recorder:
 config:
   python_script: !include_dir_list ../scripts/python_scripts
 zha:
+  custom_quirks_path: /config/zha/custom_quirks/
   zigpy_config:
     ota:
       ikea_provider: true

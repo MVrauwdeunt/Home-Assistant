@@ -201,7 +201,7 @@ class MoesManufCluster(TuyaManufClusterAttributes):
 
     DIRECT_MAPPED_ATTRS = {
         MOES_TEMPERATURE_ATTR: ("local_temp", lambda value: value * 10),
-        MOES_TARGET_TEMP_ATTR: ("occupied_heating_setpoint", lambda value: value * 100),
+        MOES_TARGET_TEMP_ATTR: ("occupied_heating_setpoint", lambda value: value * 10),
         MOES_AWAY_TEMP_ATTR: ("unoccupied_heating_setpoint", lambda value: value * 100),
         MOES_COMFORT_TEMP_ATTR: ("comfort_heating_setpoint", lambda value: value * 100),
         MOES_ECO_TEMP_ATTR: ("eco_heating_setpoint", lambda value: value * 100),
@@ -345,7 +345,7 @@ class MoesThermostat(TuyaThermostatCluster):
     DIRECT_MAPPING_ATTRS = {
         "occupied_heating_setpoint": (
             MOES_TARGET_TEMP_ATTR,
-            lambda value: round(value / 100),
+            lambda value: round(value / 10),
         ),
         "unoccupied_heating_setpoint": (
             MOES_AWAY_TEMP_ATTR,

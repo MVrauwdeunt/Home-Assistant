@@ -495,3 +495,31 @@
       person2: person.thonia
       set_temp: 19
       time_after: 07:00:00
+- id: '1632211786591'
+  alias: Bedtijd
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.sleeping
+    to: 'On'
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.plank
+    data:
+      transition: 10
+  - service: switch.turn_on
+    target:
+      entity_id:
+      - switch.adaptive_lighting_sleep_mode_eettafel
+      - switch.adaptive_lighting_adapt_brightness_zithoek
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.wallpanel
+    data:
+      volume_level: 1
+  - service: notify.wallpanel
+    data_template:
+      message: '!include ../../../../announcements/goodnight.yaml'
+  mode: single

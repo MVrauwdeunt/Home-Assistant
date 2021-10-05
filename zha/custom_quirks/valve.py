@@ -108,7 +108,7 @@ class MoesManufCluster(TuyaManufClusterAttributes):
         ),
         MOES_MAX_TEMPERATURE_ATTR: (
             "max_heat_setpoint_limit",
-            lambda value: value * 10,
+            lambda value: value * 100,
         ),
         MOES_VALVE_STATE_ATTR: ("valve_open_percentage", None),
         MOES_AWAY_DAYS_ATTR: ("unoccupied_duration_days", None),

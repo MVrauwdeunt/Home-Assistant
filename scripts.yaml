@@ -6,3 +6,63 @@ woonkamer_licht_aan:
       title: test
   mode: single
   alias: test
+woonkamer_licht_aan_2:
+  sequence:
+  - condition: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    below: '14'
+  - condition: state
+    entity_id: group.tracked_people
+    state: home
+  - service: light.turn_on
+    target:
+      device_id:
+      - de209a155f5aa3b91f304d84e557787a
+      - 061aa10f2ea3525d4ff6e5f2f3e89cb9
+      - 6a100a28200c6b747bd8bd775d3761fe
+      - eca4c899ec176994fcb8d75698c36a72
+      - ca014fcf451ac512d2d66e27a50c8b09
+      entity_id: light.plank
+    data:
+      transition: 10
+  mode: single
+  alias: woonkamer licht aan
+woonkamer_licht_uit:
+  alias: woonkamer licht uit
+  sequence:
+  - service: light.turn_off
+    target:
+      device_id:
+      - de209a155f5aa3b91f304d84e557787a
+      - 061aa10f2ea3525d4ff6e5f2f3e89cb9
+      - 6a100a28200c6b747bd8bd775d3761fe
+      - eca4c899ec176994fcb8d75698c36a72
+      - ca014fcf451ac512d2d66e27a50c8b09
+      entity_id: light.plank
+    data:
+      transition: 5
+  mode: single
+hal_verlichting_aan:
+  sequence:
+  - condition: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    below: '13'
+  - condition: state
+    entity_id: group.tracked_people
+    state: home
+  - service: light.turn_on
+    target:
+      device_id: e3bb4d9d6da34aee1e3610d52c4388fc
+    data:
+      transition: 5
+  mode: single
+  alias: Hal verlichting aan
+hal_verlichting_uit:
+  alias: Hal verlichting uit
+  sequence:
+  - service: light.turn_off
+    target:
+      device_id: e3bb4d9d6da34aee1e3610d52c4388fc
+    data:
+      transition: 5
+  mode: single

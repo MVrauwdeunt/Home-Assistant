@@ -466,23 +466,6 @@
     target:
       entity_id: switch.on_off_3d_printer
   mode: single
-- id: '1630562860404'
-  alias: Werk test
-  description: ''
-  trigger:
-  - platform: template
-    value_template: '{{ (now().strftime("%s") | timestamp_local | int + (5*60)) |
-      timestamp_custom("%H:%M") == as_timestamp(state_attr(''calendar.werkrooster'',
-      ''start_time'') | timestamp_local) | timestamp_custom("%H:%M") }}
-
-      '
-  condition: []
-  action:
-  - service: notify.mobile_app_oneplus_michel
-    data:
-      message: Je moet zo werken
-      title: Werken
-  mode: single
 - id: '1631734873996'
   alias: Verwarming
   description: ''
@@ -571,4 +554,47 @@
       temperature: 10
     target:
       entity_id: climate.woonkamer
+  mode: single
+- id: '1633933264505'
+  alias: Werk announcement
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ as_timestamp(now()) | timestamp_custom("%H:%M") == (as_timestamp(state_attr(''calendar.werkrooster'',
+      ''start_time'')) |int - (state_attr(''input_datetime.firstcall'',''timestamp'')))
+      | timestamp_custom("%H:%M") }}
+
+      '
+    id: firstcall
+  - platform: template
+    value_template: '{{ as_timestamp(now()) | timestamp_custom("%H:%M") == (as_timestamp(state_attr(''calendar.werkrooster'',
+      ''start_time'')) |int - (state_attr(''input_datetime.lastcall'',''timestamp'')))
+      | timestamp_custom("%H:%M") }}
+
+      '
+    id: lastcall
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 5minute
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Je moet over 5 minuten werken
+          title: Werken
+    - conditions:
+      - condition: trigger
+        id: 30minute
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          message: Je moet over 10 werken
+          title: Werken
+    default:
+    - service: notify.mobile_app_oneplus_michel
+      data:
+        message: Je moet zo werken
+        title: Werken
   mode: single

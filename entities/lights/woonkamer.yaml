@@ -1,9 +1,9 @@
 platform: group
 name: Woonkamer
 entities:
-  - light.muur
+  - light.plank
   - light.spot
   - light.tafel_1
   - light.tafel_2
-  - light.plank_1
-  - light.plank_2
+  - light.muur_1
+  - light.muur_2

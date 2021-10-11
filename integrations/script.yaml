@@ -1,1 +1,7 @@
+---
+# This handles the loading of my automations
+#
+# https://www.home-assistant.io/docs/automation/
+#
+#script: !include_dir_list ../scripts
 script editor: !include ../scripts.yaml

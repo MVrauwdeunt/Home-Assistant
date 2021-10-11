@@ -1,4 +1,0 @@
-  platform: command_line
-  name: vaccinatie 
-  command: "curl https://user-api.coronatest.nl/vaccinatie/programma/bepaalbaar/1977/NEE/NEE"
-  value_template: "{{ value_json.success }}"

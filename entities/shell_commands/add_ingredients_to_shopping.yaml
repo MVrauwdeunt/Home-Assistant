@@ -1,1 +1,1 @@
-grocy_add_missingitem: "curl -X 'POST' 'https://grocy.gladsheimr.nl/api/recipes/{{recipe_id}}/add-not-fulfilled-products-to-shoppinglist'   -H 'accept: */*' -H 'GROCY-API-KEY: {{grocy_keys}}' -H 'Content-Type: application/json' -d '{ 'excludedProductIds': [0]}'"
+grocy_add_missingitem: "curl -X 'POST' 'https://grocy.gladsheimr.nl/api/recipes/{{recipe_id}}/add-not-fulfilled-products-to-shoppinglist'   -H 'accept: */*' -H 'GROCY-API-KEY: {{grocy_key}}' -H 'Content-Type: application/json' -d '{ 'excludedProductIds': [0]}'"

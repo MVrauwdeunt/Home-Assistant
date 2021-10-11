@@ -2,25 +2,93 @@
     "readme": "Generates this awesome readme file.", 
     "browser_mod": "Turns your browser into a controllable entity",
     "hacs": "a powerful UI to handle downloads of all your custom needs",
-    "bus": "Public Transport information from OVapi",
+    "ovapi": "Public Transport information from OVapi",
     "ha_fritzbox_tools": "Connect to my Fritz",
     "grocy": "Connection to my Grocy installation",
     "buienalarm": "Get local weather info",
     "monitor_docker": "Get info from the docker which runs it all",
     "adaptive_lighting": "Changes the settings of my lights throughout the day",
-    "neerslag": "Display rain forecast using Buienalarm and/or Buienradar sensor data"
+    "neerslag": "Display rain forecast using Buienalarm and/or Buienradar sensor data",
+    "breaking_changes": "This will list breaking changes on versions for versions released after the one you are running up to the latest stable version.",
+    "climate_group": "Groups multiple climate devices to a single entity. Useful if you have for instance multiple radiator thermostats in a room and want to control them all together."
 } -%}
 
-# This is my current Home Assistant installation.
 [![HA Version](https://img.shields.io/badge/Home%20Assistant-{{states('sensor.current_version')}}-brightgreen)](https://github.com/home-assistant/home-assistant/releases/{{states.sensor.current_version.state}})
+# Home Assistant Configuration
+---
+This is repo is the current [Home Assistant](https://home-assistant.io) configuration. Below you'll find links to the devices and custom components used.
 
-Home Assistant runs on a server which runs {{states('sensor.docker_containers_running')}} docker containers. Some are related to my smarthome Home Assistant offcourse, ESPHome, Mosquitto, Deconz.
+Feel free to use the code as you like.
+
+---
+## System
+
+Home Assistant runs in a [Docker](https://www.docker.com) container on a server running [Debian 10 (Buster)](https://www.debian.org/). The server also doubles as a Network Attached Storage serving files over NFS and SMB.
+
+The system consists of:
+
+Type | Discription
+-- | --
+Mainboard | ASRock B85M Pro4
+CPU | Intel Celeron G1840
+Memory | Crucial 16GB
+
+By no means is it a powerhouse. But even with these specs I have no issues. Most of the time it is idle or just above idle.
+I am runing [Debian 10 (Buster)](https://www.debian.org/). The server also doubles as a Network Attached Storage serving files over NFS and SMB. 
+
+In total there are {{states('sensor.docker_containers_running')}} docker containers running. Some are related to my smarthome Home Assistant offcourse :), ESPHome, Mosquitto.
 There are a couple of containers which work with Home Assistant but could be fun or usefull in other situations. For instance Grocy, Barcode Buddy, VSCode and Rhasspy.
 Then there are several containers related to my multimedia setup. Automated download and handling of audio, video and subtitles and such. And last the containers for controlling, 
-securing and backup of the server and network. Authelia, Duplicati and Unifi among others
+securing and backup of the server and network. Authelia, Duplicati and Unifi among others.
+
+---
+## My Design Philosophy
+
+
+### Keep it local:
+&emsp;&emsp;
+As a rule of thumb everything should be local. Basic things like light, heating but also multimedia should be available without an internet connection.
+
+### Minimal interation: 
+&emsp;&emsp;
+Home-automation should not be some fancy remote control but an inteligent system which takes action based on sensors or indirect actions.<br/>
+&emsp;&emsp;
+For instance the lights in my livingroom should turn on when there is low light and someone is home. When arriving after dark lights should turn on whitout intervention. 
+
+### Add functionality don't take away any.
+&emsp;&emsp;
+For a good user experience basic things like light switches should more or less work as you expect. 
+
+
+---
+## Custom Components
+
+I use [HACS](https://github.com/hacs/integration) to add integrations I miss currently I use these:
+{% if custom_components %}
+{% for integration in custom_components %}
+- [{{integration.name}}]({{integration.documentation}})
+{%- if integration.domain in custom_component_descriptions %}
+  {{custom_component_descriptions[integration.domain]}}
+{%- endif -%}
+{% endfor -%}
+{% endif %}
+
+***
+
+
+Description | value
+-- | --
+Number of automations | {{states.automation | count}}
+Number of entities | {{states | count}}
+Number of sensors | {{states.sensor | count}}
+
+
+---
 
 ## Images
-### Wallpanel running on a ASUS 10.1 inch tablet
+
+
+### Wallpanel running on a Samsun 10.1 inch tablet
 ![Wallpanel](https://raw.githubusercontent.com/Warlock77/Home-Assistant/main/www/images/screenshots/Wallpanel2.png)
 
 Description | value

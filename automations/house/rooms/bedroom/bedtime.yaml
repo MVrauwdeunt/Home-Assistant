@@ -9,6 +9,12 @@ trigger:
 condition: []
 
 action:
+  - service: light.turn_off
+    target:
+      entity_id: 
+        - light.ambilight
+        - light.plank
+
   - service: switch.turn_on
     target:
       entity_id:
@@ -19,16 +25,16 @@ action:
     target:
       entity_id: media_player.wallpanel
     data:
-      volume_level: 0.25
+      volume_level: 0.5
 
   - service: notify.wallpanel
     data_template:
       message: !include ../../../../announcements/goodnight.yaml
 
-  - service: switch.turn_off
-    target:
-      entity_id: 
-        - switch.tv_woonkamer
+  # - service: switch.turn_off
+  #   target:
+  #     entity_id: 
+  #       - switch.tv_woonkamer
 
   - service: media_player.turn_off
     target:
@@ -37,9 +43,7 @@ action:
 
   - service: light.turn_off
     target:
-      entity_id: 
-        - light.ambilight
-        - light.plank
+      entity_id:
         - light.wallpanel
 
   - delay:

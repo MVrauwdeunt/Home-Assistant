@@ -6,3 +6,7 @@ switch.tv_woonkamer:
   icon: mdi:television
 light.tafel_2: {}
 media_player.baldr: {}
+light.muur:
+  icon: mdi:wall-sconce-flat
+light.tafel:
+  icon: mdi:ceiling-light

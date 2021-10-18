@@ -578,23 +578,36 @@
   - choose:
     - conditions:
       - condition: trigger
-        id: 5minute
+        id: firstcall
       sequence:
       - service: notify.mobile_app_oneplus_michel
         data:
-          message: Je moet over 5 minuten werken
+          message: Je moet over {{ states('input_datetime.firstcall') }} minuten werken
           title: Werken
     - conditions:
       - condition: trigger
-        id: 30minute
+        id: lastcall
       sequence:
       - service: notify.mobile_app_oneplus_michel
         data:
-          message: Je moet over 10 werken
+          message: Je moet over {{ states('input_datetime.lastcall') }} werken
           title: Werken
     default:
     - service: notify.mobile_app_oneplus_michel
       data:
         message: Je moet zo werken
         title: Werken
+  mode: single
+- id: '1634061737825'
+  alias: Nieuwe automatisering
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.woonkamer_sensor_illuminance
+    above: input_number.maxlux
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_michel
+    data:
+      message: light level is above {{ states('input_number.maxlux') }}
   mode: single

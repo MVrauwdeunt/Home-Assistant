@@ -16,13 +16,14 @@ action:
   - service: light.turn_off
     data:
       entity_id: light.ambilight
+      
   - service: light.turn_off
     data:
-      transition: 5
+      transition: 10
       entity_id:
       - light.muur_1
       - light.muur_2
-      - light.spot
       - light.plank
+      - light.spot
       - light.tafel_1
       - light.tafel_2

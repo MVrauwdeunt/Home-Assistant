@@ -38,16 +38,11 @@ action:
 
   - service: light.turn_on
     data:
+      transition: 10
       entity_id: 
         - light.muur_1
         - light.muur_2
+        - light.plank
         - light.spot
         - light.tafel_1
         - light.tafel_2
-      transition: 10
-
-  - service: light.turn_on
-    data:
-      entity_id: 
-        - light.plank
-      transition: 10

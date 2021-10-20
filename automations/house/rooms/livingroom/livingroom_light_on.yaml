@@ -16,7 +16,6 @@ trigger:
   - platform: state
     entity_id: switch.sleeping
     to: 'off'
-    for: "00:10:00"
 
 condition:
   - condition: state

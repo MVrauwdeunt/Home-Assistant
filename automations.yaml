@@ -517,7 +517,7 @@
   - platform: state
     entity_id: switch.sleeping
     for:
-      hours: 1
+      hours: 0
       minutes: 0
       seconds: 0
       milliseconds: 0
@@ -530,6 +530,11 @@
     entity_id: group.tracked_people
     state: home
   action:
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
   - service: climate.set_temperature
     target:
       entity_id: climate.woonkamer

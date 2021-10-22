@@ -1,6 +1,3 @@
-// import * as data from './translations/en.json';
-// const {test} = data;
-
 customElements.whenDefined("home-assistant-main").then(() => {
 
 	const LitElement = customElements.get("home-assistant-main")
@@ -67,18 +64,21 @@ customElements.whenDefined("home-assistant-main").then(() => {
 
 			setConfig(config) {
 
-				//console.log("setConfig");
+				// console.log("setConfig");
 				if (!config.entity && !config.entities) {
 					throw new Error('You need to define an entity or a list of entities. See readme file for available entities (sensors)');
 				}
 				this._config = config;
+
+				//default zoom waarde
+				this.zoomwaarde = 0.5;
 			}
 
 			getCardSize() {
 				return 2;
 			}
 
-			zoomwaarde = 0.5;
+
 
 
 			vertaling = {
@@ -88,6 +88,7 @@ customElements.whenDefined("home-assistant-main").then(() => {
 					licht : 'Licht',
 					matig : 'Matig',
 					zwaar : 'Zwaar',
+					geenDataBeschikbaar: 'Geen sensor data beschikbaar',
 				},
 				en : {
 					regenMmUur : 'Rain (mm / uur)',
@@ -95,6 +96,7 @@ customElements.whenDefined("home-assistant-main").then(() => {
 					licht : 'Light',
 					matig : 'Moderate',
 					zwaar : 'Heavy',
+					geenDataBeschikbaar: 'No sensor data available',
 				}
 			}
 
@@ -138,8 +140,6 @@ customElements.whenDefined("home-assistant-main").then(() => {
 
 			render() {
 
-				console.log('render()');
-
 				if (!this._config || !this.hass) {
 					return html``;
 				}
@@ -156,7 +156,7 @@ customElements.whenDefined("home-assistant-main").then(() => {
 					})
 				}
 
-				if (this._config.autozoom == false) {
+				if (this._config.autozoom === false) {
 					this.zoomwaarde = 5.5;
 				}
 
@@ -179,6 +179,41 @@ customElements.whenDefined("home-assistant-main").then(() => {
 							<ha-icon icon="mdi:weather-rainy"></ha-icon>
 						</ha-card>
 						`;
+				}
+				let check = customElements.get("buien-rain-forecast");
+				if(check) {
+					return html`
+						<style>
+							.not-found {
+								flex: 1;
+								background-color: red;
+								padding: 8px;
+							}
+						</style>
+					<ha-card>
+
+						<ha-icon style="right:20px" icon="mdi:weather-rainy"></ha-icon>
+
+						<h1 class="card-header">
+							<div class="name">
+								${this._config.title}
+							</div>
+
+						</h1>
+
+						<div id="plotGraphCard">
+							<div class="not-found">
+								Error: Incompatible integration detected
+								<ol>
+									<li>buien-rain-forecast</li>
+								</ol>
+								This integration is known for causing problems with the Neerslag Card. Please remove it.
+							</div>
+						</div>
+
+
+					</ha-card>
+					`
 				}
 
 				/*
@@ -207,7 +242,34 @@ customElements.whenDefined("home-assistant-main").then(() => {
 
 				this.dontMakeGraph = false;
 
-				console.log(this.prepareChartDataSets().getChartsDataAlsArray());
+				if(this.prepareChartDataSets().getChartsDataAlsArray()[0] === undefined) {
+					this.dontMakeGraph = true;
+					this.myChart = null;
+					return html`
+
+					<ha-card>
+
+						<ha-icon style="right:20px" icon="mdi:weather-rainy"></ha-icon>
+
+						<h1 class="card-header">
+							<div class="name">
+								${this._config.title}
+							</div>
+
+						</h1>
+
+						<div id="plotGraphCard">
+							<div style="display: block;">
+								${this.localize('geenDataBeschikbaar')}
+							</div>
+						</div>
+
+
+					</ha-card>
+				`;
+
+
+				}
 
 				// Display "Plot a graph card"
 				return html`
@@ -224,7 +286,7 @@ customElements.whenDefined("home-assistant-main").then(() => {
 						</h1>
 
 						<div id="plotGraphCard">
-							<div style="display: block;">
+							<div id="neerslagChartContainer" style="display: block;">
 								<canvas id="neerslagChart"></canvas>
 							</div>
 						</div>
@@ -235,6 +297,10 @@ customElements.whenDefined("home-assistant-main").then(() => {
 			}
 
 			firstUpdated(changedProperties) {
+
+				if(this.dontMakeGraph == true) {
+					return;
+				}
 
 				// changedProperties.forEach((oldValue, propName) => {
 				// 	console.log(`${propName} changed. oldValue: ${oldValue}`);
@@ -249,12 +315,13 @@ customElements.whenDefined("home-assistant-main").then(() => {
 
 			}
 
-			test() {
-				//console.log("jaa wordt afgevuurd");
-			}
 
 			updated(changedProperties) {
-				//console.log(changedProperties)
+
+				if(this.myChart === null) {
+					this.makeGraph();
+				}
+
 				if (this.myChart) {
 					if (this.myChart.width === 0) {
 						//console.log("updated(): chart is no visible!");
@@ -263,7 +330,13 @@ customElements.whenDefined("home-assistant-main").then(() => {
 				}
 
 				changedProperties.forEach((oldValue, propName) => {
-					//console.log(propName)
+
+					// wanneer de kaart configuratie veranderd, zal _config veranderen
+					if (propName == "_config") {
+						this.makeGraph();
+					}
+
+					// wanneer data veranderd, zal hass veranderen
 					if (propName == "hass") {
 						if (typeof oldValue != 'undefined') {
 							// when using single entity
@@ -280,8 +353,8 @@ customElements.whenDefined("home-assistant-main").then(() => {
 								for (const entity of this._config.entities) {
 									//console.log(entity)
 									if (this.hass.states[entity].attributes.data !== oldValue.states[entity].attributes.data) {
-										// console.log("data has changed, lets update")
-										// console.log(entity)
+										//  console.log("data has changed, lets update")
+										//  console.log(entity)
 										this.updateGrafiek()
 									}
 								}
@@ -293,6 +366,11 @@ customElements.whenDefined("home-assistant-main").then(() => {
 
 
 			makeGraph() {
+
+				if(this.dontMakeGraph == true) {
+					return;
+				}
+
 
 				//https://stackoverflow.com/a/35663683/4181822
 				function hexify(color) {
@@ -339,7 +417,21 @@ customElements.whenDefined("home-assistant-main").then(() => {
 				var primaryTextColor = convertToHexIfNeeded(style.getPropertyValue('--primary-text-color'));
 				var secondaryTextColor = convertToHexIfNeeded(style.getPropertyValue('--secondary-text-color'));
 
+
+
+				// verwijder de kaart
+				if(this.myChart) {
+
+					this.myChart=null;
+					this.renderRoot.getElementById("neerslagChart").remove();
+					let canvas = document.createElement('canvas');
+					canvas.setAttribute('id','neerslagChart');
+					this.renderRoot.getElementById("neerslagChartContainer").appendChild(canvas)
+				}
+
+
 				if (!this.myChart) {
+
 					let ctx;
 					if (this.shadowRoot) {
 						ctx = this.shadowRoot.getElementById("neerslagChart").getContext('2d');
@@ -760,6 +852,7 @@ customElements.whenDefined("home-assistant-main").then(() => {
 				let chartDatasets = []
 
 				if (this.dontMakeGraph === true) {
+					console.log('updateGrafiek - dontMakeGraph')
 					return;
 				}
 				this.myChart.data.labels = this.prepareChartDataSets().getChartsDataAlsArray()[0][0];
@@ -780,7 +873,7 @@ customElements.whenDefined("home-assistant-main").then(() => {
 		});
 
 		console.info(
-			`%c NEERSLAG-CARD %c 2021.10.20.1`,
+			`%c NEERSLAG-CARD %c 2021.10.21.0`,
 			"Color: white; font-weight: bold; background: red;",
 			""
 		);

@@ -1,17 +1,23 @@
 class PlaylistMediaCard extends HTMLElement {
-  SONG_THUMBNAIL_SIZE = "65px";
+  SONG_THUMBNAIL_WIDTH = "65px";
 
+  // the height of the epthumbnailsode of the episode in the search result
+  EPISODE_THUMBNAIL_WIDTH = "150px";
+  EPISODE_THUMBNAIL_RATIO = 1.5;
   // the height of the thumbnail
-  MOVIE_THUMBNAIL_SIZE = "80px";
-  MOVIE_THUMBNAIL_RATIO = 0.6;
-
-  EPISODE_THUMBNAIL_SIZE = "50px";
-  EPISODE_THUMBNAIL_RATIO = 1.75;
+  MOVIE_THUMBNAIL_WIDTH = "100px";
+  MOVIE_THUMBNAIL_RATIO = 0.8;
 
   BACKGROUND_BASIC_COLOR = "#9b9595";
-
-  // ICON_CURRENT_PLAYING = "mdi:minus-circle";
   ICON_CURRENT_PLAYING = "mdi:arrow-left-bold";
+
+  PLAYER_ID_MUSIC = 0;
+  PLAYER_ID_VIDEO = 1;
+
+  _config_show_thumbnail = true;
+  _config_show_thumbnail_border = false;
+  _config_thumbnail_border_color = "white";
+  _config_show_thumbnail_overlay = true;
 
   setConfig(config) {
     this._config = config;
@@ -21,6 +27,22 @@ class PlaylistMediaCard extends HTMLElement {
     if (!config.entity) {
       // If no entity was specified, this will display a red error card with the message below
       throw new Error("You need to define an entity");
+    }
+
+    if (this._config.hasOwnProperty("show_thumbnail")) {
+      this._config_show_thumbnail = this._config.show_thumbnail;
+    }
+
+    if (this._config.hasOwnProperty("show_thumbnail_border")) {
+      this._config_show_thumbnail_border = this._config.show_thumbnail_border;
+    }
+
+    if (this._config.hasOwnProperty("thumbnail_border_color")) {
+      this._config_thumbnail_border_color = this._config.thumbnail_border_color;
+    }
+
+    if (this._config.hasOwnProperty("show_thumbnail_overlay")) {
+      this._config_show_thumbnail_overlay = this._config.show_thumbnail_overlay;
     }
 
     // Make sure this only runs once
@@ -39,9 +61,6 @@ class PlaylistMediaCard extends HTMLElement {
       this.playlistDiv = document.createElement("div");
       this.playlistDiv.setAttribute("class", "playlist-container");
       card.appendChild(this.playlistDiv);
-
-      // this.content = document.createElement("div");
-      // card.appendChild(this.content);
 
       let style = document.createElement("style");
       style.textContent = this.defineCSS();
@@ -62,10 +81,6 @@ class PlaylistMediaCard extends HTMLElement {
     // Update the card in case anything has changed
 
     if (!this._config) return; // Can't assume setConfig is called before hass is set
-
-    // this._hass.callService("homeassistant", "update_entity", {
-    //   entity_id: this._config.entity,
-    // });
 
     const entity = this._config.entity;
     let state = hass.states[entity];
@@ -126,7 +141,7 @@ class PlaylistMediaCard extends HTMLElement {
     if (data && data.length > 0) {
       for (let count = 0; count < data.length; count++) {
         let item = data[count];
-        let attribute = item["object_type"];
+        let attribute = item["type"];
         if (attribute == "song") {
           this.playlistDiv.appendChild(this.formatSong(item, count));
         } else if (attribute == "movie") {
@@ -144,140 +159,154 @@ class PlaylistMediaCard extends HTMLElement {
     let isPlaying = item["id"] == this._currently_playing;
 
     let row = document.createElement("div");
-    row.setAttribute("class", "movie-item-grid");
+    row.setAttribute("class", "playlist-movie-grid playlist-grid");
 
-    let thumbnailDiv = document.createElement("div");
-    thumbnailDiv.setAttribute("class", "movie-item-thumbnail");
-    row.appendChild(thumbnailDiv);
+    let cover =
+      item["poster"] && item["poster"] != ""
+        ? item["poster"]
+        : item["thumbnail"];
 
-    if (this._config.show_thumbnail && item["thumbnail"] != "") {
-      let url = "background-image: url('" + item["thumbnail"] + "')";
-      thumbnailDiv.setAttribute("style", url);
-    }
-
-    let thumbnailPlayDiv = document.createElement("ha-icon");
-    if (!isPlaying) {
-      thumbnailPlayDiv.setAttribute("class", "movie-item-play");
-      thumbnailPlayDiv.setAttribute("icon", "mdi:play");
-      thumbnailPlayDiv.addEventListener("click", () => this.goTo(position, 1));
-    }
-    thumbnailDiv.appendChild(thumbnailPlayDiv);
+    let coverDiv = this.prepareCover(
+      cover,
+      "playlist-movie-cover",
+      "playlist-movie-cover-image",
+      "playlist-movie-cover-image-default",
+      "mdi:play",
+      "mdi:movie",
+      isPlaying,
+      () => this.goTo(position, this.PLAYER_ID_VIDEO)
+    );
+    row.appendChild(coverDiv);
 
     let titleDiv = document.createElement("div");
-    titleDiv.setAttribute("class", "movie-item-title");
-    titleDiv.innerHTML = item["title"] + " (" + item["year"] + ")";
+    titleDiv.setAttribute("class", "playlist-movie-title playlist-title");
+    titleDiv.innerHTML = item["title"];
     row.appendChild(titleDiv);
 
     let genreDiv = document.createElement("div");
-    genreDiv.setAttribute("class", "movie-item-genre");
+    genreDiv.setAttribute("class", "playlist-movie-genre playlist-genre");
     genreDiv.innerHTML = item["genre"] ? item["genre"] : "undefined";
     row.appendChild(genreDiv);
 
     let trashIcon = document.createElement("ha-icon");
     row.appendChild(trashIcon);
     if (isPlaying) {
-      trashIcon.setAttribute("class", "movie-item-playing");
+      trashIcon.setAttribute(
+        "class",
+        "playlist-movie-playing playlist-control playlist-playing"
+      );
       trashIcon.setAttribute("icon", this.ICON_CURRENT_PLAYING);
     } else {
-      trashIcon.setAttribute("class", "movie-item-remove");
+      trashIcon.setAttribute("class", "playlist-movie-remove playlist-control");
       trashIcon.setAttribute("icon", "mdi:delete");
-      trashIcon.addEventListener("click", () => this.remove(position, 1));
+      trashIcon.addEventListener("click", () =>
+        this.remove(position, this.PLAYER_ID_VIDEO)
+      );
     }
 
     return row;
   }
+
   formatEpisode(item, position) {
     let isPlaying = item["id"] == this._currently_playing;
 
     let row = document.createElement("div");
-    row.setAttribute("class", "episode-item-grid");
+    row.setAttribute("class", "playlist-episode-grid playlist-grid");
 
-    let thumbnailDiv = document.createElement("div");
-    thumbnailDiv.setAttribute("class", "episode-item-thumbnail");
-    row.appendChild(thumbnailDiv);
+    let cover =
+      item["poster"] && item["poster"] != ""
+        ? item["poster"]
+        : item["thumbnail"];
 
-    if (this._config.show_thumbnail && item["thumbnail"] != "") {
-      let url = "background-image: url('" + item["thumbnail"] + "')";
-      thumbnailDiv.setAttribute("style", url);
-    }
-
-    let thumbnailPlayDiv = document.createElement("ha-icon");
-    if (!isPlaying) {
-      thumbnailPlayDiv.setAttribute("class", "episode-item-play");
-      thumbnailPlayDiv.setAttribute("icon", "mdi:play");
-      thumbnailPlayDiv.addEventListener("click", () => this.goTo(position, 1));
-    }
-    thumbnailDiv.appendChild(thumbnailPlayDiv);
+    let coverDiv = this.prepareCover(
+      cover,
+      "playlist-episode-cover",
+      "playlist-episode-cover-image",
+      "playlist-episode-cover-image-default",
+      "mdi:play",
+      "mdi:movie",
+      isPlaying,
+      () => this.goTo(position, this.PLAYER_ID_VIDEO)
+    );
+    row.appendChild(coverDiv);
 
     let titleDiv = document.createElement("div");
-    titleDiv.setAttribute("class", "episode-item-title");
-    titleDiv.innerHTML = item["title"] + " (" + item["year"] + ")";
+    titleDiv.setAttribute("class", "playlist-episode-title playlist-title");
+    titleDiv.innerHTML = item["title"];
     row.appendChild(titleDiv);
 
     let genreDiv = document.createElement("div");
-    genreDiv.setAttribute("class", "episode-item-genre");
+    genreDiv.setAttribute("class", "playlist-episode-genre playlist-genre");
     genreDiv.innerHTML = item["genre"] ? item["genre"] : "undefined";
     row.appendChild(genreDiv);
 
     let seasonDiv = document.createElement("div");
-    seasonDiv.setAttribute("class", "episode-item-season");
-    seasonDiv.innerHTML = item["season"]
-      ? "Season " + item["season"]
-      : "undefined";
+    seasonDiv.setAttribute("class", "playlist-episode-season");
+    seasonDiv.innerHTML =
+      "Season " +
+      (item["season"] ? item["season"] : "undefined") +
+      " - Episode " +
+      (item["episode"] ? item["episode"] : "undefined");
     row.appendChild(seasonDiv);
 
     let trashIcon = document.createElement("ha-icon");
     row.appendChild(trashIcon);
     if (isPlaying) {
-      trashIcon.setAttribute("class", "episode-item-playing");
+      trashIcon.setAttribute(
+        "class",
+        "playlist-episode-playing playlist-control playlist-playing"
+      );
       trashIcon.setAttribute("icon", this.ICON_CURRENT_PLAYING);
     } else {
-      trashIcon.setAttribute("class", "episode-item-remove");
+      trashIcon.setAttribute(
+        "class",
+        "playlist-episode-remove playlist-control"
+      );
       trashIcon.setAttribute("icon", "mdi:delete");
-      trashIcon.addEventListener("click", () => this.remove(position, 1));
+      trashIcon.addEventListener("click", () =>
+        this.remove(position, this.PLAYER_ID_VIDEO)
+      );
     }
+
     return row;
   }
+
   formatSong(item, position) {
     let isPlaying = item["id"] == this._currently_playing;
 
     let row = document.createElement("div");
-    row.setAttribute("class", "song-item-grid");
+    row.setAttribute("class", "playlist-song-grid playlist-grid");
 
-    let thumbnailDiv = document.createElement("div");
-    thumbnailDiv.setAttribute("class", "song-item-thumbnail");
-    row.appendChild(thumbnailDiv);
-
-    if (this._config.show_thumbnail && item["thumbnail"] != "") {
-      let url = "background-image: url('" + item["thumbnail"] + "')";
-      thumbnailDiv.setAttribute("style", url);
-    }
-
-    let thumbnailPlayDiv = document.createElement("ha-icon");
-    if (!isPlaying) {
-      thumbnailPlayDiv.setAttribute("class", "song-item-play");
-      thumbnailPlayDiv.setAttribute("icon", "mdi:play");
-      thumbnailPlayDiv.addEventListener("click", () => this.goTo(position, 0));
-    }
-    thumbnailDiv.appendChild(thumbnailPlayDiv);
+    let cover = item["thumbnail"];
+    let coverDiv = this.prepareCover(
+      cover,
+      "playlist-song-cover",
+      "playlist-song-cover-image",
+      "playlist-song-cover-image-default",
+      "mdi:play",
+      "mdi:music",
+      isPlaying,
+      () => this.goTo(position, this.PLAYER_ID_MUSIC)
+    );
+    row.appendChild(coverDiv);
 
     let titleDiv = document.createElement("div");
-    titleDiv.setAttribute("class", "song-item-title");
+    titleDiv.setAttribute("class", "playlist-song-title playlist-title");
     titleDiv.innerHTML = item["artist"] + " - " + item["title"];
     row.appendChild(titleDiv);
 
     let genreDiv = document.createElement("div");
-    genreDiv.setAttribute("class", "song-item-genre");
+    genreDiv.setAttribute("class", "playlist-song-genre playlist-genre");
     genreDiv.innerHTML = item["genre"] ? item["genre"] : "undefined";
     row.appendChild(genreDiv);
 
     let albumDiv = document.createElement("div");
-    albumDiv.setAttribute("class", "song-item-album");
+    albumDiv.setAttribute("class", "playlist-song-album");
     albumDiv.innerHTML = item["album"] + " (" + item["year"] + ")";
     row.appendChild(albumDiv);
 
     let durationDiv = document.createElement("div");
-    durationDiv.setAttribute("class", "song-item-duration");
+    durationDiv.setAttribute("class", "playlist-song-duration");
     durationDiv.innerHTML = new Date(item["duration"] * 1000)
       .toISOString()
       .substr(11, 8);
@@ -286,40 +315,124 @@ class PlaylistMediaCard extends HTMLElement {
     let trashIcon = document.createElement("ha-icon");
     row.appendChild(trashIcon);
     if (isPlaying) {
-      trashIcon.setAttribute("class", "song-item-playing");
+      trashIcon.setAttribute(
+        "class",
+        "playlist-song-playing playlist-control playlist-playing"
+      );
       trashIcon.setAttribute("icon", this.ICON_CURRENT_PLAYING);
     } else {
-      trashIcon.setAttribute("class", "song-item-remove");
+      trashIcon.setAttribute("class", "playlist-song-remove playlist-control");
       trashIcon.setAttribute("icon", "mdi:delete");
-      trashIcon.addEventListener("click", () => this.remove(position, 0));
+      trashIcon.addEventListener("click", () =>
+        this.remove(position, this.PLAYER_ID_MUSIC)
+      );
     }
 
     return row;
+  }
+
+  prepareCover(
+    cover,
+    class_cover,
+    class_cover_image,
+    class_cover_image_default,
+    icon_overlay,
+    icon_default,
+    isPlaying,
+    action_click
+  ) {
+    let thumbnailDiv = document.createElement("div");
+    thumbnailDiv.setAttribute("class", class_cover);
+
+    let thumbContainer = document.createElement("div");
+    thumbContainer.setAttribute("class", "playlist-cover-container");
+    thumbnailDiv.appendChild(thumbContainer);
+
+    if (this._config_show_thumbnail && cover && cover != "") {
+      let thumbImg = document.createElement("img");
+      thumbImg.setAttribute(
+        "class",
+        "playlist-cover-image " + class_cover_image
+      );
+      thumbImg.setAttribute("src", cover);
+      thumbImg.onerror = function () {
+        thumbImg.remove();
+
+        let thumbImgDefault = document.createElement("ha-icon");
+        thumbImgDefault.setAttribute(
+          "class",
+          "playlist-cover-container-image-default " + class_cover_image_default
+        );
+        thumbImgDefault.setAttribute("icon", icon_default);
+        thumbContainer.appendChild(thumbImgDefault);
+      };
+
+      thumbContainer.appendChild(thumbImg);
+    } else {
+      let thumbImgDefault = document.createElement("ha-icon");
+      thumbImgDefault.setAttribute(
+        "class",
+        "playlist-cover-container-image-default " + class_cover_image_default
+      );
+      thumbImgDefault.setAttribute("icon", icon_default);
+      thumbContainer.appendChild(thumbImgDefault);
+    }
+
+    if (!this._config_show_thumbnail_overlay) {
+      thumbContainer.addEventListener("click", action_click);
+    } else if (this._config_show_thumbnail_overlay && !isPlaying) {
+      let overlayImg = document.createElement("ha-icon");
+      overlayImg.setAttribute("class", "overlay-play");
+      overlayImg.setAttribute("icon", icon_overlay);
+      overlayImg.addEventListener("click", action_click);
+      thumbContainer.appendChild(overlayImg);
+    }
+
+    return thumbnailDiv;
   }
 
   formatUnknown(item) {
     let isPlaying = item["id"] == this._currently_playing;
 
     let row = document.createElement("div");
-    row.setAttribute("class", "unknown-item-grid");
+    row.setAttribute("class", "playlist-unknown-grid playlist-grid");
 
-    let titleDiv = document.createElement("div");
-    titleDiv.setAttribute("class", "unknown-item-title");
-    titleDiv.innerHTML = item["title"];
-    row.appendChild(titleDiv);
+    let cover = item["thumbnail"];
+    let coverDiv = this.prepareCover(
+      cover,
+      "playlist-unknown-cover",
+      "playlist-unknown-cover-image",
+      "playlist-unknown-cover-image-default",
+      "mdi:play",
+      "mdi:sparkles",
+      isPlaying,
+      () => this.goTo(position, this.PLAYER_ID_MUSIC)
+    );
+    row.appendChild(coverDiv);
 
     let messageDiv = document.createElement("div");
-    messageDiv.setAttribute("class", "unknown-item-message");
-    messageDiv.innerHTML = "unknown type... " + item["type"];
+    messageDiv.setAttribute("class", "playlist-unknown-message");
+    messageDiv.innerHTML = "type of media is... : " + item["type"];
     row.appendChild(messageDiv);
+
+    let titleDiv = document.createElement("div");
+    titleDiv.setAttribute("class", "playlist-unknown-title playlist-title");
+    titleDiv.innerHTML = item["title"];
+    row.appendChild(titleDiv);
 
     let trashIcon = document.createElement("ha-icon");
     row.appendChild(trashIcon);
     if (isPlaying) {
-      trashIcon.setAttribute("class", "unknown-item-remove-alt");
+      trashIcon.setAttribute(
+        "class",
+        "playlist-unknown-playing playlist-control"
+      );
       trashIcon.setAttribute("icon", this.ICON_CURRENT_PLAYING);
     } else {
-      trashIcon.setAttribute("class", "unknown-item-remove");
+      trashIcon.setAttribute(
+        "class",
+        "playlist-unknown-remove playlist-control"
+      );
       trashIcon.setAttribute("icon", "mdi:delete");
       trashIcon.addEventListener("click", () => this.remove(position, 1));
     }
@@ -372,12 +485,7 @@ class PlaylistMediaCard extends HTMLElement {
   }
 
   defineCSS() {
-    return `
-    /*
-    .movie-item-remove,.movie-item-grid,.movie-item-genre,.movie-item-title, .song-item-grid, .song-item-remove, .song-item-title{
-      border: 1px solid orange;
-    }
-    */
+    let css = `
 
                 .playertype-container{
                   display: grid;
@@ -402,262 +510,256 @@ class PlaylistMediaCard extends HTMLElement {
                 }
 
                 /*
-                //// UNKNOWN
+                //// COMMUN USED
                */
-                .unknown-item-grid{
-                  display: grid;
-                  grid-template-columns: ${this.SONG_THUMBNAIL_SIZE} 1fr auto auto auto;
-                  grid-gap: 3px;
-                  grid-auto-rows: auto;
-                  border-bottom: solid 1px;
+
+                .overlay-play {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(0, 0, 0, 0.5);
+                  opacity:0;
+                  color: white;
+                  transition: .5s ease;
+                  text-align: center;
+                  --mdc-icon-size: 50px;
                 }
 
-                .unknown-item-title{
-                  grid-column-start: 2;
-                  grid-column-end: 4;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
+                .playlist-cover-container-image-default{
+                  display:flex;
+                  justify-content:flex-end;
+                  align-items:flex-end;
+                  color: white;
+                  background-color: ${this.BACKGROUND_BASIC_COLOR};
+                }
+
+                .playlist-cover-image{
+                  height:auto !important;
+                  display: block;
+                  justify-content:center;
+                }
+
+                .playlist-cover-container{
+                  position: relative;
+                }
+
+                .playlist-cover-container:hover .overlay-play {
+                  opacity: 1;
+                }
+
+                .playlist-grid {
+                  display: grid;
+                  column-gap:10px;
+                  border-bottom:1px solid white;
+                }
+
+                .playlist-title{
                   font-weight: bold;
                   font-size: 14px;
                 }
 
-                .unknown-message{
-                  grid-column-start: 2;
-                  grid-column-end: 3;
-                  grid-row-start: 3;
-                  grid-row-end: 4;
+                .playlist-genre{
+                  font-style: italic;
                 }
 
-                .unknown-item-remove, .unknown-item-remove-alt{
-                  grid-column-start: 4;
-                  grid-colu mn-end: 5;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
+                .playlist-control{
                   text-align: right;
                   width: 30px;
                 }
+
+                .playlist-playing{
+                  color: rgb(3, 169, 244);
+                }
+
+                /*
+                //// UNKNOWN
+               */
+                .playlist-unknown-grid{
+                  grid-template-columns: auto 1fr auto;
+                  grid-auto-rows: auto;
+                }
+
+                .playlist-unknown-message{
+                  grid-column: 2;
+                  grid-row: 1;
+                }
+
+                .playlist-unknown-title{
+                  grid-column: 2 ;
+                  grid-row: 2;
+                }
+
+                .playlist-unknown-remove, .playlist-unknown-playing{
+                  grid-column: 3;
+                  grid-row: 1;
+                }
+
+                .playlist-unknown-cover{
+                  grid-column: 1;
+                  grid-row: 1 / 3 ;
+                }
+
+                .playlist-unknown-cover-image{
+                  width: ${this.SONG_THUMBNAIL_WIDTH};
+                }
+
+                .playlist-unknown-cover-image-default{
+                  width: ${this.SONG_THUMBNAIL_WIDTH};
+                  height: ${this.SONG_THUMBNAIL_WIDTH};
+                  --mdc-icon-size: calc(${this.SONG_THUMBNAIL_WIDTH} - 30px);
+                }
+
 
                /*
                 //// SONGS
                */
-
-                .song-item-grid{
-                  display: grid;
-                  grid-template-columns: ${this.SONG_THUMBNAIL_SIZE} 1fr auto auto auto;
-                  grid-gap: 3px;
+                .playlist-song-grid{
+                  grid-template-columns: auto 1fr auto auto;
                   grid-auto-rows: auto;
-                  border-bottom: solid 1px;
                 }
 
-                .song-item-title{
-                  grid-column-start: 2;
-                  grid-column-end: 4;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
-                  font-weight: bold;
-                  font-size: 14px;
+                .playlist-song-title{
+                  grid-column: 2 / 4;
+                  grid-row: 1;
                 }
 
-                .song-item-album{
-                  grid-column-start: 2;
-                  grid-column-end: 3;
-                  grid-row-start: 3;
-                  grid-row-end: 4;
+                .playlist-song-genre{
+                  grid-column: 2 / 4;
+                  grid-row: 2;
                 }
 
-                .song-item-genre{
-                  grid-column-start: 2;
-                  grid-column-end: 4;
-                  grid-row-start: 2;
-                  grid-row-end: 3;
-                  font-style: italic;
+                .playlist-song-album{
+                  grid-column: 2 / 5;
+                  grid-row: 3;
                 }
-                .song-item-duration{
-                  grid-column-start: 3;
-                  grid-column-end: 5;
-                  grid-row-start: 3;
-                  grid-row-end: 4;
+
+                .playlist-song-duration{
+                  grid-column: 3 / 5;
+                  grid-row: 3;
                   text-align: right;
                 }
 
-                .song-item-remove, .song-item-remove-alt{
-                  grid-column-start: 4;
-                  grid-colu mn-end: 5;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
-                  text-align: right;
-                  width: 30px;
+                .playlist-song-remove, .playlist-song-playing{
+                  grid-column: 4 / 5;
+                  grid-row: 1 / 3;
                 }
 
-                .song-item-thumbnail{
-                  grid-column-start: 1;
-                  grid-column-end: 2;
-                  grid-row-start: 1;
-                  grid-row-end: 4;
-                  display: block;
-                  background-size: contain;
-                  background-repeat: no-repeat;
-                  background-color: ${this.BACKGROUND_BASIC_COLOR};
-                  width: 65px;
-                  height: 65px;
+                .playlist-song-cover{
+                  grid-column: 1;
+                  grid-row: 1 / 5 ;
                 }
 
-                .song-item-play{
-                  width: 65px;
-                  height: 65px;
+                .playlist-song-cover-image{
+                  width: ${this.SONG_THUMBNAIL_WIDTH};
                 }
+
+                .playlist-song-cover-image-default{
+                  width: ${this.SONG_THUMBNAIL_WIDTH};
+                  height: ${this.SONG_THUMBNAIL_WIDTH};
+                  --mdc-icon-size: calc(${this.SONG_THUMBNAIL_WIDTH} - 30px);
+                }
+
 
                 /*
                 //// MOVIES
                */
-                .movie-item-grid{
-                  display: grid;
-                  grid-template-columns: calc(${this.MOVIE_THUMBNAIL_SIZE} * ${this.MOVIE_THUMBNAIL_RATIO}) 1fr auto;
-                  grid-gap: 3px;
+
+                .playlist-movie-grid{
+                  grid-template-columns: auto 1fr auto;
                   grid-auto-rows: auto;
                 }
 
-                .movie-item-title{
-                  grid-column-start: 2;
-                  grid-column-end: 3;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
-                  font-weight: bold;
-                  font-size: 14px;
+                .playlist-movie-title{
+                  grid-column: 2;
+                  grid-row: 1;
                 }
 
-                .movie-item-genre{
-                  grid-column-start: 2;
-                  grid-column-end: end;
-                  grid-row-start: 2;
-                  grid-row-end: 3;
-                  font-style: italic;
+                .playlist-movie-genre{
+                  grid-column: 2;
+                  grid-row: 2;
                 }
 
-                .movie-item-remove, .movie-item-remove-alt{
-                  grid-column-start: 3;
-                  grid-column-end: end;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
-                  text-align: right;
-                  display:flex;
-                  justify-content:flex-end;
-                  align-items:flex-end;
-                  width: 30px;
+                .playlist-movie-remove, .playlist-movie-playing{
+                  grid-column: 3;
+                  grid-row: 1 / 3;
                 }
 
-                .movie-item-thumbnail{
-                  grid-column-start: 1;
-                  grid-column-end: 2;
-                  grid-row-start: 1;
-                  grid-row-end: 4;
-                  display: block;
-                  background-size: contain;
-                  background-repeat: no-repeat;
-                  background-color: ${this.BACKGROUND_BASIC_COLOR};
+                .playlist-movie-cover{
+                  grid-column: 1;
+                  grid-row: 1 / 4 ;
+
                 }
 
-                .movie-item-play{
-                  display: block;
-                  grid-column-start: 1;
-                  grid-column-end: 2;
-                  grid-row-start: 1;
-                  grid-row-end: 4;
-                  width: calc(${this.MOVIE_THUMBNAIL_SIZE} * ${this.MOVIE_THUMBNAIL_RATIO});
-                  height: ${this.MOVIE_THUMBNAIL_SIZE} ;
+                .playlist-movie-cover-image{
+                  width: ${this.MOVIE_THUMBNAIL_WIDTH};
+                }
+
+                .playlist-movie-cover-image-default{
+                  width: ${this.MOVIE_THUMBNAIL_WIDTH};
+                  height: calc(${this.MOVIE_THUMBNAIL_WIDTH} / ${this.MOVIE_THUMBNAIL_RATIO});
+                  --mdc-icon-size: calc(${this.MOVIE_THUMBNAIL_WIDTH} - 30px);
                 }
 
 
-                /*
+              /*
                 //// EPISODE
                */
-                .episode-item-grid{
-                  display: grid;
-                  grid-template-columns: calc(${this.EPISODE_THUMBNAIL_SIZE} * ${this.EPISODE_THUMBNAIL_RATIO}) 1fr auto;
-                  grid-gap: 3px;
+                .playlist-episode-grid{
+                  grid-template-columns: auto 1fr auto;
                   grid-auto-rows: auto;
                 }
 
-                .episode-item-title{
-                  grid-column-start: 2;
-                  grid-column-end: 3;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
-                  font-weight: bold;
-                  font-size: 14px;
+                .playlist-episode-title{
+                  grid-column: 2;
+                  grid-row: 1;
                 }
 
-                .episode-item-genre{
-                  grid-column-start: 2;
-                  grid-column-end: end;
-                  grid-row-start: 2;
-                  grid-row-end: 3;
-                  font-style: italic;
+                .playlist-episode-genre{
+                  grid-column: 2;
+                  grid-row: 2;
                 }
 
-                .episode-item-season{
-                  grid-column-start: 2;
-                  grid-column-end: end;
-                  grid-row-start: 3;
-                  grid-row-end: 4;
+                .playlist-episode-season{
+                  grid-column: 2;
+                  grid-row: 3;
                 }
 
-                .episode-item-remove, .episode-item-remove-alt{
-                  grid-column-start: 3;
-                  grid-column-end: end;
-                  grid-row-start: 1;
-                  grid-row-end: 2;
-                  text-align: right;
-                  display:flex;
-                  justify-content:flex-end;
-                  align-items:flex-end;
-                  width: 30px;
+                .playlist-episode-remove, .playlist-episode-playing{
+                  grid-column: 3;
+                  grid-row: 1 / 3;
                 }
 
-                .episode-item-thumbnail{
-                  grid-column-start: 1;
-                  grid-column-end: 2;
-                  grid-row-start: 1;
-                  grid-row-end: 5;
-                  display: block;
-                  background-size: contain;
-                  backgrouFFnd-repeat: no-repeat;
-                  background-color: ${this.BACKGROUND_BASIC_COLOR};
-                  width: calc(${this.EPISODE_THUMBNAIL_SIZE} * ${this.EPISODE_THUMBNAIL_RATIO});
-                  height: ${this.EPISODE_THUMBNAIL_SIZE} ;
+                .playlist-episode-cover{
+                  grid-column: 1;
+                  grid-row: 1 / 5 ;
                 }
 
-                .episode-item-play{
-                  display: block;
-                  grid-column-start: 1;
-                  grid-column-end: 2;
-                  grid-row-start: 1;
-                  grid-row-end: 5;
-                  width: calc(${this.EPISODE_THUMBNAIL_SIZE} * ${this.EPISODE_THUMBNAIL_RATIO});
-                  height: ${this.EPISODE_THUMBNAIL_SIZE} ;
+                .playlist-episode-cover-image{
+                  width: ${this.EPISODE_THUMBNAIL_WIDTH};
                 }
 
-
-                .song-item-play, .movie-item-play, .episode-item-play, song-item-playing, .movie-item-playing, .episode-item-playing{
-                  display: block;
-                  background-color: rgb(250, 250, 250, 0.4);
-                }
-
-
-                .song-item-play, .movie-item-play, .episode-item-play{
-                  color: rgb(0, 0, 0);
-                }
-
-
-                .song-item-playing, .movie-item-playing, .episode-item-playing{
-                  color: rgb(3, 169, 244);
-                }
-
-                .song-item-play:hover, .song-item-remove:hover, .movie-item-play:hover, .movie-item-remove:hover, .episode-item-play:hover, .episode-item-remove:hover{
-                  color: red;
+                .playlist-episode-cover-image-default{
+                  width: ${this.EPISODE_THUMBNAIL_WIDTH};
+                  height: calc(${this.EPISODE_THUMBNAIL_WIDTH} / ${this.EPISODE_THUMBNAIL_RATIO});
+                  --mdc-icon-size: calc((${this.EPISODE_THUMBNAIL_WIDTH} / ${this.EPISODE_THUMBNAIL_RATIO}) - 30px);
                 }
 
           `;
+
+    if (this._config_show_thumbnail_border) {
+      css +=
+        `
+        .playlist-cover-image{
+                border: 1px solid ` +
+        this._config_thumbnail_border_color +
+        `;
+    }
+    `;
+    }
+
+    return css;
   }
 }
 customElements.define("kodi-playlist-card", PlaylistMediaCard);

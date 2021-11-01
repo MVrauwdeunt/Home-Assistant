@@ -24,10 +24,10 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.ender_3_printing
-    from: 'on'
-    to: 'off'
+    entity_id: sensor.ender_3_current_state
     for: 1 seconde
+    from: Printing
+    to: Operational
   condition:
   - condition: state
     entity_id: switch.sleeping
@@ -420,20 +420,25 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ (now().strftime("%s")| int + (5*60)) | timestamp_custom("%H:%M")
-      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time'')  | timestamp_local)
+    value_template: '{{ as_timestamp(now()) | timestamp_custom("%H:%M") == (as_timestamp(state_attr(''calendar.feyenoord'',
+      ''start_time'')) |int - (state_attr(''input_datetime.lastcall'',''timestamp'')))
       | timestamp_custom("%H:%M") }}
 
       '
     id: 5min
   - platform: template
-    value_template: '{{ (now().strftime("%s")| int + (30*60)) | timestamp_custom("%H:%M")
-      == as_timestamp(state_attr(''calendar.feyenoord'', ''start_time'') | timestamp_local)
+    value_template: '{{ as_timestamp(now()) | timestamp_custom("%H:%M") == (as_timestamp(state_attr(''calendar.feyenoord'',
+      ''start_time'')) |int - (state_attr(''input_datetime.firstcall'',''timestamp'')))
       | timestamp_custom("%H:%M") }}
 
       '
     id: 30min
-  condition: []
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: calendar.feyenoord
+      state: None
   action:
   - choose:
     - conditions:
@@ -578,7 +583,13 @@
 
       '
     id: lastcall
-  condition: []
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: calendar.werkrooster
+      attribute: start_time
+      state: None
   action:
   - choose:
     - conditions:

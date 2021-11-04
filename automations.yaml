@@ -439,6 +439,7 @@
     - condition: state
       entity_id: calendar.feyenoord
       state: None
+      attribute: friendly_name
   action:
   - choose:
     - conditions:

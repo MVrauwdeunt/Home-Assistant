@@ -1,3 +1,39 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@MVrauwdeunt
+zigpy /
+zha-device-handlers
+Public
+
+30
+195
+
+    200
+
+Code
+Issues 135
+Pull requests 12
+Discussions
+Actions
+Projects
+Wiki
+Security
+
+    Insights
+
+zha-device-handlers/zhaquirks/tuya/ts0601_trv.py /
+@martin3000
+martin3000 Fixed factor/divider for _TZE200_b6wax7g0 temperature settings (#1082)
+Latest commit a86c1e8 18 days ago
+History
+2 contributors
+@MattWestb
+@martin3000
+1234 lines (1104 sloc) 47.7 KB
 """Map from manufacturer to standard clusters for thermostatic valves."""
 import logging
 from typing import Optional, Union
@@ -201,7 +237,7 @@ class MoesManufCluster(TuyaManufClusterAttributes):
 
     DIRECT_MAPPED_ATTRS = {
         MOES_TEMPERATURE_ATTR: ("local_temp", lambda value: value * 10),
-        MOES_TARGET_TEMP_ATTR: ("occupied_heating_setpoint", lambda value: value * 100), # jms: 10->100),
+        MOES_TARGET_TEMP_ATTR: ("occupied_heating_setpoint", lambda value: value * 10),
         MOES_AWAY_TEMP_ATTR: ("unoccupied_heating_setpoint", lambda value: value * 100),
         MOES_COMFORT_TEMP_ATTR: ("comfort_heating_setpoint", lambda value: value * 100),
         MOES_ECO_TEMP_ATTR: ("eco_heating_setpoint", lambda value: value * 100),
@@ -260,6 +296,39 @@ class MoesManufCluster(TuyaManufClusterAttributes):
             self.endpoint.device.battery_bus.listener_event(
                 "battery_change", 5 if value else 100
             )
+
+
+class MoesManufClusterNew(MoesManufCluster):
+    """Manufacturer Specific Cluster for the new _TZE200_b6wax7g0 thermostatic valves."""
+
+    DIRECT_MAPPED_ATTRS = {
+        MOES_TEMPERATURE_ATTR: ("local_temp", lambda value: value * 10),
+        MOES_TARGET_TEMP_ATTR: (
+            "occupied_heating_setpoint",
+            lambda value: value * 100,
+        ),  # jms
+        MOES_AWAY_TEMP_ATTR: ("unoccupied_heating_setpoint", lambda value: value * 100),
+        MOES_COMFORT_TEMP_ATTR: ("comfort_heating_setpoint", lambda value: value * 100),
+        MOES_ECO_TEMP_ATTR: ("eco_heating_setpoint", lambda value: value * 100),
+        MOES_TEMP_CALIBRATION_ATTR: (
+            "local_temperature_calibration",
+            lambda value: value * 10,
+        ),
+        MOES_MIN_TEMPERATURE_ATTR: (
+            "min_heat_setpoint_limit",
+            lambda value: value * 100,
+        ),
+        MOES_MAX_TEMPERATURE_ATTR: (
+            "max_heat_setpoint_limit",
+            lambda value: value * 100,
+        ),
+        MOES_VALVE_STATE_ATTR: ("valve_open_percentage", None),
+        MOES_AWAY_DAYS_ATTR: ("unoccupied_duration_days", None),
+        MOES_BOOST_TIME_ATTR: ("boost_duration_seconds", None),
+        MOES_MODE_ATTR: ("operation_preset", None),
+        MOES_WEEK_FORMAT_ATTR: ("work_days", None),
+        MOES_FORCE_VALVE_ATTR: ("valve_force_state", None),
+    }
 
 
 class MoesThermostat(TuyaThermostatCluster):
@@ -345,7 +414,7 @@ class MoesThermostat(TuyaThermostatCluster):
     DIRECT_MAPPING_ATTRS = {
         "occupied_heating_setpoint": (
             MOES_TARGET_TEMP_ATTR,
-            lambda value: round(value / 100), #jms 10->100 ),
+            lambda value: round(value / 10),
         ),
         "unoccupied_heating_setpoint": (
             MOES_AWAY_TEMP_ATTR,
@@ -611,6 +680,43 @@ class MoesThermostat(TuyaThermostatCluster):
             self._update_attribute(
                 self.attridx["weekend_schedule_6_temperature"], value[0] * 100
             )
+
+
+class MoesThermostatNew(MoesThermostat):
+    """Thermostat cluster for the new _TZE200_b6wax7g0 thermostatic valve."""
+
+    DIRECT_MAPPING_ATTRS = {
+        "occupied_heating_setpoint": (
+            MOES_TARGET_TEMP_ATTR,
+            lambda value: round(value / 100),  # jms
+        ),
+        "unoccupied_heating_setpoint": (
+            MOES_AWAY_TEMP_ATTR,
+            lambda value: round(value / 100),
+        ),
+        "comfort_heating_setpoint": (
+            MOES_COMFORT_TEMP_ATTR,
+            lambda value: round(value / 100),
+        ),
+        "eco_heating_setpoint": (MOES_ECO_TEMP_ATTR, lambda value: round(value / 100)),
+        "min_heat_setpoint_limit": (
+            MOES_MIN_TEMPERATURE_ATTR,
+            lambda value: round(value / 100),
+        ),
+        "max_heat_setpoint_limit": (
+            MOES_MAX_TEMPERATURE_ATTR,
+            lambda value: round(value / 100),
+        ),
+        "local_temperature_calibration": (
+            MOES_TEMP_CALIBRATION_ATTR,
+            lambda value: round(value / 10),
+        ),
+        "work_days": (MOES_WEEK_FORMAT_ATTR, None),
+        "operation_preset": (MOES_MODE_ATTR, None),
+        "boost_duration_seconds": (MOES_BOOST_TIME_ATTR, None),
+        "valve_force_state": (MOES_FORCE_VALVE_ATTR, None),
+        "unoccupied_duration_days": (MOES_AWAY_DAYS_ATTR, None),
+    }
 
 
 class MoesUserInterface(TuyaUserInterfaceCluster):
@@ -893,6 +999,7 @@ class SiterwellGS361_Type1(TuyaThermostat):
             ("_TYST11_hhrtiq0x", "hrtiq0x"),
             ("_TYST11_ps5v5jor", "s5v5jor"),
             ("_TYST11_owwdxjbx", "wwdxjbx"),
+            ("_TYST11_8daqwrsj", "daqwrsj"),
         ],
         ENDPOINTS: {
             1: {
@@ -936,6 +1043,7 @@ class SiterwellGS361_Type2(TuyaThermostat):
             ("_TZE200_hhrtiq0x", "TS0601"),
             ("_TZE200_ps5v5jor", "TS0601"),
             ("_TZE200_owwdxjbx", "TS0601"),
+            ("_TZE200_8daqwrsj", "TS0601"),
         ],
         ENDPOINTS: {
             1: {
@@ -987,7 +1095,6 @@ class MoesHY368_Type1(TuyaThermostat):
             ("_TZE200_ckud7u2l", "TS0601"),
             ("_TZE200_ywdxldoj", "TS0601"),
             ("_TZE200_cwnjrr72", "TS0601"),
-            ("_TZE200_b6wax7g0", "TS0601"),
         ],
         ENDPOINTS: {
             1: {
@@ -1015,6 +1122,57 @@ class MoesHY368_Type1(TuyaThermostat):
                     Scenes.cluster_id,
                     MoesManufCluster,
                     MoesThermostat,
+                    MoesUserInterface,
+                    MoesWindowDetection,
+                    TuyaPowerConfigurationCluster,
+                ],
+                OUTPUT_CLUSTERS: [Time.cluster_id, Ota.cluster_id],
+            }
+        }
+    }
+
+
+# for Moes TRV _TZE200_b6wax7g0
+class MoesHY368_Type1new(TuyaThermostat):
+    """MoesHY368 Thermostatic radiator valve."""
+
+    def __init__(self, *args, **kwargs):
+        """Init device."""
+        self.window_detection_bus = Bus()
+        super().__init__(*args, **kwargs)
+
+    signature = {
+        #  endpoint=1 profile=260 device_type=81 device_version=0 input_clusters=[0, 4, 5, 61184]
+        #  output_clusters=[10, 25]>
+        MODELS_INFO: [
+            ("_TZE200_b6wax7g0", "TS0601"),
+        ],
+        ENDPOINTS: {
+            1: {
+                PROFILE_ID: zha.PROFILE_ID,
+                DEVICE_TYPE: zha.DeviceType.SMART_PLUG,
+                INPUT_CLUSTERS: [
+                    Basic.cluster_id,
+                    Groups.cluster_id,
+                    Scenes.cluster_id,
+                    TuyaManufClusterAttributes.cluster_id,
+                ],
+                OUTPUT_CLUSTERS: [Time.cluster_id, Ota.cluster_id],
+            }
+        },
+    }
+
+    replacement = {
+        ENDPOINTS: {
+            1: {
+                PROFILE_ID: zha.PROFILE_ID,
+                DEVICE_TYPE: zha.DeviceType.THERMOSTAT,
+                INPUT_CLUSTERS: [
+                    Basic.cluster_id,
+                    Groups.cluster_id,
+                    Scenes.cluster_id,
+                    MoesManufClusterNew,
+                    MoesThermostatNew,
                     MoesUserInterface,
                     MoesWindowDetection,
                     TuyaPowerConfigurationCluster,
@@ -1075,6 +1233,7 @@ class ZonnsmartTV01_ZG(TuyaThermostat):
         #  output_clusters=[10, 25]>
         MODELS_INFO: [
             ("_TZE200_e9ba97vf", "TS0601"),
+            ("_TZE200_husqqvux", "TS0601"),
         ],
         ENDPOINTS: {
             1: {
@@ -1109,3 +1268,19 @@ class ZonnsmartTV01_ZG(TuyaThermostat):
             }
         }
     }
+
+    © 2021 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+Loading complete

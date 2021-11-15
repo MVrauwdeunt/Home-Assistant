@@ -26,12 +26,8 @@
   - platform: state
     entity_id: sensor.ender_3_current_state
     for: 1 seconde
-    from: Printing
     to: Operational
-  condition:
-  - condition: state
-    entity_id: switch.sleeping
-    state: 'off'
+  condition: []
   action:
   - service: notify.mobile_app_oneplus_michel
     data:

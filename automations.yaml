@@ -624,3 +624,37 @@
     data:
       message: light level is above {{ states('input_number.maxlux') }}
   mode: single
+- id: '1637228911701'
+  alias: Ender3 3D printer
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.ender_3_current_state
+    to: Printing
+    id: printing
+  - platform: state
+    entity_id: sensor.ender_3_current_state
+    id: finished
+    from: Printing
+    to: Operational
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: printing
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          title: Ender3 printer started
+          message: I just started printing
+    - conditions:
+      - condition: trigger
+        id: finished
+      sequence:
+      - service: notify.mobile_app_oneplus_michel
+        data:
+          title: Ender3 printer finished
+          message: I just finished printing
+    default: []
+  mode: single

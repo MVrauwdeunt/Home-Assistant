@@ -1,0 +1,6 @@
+platform: command_line
+name: shopping_list_missing
+command: /config/scripts/shopping_items.py
+json_attributes:
+  - 'missing'
+value_template: '{{ value_json.missing | count }}'

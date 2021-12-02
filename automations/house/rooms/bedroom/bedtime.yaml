@@ -9,11 +9,6 @@ trigger:
 condition: []
 
 action:
-  - service: light.turn_off
-    target:
-      entity_id: 
-        - light.ambilight
-        - light.plank
 
   - service: switch.turn_on
     target:
@@ -43,11 +38,13 @@ action:
 
   - service: light.turn_off
     target:
-      entity_id:
+      entity_id: 
+        - light.ambilight
+        - light.plank
         - light.wallpanel
 
   - delay:
-      seconds: 10
+      seconds: 20
         # - switch.tv_slaapkamer
 
   - service: light.turn_off

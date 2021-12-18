@@ -1,5 +1,4 @@
 import asyncio
-import math
 from custom_components.ai_thermostat.helpers import convert_decimal
 from homeassistant.helpers.json import JSONEncoder
 import logging
@@ -23,10 +22,10 @@ def default_calibration(self):
   new_calibration = float((float(self._cur_temp) - float(state.get('local_temperature'))) + float(state.get('local_temperature_calibration')))
   if new_calibration > 0 and new_calibration < 1:
     new_calibration = round(new_calibration)
-  if new_calibration < -6:
-      new_calibration = -6
-  if new_calibration > 6:
-      new_calibration = 6
+  if new_calibration < -30:
+      new_calibration = -30
+  if new_calibration > 30:
+      new_calibration = 30
 
   return convert_decimal(new_calibration)
 
@@ -38,9 +37,9 @@ async def overswing(self,calibration):
     if check_overswing:
       self.ignoreStates = True
       _LOGGER.debug("Overswing detected")
-      mqtt.async_publish('zigbee2mqtt/'+state.get('device').get('friendlyName')+'/set/current_heating_setpoint', float(5), 0, False)
+      await mqtt.async_publish(self.hass,'zigbee2mqtt/'+state.get('device').get('friendlyName')+'/set/current_heating_setpoint', float(5), 0, False)
       await asyncio.sleep(60)
-      mqtt.async_publish('zigbee2mqtt/'+state.get('device').get('friendlyName')+'/set/current_heating_setpoint', float(calibration), 0, False)
+      await mqtt.async_publish(self.hass,'zigbee2mqtt/'+state.get('device').get('friendlyName')+'/set/current_heating_setpoint', float(calibration), 0, False)
       self.lastOverswing = datetime.now()
       self.ignoreStates = False
 
@@ -52,7 +51,7 @@ def temperature_calibration(self):
   if new_calibration > float(self._max_temp):
       new_calibration = float(self._max_temp)
 
-  loop = asyncio.get_event_loop()
-  loop.create_task(overswing(self,new_calibration))
+  #loop = asyncio.get_event_loop()
+  #loop.create_task(overswing(self,new_calibration))
             
   return new_calibration

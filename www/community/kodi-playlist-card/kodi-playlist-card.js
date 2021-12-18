@@ -1,15 +1,13 @@
 const DEFAULT_SHOW_THUMBNAIL = true;
 const DEFAULT_SHOW_THUMBNAIL_BORDER = false;
 const DEFAULT_SHOW_THUMBNAIL_OVERLAY = true;
-const DEFAULT_THUMBNAIL_BORDER_COLOR = "white";
+const DEFAULT_SHOW_LINE_SEPARATOR = true;
+const DEFAULT_OUTLINE_COLOR = "white";
 
-class PlaylistMediaCard extends HTMLElement {
+class PlaylistSensorCard extends HTMLElement {
   SONG_THUMBNAIL_WIDTH = "65px";
-
-  // the height of the epthumbnailsode of the episode in the search result
   EPISODE_THUMBNAIL_WIDTH = "150px";
   EPISODE_THUMBNAIL_RATIO = 1.5;
-  // the height of the thumbnail
   MOVIE_THUMBNAIL_WIDTH = "100px";
   MOVIE_THUMBNAIL_RATIO = 0.8;
 
@@ -21,8 +19,9 @@ class PlaylistMediaCard extends HTMLElement {
 
   _config_show_thumbnail = DEFAULT_SHOW_THUMBNAIL;
   _config_show_thumbnail_border = DEFAULT_SHOW_THUMBNAIL_BORDER;
-  _config_thumbnail_border_color = DEFAULT_THUMBNAIL_BORDER_COLOR;
+  _config_show_line_separator = DEFAULT_SHOW_LINE_SEPARATOR;
   _config_show_thumbnail_overlay = DEFAULT_SHOW_THUMBNAIL_OVERLAY;
+  _config_outline_color = DEFAULT_OUTLINE_COLOR;
 
   static async getConfigElement() {
     await import("./kodi-playlist-card-editor.js");
@@ -31,11 +30,12 @@ class PlaylistMediaCard extends HTMLElement {
 
   static getStubConfig() {
     return {
-      entity: _config.entity,
+      entity: "",
       show_thumbnail: DEFAULT_SHOW_THUMBNAIL,
       show_thumbnail_border: DEFAULT_SHOW_THUMBNAIL_BORDER,
+      show_line_separator: DEFAULT_SHOW_LINE_SEPARATOR,
       show_thumbnail_overlay: DEFAULT_SHOW_THUMBNAIL_OVERLAY,
-      thumbnail_border_color: DEFAULT_THUMBNAIL_BORDER_COLOR,
+      outline_color: DEFAULT_OUTLINE_COLOR,
     };
   }
 
@@ -57,12 +57,16 @@ class PlaylistMediaCard extends HTMLElement {
       this._config_show_thumbnail_border = this._config.show_thumbnail_border;
     }
 
-    if (this._config.hasOwnProperty("thumbnail_border_color")) {
-      this._config_thumbnail_border_color = this._config.thumbnail_border_color;
-    }
-
     if (this._config.hasOwnProperty("show_thumbnail_overlay")) {
       this._config_show_thumbnail_overlay = this._config.show_thumbnail_overlay;
+    }
+
+    if (this._config.hasOwnProperty("show_line_separator")) {
+      this._config_show_line_separator = this._config.show_line_separator;
+    }
+
+    if (this._config.hasOwnProperty("outline_color")) {
+      this._config_outline_color = this._config.outline_color;
     }
 
     // Make sure this only runs once
@@ -130,7 +134,7 @@ class PlaylistMediaCard extends HTMLElement {
 
       this.last_update_time = update_time;
 
-      /** Here the real code */
+      /** Start building UI components */
       let json;
       let playerType;
 
@@ -329,7 +333,7 @@ class PlaylistMediaCard extends HTMLElement {
     durationDiv.setAttribute("class", "playlist-song-duration");
     durationDiv.innerHTML = new Date(item["duration"] * 1000)
       .toISOString()
-      .substr(11, 8);
+      .substring(11, 19);
     row.appendChild(durationDiv);
 
     let trashIcon = document.createElement("ha-icon");
@@ -530,7 +534,7 @@ class PlaylistMediaCard extends HTMLElement {
                 }
 
                 /*
-                //// COMMUN USED
+                //// COMMON ATTRIBUTES
                */
 
                 .overlay-play {
@@ -572,7 +576,8 @@ class PlaylistMediaCard extends HTMLElement {
                 .playlist-grid {
                   display: grid;
                   column-gap:10px;
-                  border-bottom:1px solid white;
+                  padding-bottom: 5px;
+                  margin-left:20px;
                 }
 
                 .playlist-title{
@@ -773,7 +778,18 @@ class PlaylistMediaCard extends HTMLElement {
         `
         .playlist-cover-image, .playlist-cover-image-default{
                 border: 1px solid ` +
-        this._config_thumbnail_border_color +
+        this._config_outline_color +
+        `;
+    }
+    `;
+    }
+
+    if (this._config_show_line_separator) {
+      css +=
+        `
+        .playlist-grid{
+            border-bottom: 1px solid ` +
+        this._config_outline_color +
         `;
     }
     `;
@@ -782,4 +798,11 @@ class PlaylistMediaCard extends HTMLElement {
     return css;
   }
 }
-customElements.define("kodi-playlist-card", PlaylistMediaCard);
+customElements.define("kodi-playlist-card", PlaylistSensorCard);
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "kodi-playlist-card",
+  name: "Kodi Playlist Card",
+  preview: false, // Optional - defaults to false
+  description: "Shows the playlist of Kodi", // Optional
+});

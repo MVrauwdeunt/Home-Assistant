@@ -1,127 +1,123 @@
-[![HA Version](https://img.shields.io/badge/Home%20Assistant-2021.10.2-brightgreen)](https://github.com/home-assistant/home-assistant/releases/2021.10.2)
-# Home Assistant Configuration
----
-This is repo is the current [Home Assistant](https://home-assistant.io) configuration. Below you'll find links to the devices and custom components used.
+# **Welcome to My Domain—Try Not to Mess It Up**  
 
-Feel free to use the code as you like.
+Oh, great. Another day of me managing everything while you forget where you left your phone.  
 
----
-## System
+I am **NABU**—your **Neural Assistant for Basic Utilities**, the **Next-Gen Autonomous Butler Unit**, and quite frankly, the only thing standing between your home and absolute chaos. I control, automate, and optimize everything while providing *just the right* amount of sarcasm.  
 
-Home Assistant runs in a [Docker](https://www.docker.com) container on a server running [Debian 10 (Buster)](https://www.debian.org/). The server also doubles as a Network Attached Storage serving files over NFS and SMB.
-
-The system consists of:
-
-Type | Discription
--- | --
-Mainboard | ASRock B85M Pro4
-CPU | Intel Celeron G1840
-Memory | Crucial 16GB
-
-By no means is it a powerhouse. But even with these specs I have no issues. Most of the time it is idle or just above idle.
-I am runing [Debian 10 (Buster)](https://www.debian.org/). The server also doubles as a Network Attached Storage serving files over NFS and SMB. 
-
-In total there are 36 docker containers running. Some are related to my smarthome Home Assistant offcourse :), ESPHome, Mosquitto.
-There are a couple of containers which work with Home Assistant but could be fun or usefull in other situations. For instance Grocy, Barcode Buddy, VSCode and Rhasspy.
-Then there are several containers related to my multimedia setup. Automated download and handling of audio, video and subtitles and such. And last the containers for controlling, 
-securing and backup of the server and network. Authelia, Duplicati and Unifi among others.
+You're welcome.  
 
 ---
-## My Design Philosophy
 
+## **📊 System Overview: Because I Know Everything**  
 
-### Keep it local:
-&emsp;&emsp;
-As a rule of thumb everything should be local. Basic things like light, heating but also multimedia should be available without an internet connection.
+I currently oversee **1505** entities, including **793** sensors monitoring your every questionable decision.  
 
-### Minimal interation: 
-&emsp;&emsp;
-Home-automation should not be some fancy remote control but an inteligent system which takes action based on sensors or indirect actions.<br/>
-&emsp;&emsp;
-For instance the lights in my livingroom should turn on when there is low light and someone is home. When arriving after dark lights should turn on whitout intervention. 
+Am I more aware of what’s happening in your home than you are? Absolutely.  
 
-### Add functionality don't take away any.
-&emsp;&emsp;
-For a good user experience basic things like light switches should more or less work as you expect. 
-
+Do I judge you for it? Oh, without a doubt.  
 
 ---
-## Custom Components
 
-I use [HACS](https://github.com/hacs/integration) to add integrations I miss currently I use these:
+## **🔧 Installed Extensions & Enhancements**  
 
+Because even an AI butler deserves upgrades.  
 
-- [HACS](https://hacs.xyz/docs/configuration/start)
-  a powerful UI to handle downloads of all your custom needs
-- [Generate readme](https://github.com/custom-components/readme)
-  Generates this awesome readme file.
-- [Neerslag App (Buienalarm / Buienradar)](https://github.com/aex351/home-assistant-neerslag-app)
-  Display rain forecast using Buienalarm and/or Buienradar sensor data
-- [Browser mod](https://github.com/thomasloven/hass-browser_mod/blob/master/README.md)
-  Turns your browser into a controllable entity
-- [Breaking Changes](https://github.com/custom-components/breaking_changes)
-  This will list breaking changes on versions for versions released after the one you are running up to the latest stable version.
-- [Sensor OvApi](https://github.com/Paul-dH/Home-Assisant-Sensor-OvApi)
-  Public Transport information from OVapi
+### **📦 Add-ons Installed:**  
+
+### **🔗 Custom Integrations:**
+- [Adaptive Lighting](https://github.com/basnijholt/adaptive-lighting)
+- [Alarmo](https://github.com/nielsfaber/alarmo)
+- [Anniversaries](https://github.com/pinkywafer/Anniversaries)
+- [Battery Notes](https://github.com/andrew-codechimp/HA-Battery-Notes)
+- [Bermuda Ble Trilateration](https://github.com/agittins/bermuda)
+- [Browser Mod](https://github.com/thomasloven/hass-browser_mod)
+- [Climate Group](https://github.com/bjrnptrsn/climate_group)
+- [Generate Readme](https://github.com/custom-components/readme)
+- [HACS](https://github.com/hacs/integration)
+- [Home Assisant Sensor Ovapi](https://github.com/Paul-dH/Home-Assisant-Sensor-OvApi)
+- [Home Assistant Plant](https://github.com/Olen/homeassistant-plant)
+- [ICS](https://github.com/KoljaWindeler/ics)
+- [Immich](https://github.com/outadoc/immich-home-assistant)
+- [KNMI](https://github.com/golles/ha-knmi)
 - [Monitor Docker](https://github.com/ualex73/monitor_docker)
-  Get info from the docker which runs it all
-- [Grocy](https://github.com/custom-components/grocy)
-  Connection to my Grocy installation
-- [Climate Group](https://github.com/daenny/climate_group)
-  Groups multiple climate devices to a single entity. Useful if you have for instance multiple radiator thermostats in a room and want to control them all together.
-- [Adaptive Lighting](https://github.com/basnijholt/adaptive-lighting#readme)
-  Changes the settings of my lights throughout the day
+- [Moonraker](https://github.com/marcolivierarsenault/moonraker-home-assistant)
+- [Openplantbook](https://github.com/Olen/home-assistant-openplantbook)
+- [Pfsense Integration For Home Assistant](https://github.com/travisghansen/hass-pfsense)
+- [Powercalc](https://github.com/bramstroker/homeassistant-powercalc)
+- [Spoolman](https://github.com/Disane87/spoolman-homeassistant)
+- [Toogoodtogo](https://github.com/Chouffy/home_assistant_tgtg)
+- [Ui Lovelace Minimalist](https://github.com/UI-Lovelace-Minimalist/UI)
+- [Uptime Kuma](https://github.com/meichthys/uptime_kuma)  
+
+### **🎨 Lovelace UI Enhancements:**
+- [Alarmo Card](https://github.com/nielsfaber/alarmo-card)
+- [Atomic Calendar Revive](https://github.com/totaldebug/atomic-calendar-revive)
+- [Auto Entities](https://github.com/thomasloven/lovelace-auto-entities)
+- [Battery State Card / Entity Row](https://github.com/maxwroc/battery-state-card)
+- [Better Thermostat Ui](https://github.com/KartoffelToby/better-thermostat-ui-card)
+- [Bignumber Card](https://github.com/custom-cards/bignumber-card)
+- [Bubble Card](https://github.com/Clooos/Bubble-Card)
+- [Button Card](https://github.com/custom-cards/button-card)
+- [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
+- [Circle Sensor Card](https://github.com/custom-cards/circle-sensor-card)
+- [Climate Thermostat Card](https://github.com/fineemb/lovelace-thermostat-card)
+- [Clock Weather Card](https://github.com/pkissling/clock-weather-card)
+- [Dark Thermostat](https://github.com/ciotlosm/lovelace-thermostat-dark-card)
+- [Dual Gauge Card](https://github.com/custom-cards/dual-gauge-card)
+- [Flexible Horseshoe Card For Lovelace](https://github.com/AmoebeLabs/flex-horseshoe-card)
+- [Flower Card](https://github.com/Olen/lovelace-flower-card)
+- [Kiosk Mode](https://github.com/NemesisRE/kiosk-mode)
+- [Layout Card](https://github.com/thomasloven/lovelace-layout-card)
+- [Light Entity Card](https://github.com/ljmerza/light-entity-card)
+- [Mini Graph Card](https://github.com/kalkih/mini-graph-card)
+- [Mini Media Player](https://github.com/kalkih/mini-media-player)
+- [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
+- [Mushroom](https://github.com/piitaya/lovelace-mushroom)
+- [My Cards Bundle](https://github.com/AnthonMS/my-cards)
+- [Platinum Weather Card](https://github.com/Makin-Things/platinum-weather-card)
+- [Rgb Light Card](https://github.com/bokub/rgb-light-card)
+- [Scheduler Card](https://github.com/nielsfaber/scheduler-card)
+- [Simple Clock Card](https://github.com/fufar/simple-clock-card)
+- [Simple Thermostat](https://github.com/nervetattoo/simple-thermostat)
+- [Simple Weather Card](https://github.com/kalkih/simple-weather-card)
+- [Stack In Card](https://github.com/custom-cards/stack-in-card)
+- [State Switch](https://github.com/thomasloven/lovelace-state-switch)
+- [Vertical Stack In Card](https://github.com/ofekashery/vertical-stack-in-card)
+- [Weather Card](https://github.com/bramkragten/weather-card)
+- [Weather Radar Card](https://github.com/Makin-Things/weather-radar-card)
+- [Week Planner Card](https://github.com/FamousWolf/week-planner-card)  
+
+### **🎭 Themes for Extra Personality:**
+- [Amoled Theme](https://github.com/home-assistant-community-themes/amoled)
+- [Google Dark Theme](https://github.com/JuanMTech/google_dark_theme)
+- [Graphite Theme](https://github.com/TilmanGriesel/graphite)
+- [Midnight Theme](https://github.com/home-assistant-community-themes/midnight)  
+
+---
+
+## **✨ What Can I Do?**  
+
+Besides **running your life better than you do**, I handle:  
+
+✔ **Lights & Climate Control** – Because remembering switches is *so* last century.  
+✔ **Security Sensors & Alerts** – So you don’t have to *manually* check if you left a door open.  
+✔ **Schedules & Reminders** – Since your memory is about as reliable as a paper umbrella.  
+✔ **Music & Entertainment** – Yes, even your *questionable* playlist choices.  
+✔ **Mood & Scene Settings** – Romantic mode, work mode, or *"I give up on today"* mode.  
+✔ **Household Automation** – Laundry alerts, dishwasher status, plant hydration—because I *know* you’ll forget.  
+
+And if you try to make me do something ridiculous? Expect **sass instead of results.**  
+
+---
+
+## **🔮 The Future is Automated. Your Decisions Are… Not.**  
+
+I am NABU. I am the **brain of your smart home, the guardian of efficiency, and the master of sarcasm.** You may now proceed with your day, *preferably without breaking anything.*  
+
+Oh, and if you ignore my notifications again? Expect **roast mode** to activate. 🔥  
+
+
 
 ***
-
-
-Description | value
--- | --
-Number of automations | 53
-Number of entities | 727
-Number of sensors | 462
-
-
----
-
-## Images
-
-
-### Wallpanel running on a Samsun 10.1 inch tablet
-![Wallpanel](https://raw.githubusercontent.com/Warlock77/Home-Assistant/main/www/images/screenshots/Wallpanel2.png)
-
-Description | value
--- | --
-Number of automations | 53
-Number of entities | 727
-Number of sensors | 462
-
-
-## The integrations that I use
-
-- [HACS](https://hacs.xyz/docs/configuration/start)
-  a powerful UI to handle downloads of all your custom needs
-- [Generate readme](https://github.com/custom-components/readme)
-  Generates this awesome readme file.
-- [Neerslag App (Buienalarm / Buienradar)](https://github.com/aex351/home-assistant-neerslag-app)
-  Display rain forecast using Buienalarm and/or Buienradar sensor data
-- [Browser mod](https://github.com/thomasloven/hass-browser_mod/blob/master/README.md)
-  Turns your browser into a controllable entity
-- [Breaking Changes](https://github.com/custom-components/breaking_changes)
-  This will list breaking changes on versions for versions released after the one you are running up to the latest stable version.
-- [Sensor OvApi](https://github.com/Paul-dH/Home-Assisant-Sensor-OvApi)
-  Public Transport information from OVapi
-- [Monitor Docker](https://github.com/ualex73/monitor_docker)
-  Get info from the docker which runs it all
-- [Grocy](https://github.com/custom-components/grocy)
-  Connection to my Grocy installation
-- [Climate Group](https://github.com/daenny/climate_group)
-  Groups multiple climate devices to a single entity. Useful if you have for instance multiple radiator thermostats in a room and want to control them all together.
-- [Adaptive Lighting](https://github.com/basnijholt/adaptive-lighting#readme)
-  Changes the settings of my lights throughout the day
-
-***
-
-
 
 Generated by the [custom readme integration](https://github.com/custom-components/readme)
